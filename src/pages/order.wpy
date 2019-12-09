@@ -1,0 +1,13 @@
+<style lang="less">
+
+</style>
+<template>
+  <view class="choose_login">
+    订单页面
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+
+export default class Order extends wepy.page {}
+</script>

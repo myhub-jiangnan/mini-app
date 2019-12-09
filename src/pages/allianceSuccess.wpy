@@ -1,0 +1,33 @@
+<style lang="less">
+    .choose_login {
+        .title {
+            text-align: center;
+            font-size: 35px;
+            color: red;
+        }
+        button {
+            margin-top: 50px;
+        }
+    }
+</style>
+<template>
+    <view class="choose_login">
+        <view class="title">申请成功</view>
+        <button type="primary" @tap="btnClick">提交</button>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy';
+    export default class AllianceSuccess extends wepy.page {
+        config = {
+            navigationBarTitleText: '申请成功'
+        };
+        methods = {
+            btnClick() {
+                wepy.switchTab({
+                    url: '/pages/index',
+                });
+            }
+        }
+    }
+</script>

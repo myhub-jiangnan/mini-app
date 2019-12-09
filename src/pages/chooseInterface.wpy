@@ -1,0 +1,109 @@
+<template>
+  <view class="choose_login">
+    <view class="bg_box">
+      <image src="../images/choose_login_bg.png">
+    </view>
+    <view class="content_box">
+      <text class="login_title">FLOW福禄</text>
+      <view class="btn_box">
+        <button @tap="btnClick">经销商入口</button>
+        <button @tap="btnClick">代理商入口</button>
+        <button @tap="btnClick">加盟合作</button>
+      </view>
+      <view class="bottom_box">
+        <view class="icon_box">
+          <image src="../images/choose_login_icon.png">
+        </view>
+        <view class="warm">禁止未成年人购买或使用本公司产品</view>
+      </view>
+    </view>
+  </view>
+</template>
+<style lang="less">
+  page {
+    height: 100%;
+  }
+  .choose_login {
+    // border: 1rpx solid red;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .bg_box {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -9999;
+      image {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .content_box {
+      // border: 2rpx solid red;
+      padding-top: 166rpx;
+      position: relative; 
+      display: block;
+      text {
+        display: block; // border: 1rpx solid white;
+        font-size: 76rpx;
+        color: white;
+        text-align: center;
+      }
+      .btn_box {
+        // border: 1px solid red;
+        display: block;
+        margin-top: 305rpx;
+        button {
+          display: block;
+          width: 540rpx;
+          height: 80rpx;
+          margin-bottom: 50rpx;
+          border-radius: 40rpx;
+          font-size: 36rpx;
+          font-weight: bold;
+          color: #1A1A1A;
+        }
+      }
+      .bottom_box {
+        // border: 1px solid red;
+        margin-top: 200rpx;
+        text-align: center;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        .icon_box {
+          // border: 1px solid transparent;
+          display: block;
+          width: 40rpx;
+          height: 36rpx;
+          image {
+            // display: block;
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .warm {
+          display: block;
+          margin-left: 15rpx;
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+  import wepy from 'wepy';
+  export default class chooseInterface extends wepy.page {
+   config = {
+      navigationBarTitleText: '选择加盟类型'
+    };
+    methods = {
+      btnClick(){
+        wepy.redirectTo({ 
+          url: '/pages/applyForalliance',      
+        });
+      }
+    }
+  }
+</script>

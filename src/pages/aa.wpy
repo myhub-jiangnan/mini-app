@@ -1,0 +1,13 @@
+<style lang="less">
+
+</style>
+<template>
+  <view class="choose_login">
+  
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+
+export default class Main extends wepy.page {}
+</script>

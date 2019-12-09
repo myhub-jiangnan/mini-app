@@ -1,0 +1,67 @@
+<style lang="less">
+@import './styles/base';
+@import './styles/icon';
+@import './styles/style';
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+</style>
+
+<script>
+import wepy from 'wepy';
+import 'wepy-async-function';
+export default class extends wepy.app {
+  config = {
+    pages: [
+      'pages/authorize',
+      'pages/chooseInterface',
+      'pages/index',
+      'pages/order',
+      'pages/mine',
+      'pages/applyForalliance',
+      'pages/allianceSuccess'
+    ],
+    window: {
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#fff',
+      navigationBarTitleText: 'flow',
+      navigationBarTextStyle: 'black'
+    },
+    tabBar: {
+      color: '#999999',
+      selectedColor: '#ff6a3c',
+      backgroundColor: '#ffffff',
+      borderStyle: 'black',
+      list: [
+        {
+          pagePath: 'pages/index',
+          text: '首页',
+          iconPath: '/images/icon_home.png',
+          selectedIconPath: '/images/icon_home_active.png'
+        },
+        {
+          pagePath: 'pages/order',
+          text: '订单',
+          iconPath: '/images/icon_classify.png',
+          selectedIconPath: '/images/icon_classify_active.png'
+        },
+        {
+          pagePath: 'pages/mine',
+          text: '我的',
+          iconPath: 'images/icon_info.png',
+          selectedIconPath: '/images/icon_info_active.png'
+        }
+      ]
+    }
+  };
+  constructor() {
+    super();
+    this.use('requestfix');
+  }
+}
+</script>

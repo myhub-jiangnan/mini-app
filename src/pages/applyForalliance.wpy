@@ -1,0 +1,34 @@
+<style lang="less">
+    .choose_login {
+        .title {
+            text-align: center;
+            font-size: 35px; 
+              color: red;
+        }
+          button {
+            margin-top: 50px;
+        }
+    }
+</style>
+<template>
+    <view class="choose_login">
+        <view class="title"> 申请加盟页面</view>
+        <button type="primary" @tap="btnClick">提交</button>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy';
+    export default class ApplyForalliance extends wepy.page {
+        config = {
+            navigationBarTitleText: '申请加盟'
+        };
+        methods = {
+            btnClick() {
+             
+                wepy.redirectTo({
+                    url: '/pages/allianceSuccess',
+                });
+            }
+        }
+    }
+</script>
