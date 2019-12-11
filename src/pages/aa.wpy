@@ -1,13 +1,9 @@
-<style lang="less">
-
-</style>
+<style lang="less"></style>
 <template>
-  <view class="choose_login">
-  
-  </view>
+  <view class="choose_login"> aaaaa</view>
 </template>
 <script>
 import wepy from 'wepy';
 
-export default class Main extends wepy.page {}
+export default class Aa extends wepy.page {}
 </script>

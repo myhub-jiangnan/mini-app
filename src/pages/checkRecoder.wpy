@@ -1,0 +1,98 @@
+<style lang="less">
+.checkRecoder {
+  padding: 30rpx 40rpx;
+  padding-bottom: auto;
+  .recoder_item {
+    width: 670rpx;
+    height: 286rpx;
+    border-radius: 12rpx;
+    background: white;
+    margin-bottom: 30rpx;
+    padding-bottom: 30rpx;
+    .time_box {
+      height: 78rpx;
+      line-height: 78rpx;
+      border-bottom: 2rpx solid #e6e6e6;
+      font-size: 26rpx;
+      padding-left: 26rpx;
+      text:nth-child(2) {
+        margin-left: 30rpx;
+      }
+    }
+    .check_man_info {
+      margin-top: 20rpx;
+      padding-left: 26rpx;
+      text:nth-child(2) {
+        margin-left: 20rpx;
+      }
+      text:nth-child(3) {
+        margin-left: 20rpx;
+      }
+    }
+    .cargo_info {
+      margin-top: 20rpx;
+      padding-left: 26rpx;
+      text:nth-child(2) {
+        margin-left: 20rpx;
+        color: #f95c4c;
+      }
+    }
+    .check_type {
+      margin-top: 20rpx;
+      padding-left: 26rpx;
+    }
+  }
+}
+</style>
+<template>
+  <view class="checkRecoder">
+    <view class="recoder_item" wx:for="{{array}}">
+      <view class="time_box">
+        <text>{{ item.date }}</text>
+        <text>{{ item.time }}</text>
+      </view>
+      <view class="check_man_info">
+        <text>检测人：</text>
+        <text>{{item.name}}</text>
+        <text>{{item.phoneNum}}</text>
+      </view>
+      <view class="cargo_info">
+        <text>货道01:</text>
+        <text>{{-1}}</text>
+      </view>
+      <view class="check_type">
+        <text>货道检测</text>
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class CheckRecoder extends wepy.page {
+  config = {
+    navigationBarTitleText: '检测记录'
+  };
+  data = {
+    array: [
+      {
+        date: '2019年12月09日',
+        time: '23:10:20',
+        name: '周杰伦',
+        phoneNum: 18012345678
+      },
+      {
+        date: '2019年12月09日',
+        time: '23:10:20',
+        name: '周杰伦',
+        phoneNum: 18012345678
+      },
+      {
+        date: '2019年12月09日',
+        time: '23:10:20',
+        name: '周杰伦',
+        phoneNum: 18012345678
+      }
+    ]
+  };
+}
+</script>

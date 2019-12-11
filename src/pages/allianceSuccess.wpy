@@ -1,19 +1,59 @@
 <style lang="less">
-    .choose_login {
-        .title {
-            text-align: center;
-            font-size: 35px;
-            color: red;
+    page {
+        height: 100%;
+        background: #1A1A1A;
+    }
+    .allianceSuccess_container {
+        position: relative;
+        height: 100%;
+        .img_box {
+            width: 750rpx;
+            height: 764rpx;
+            image {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
         }
-        button {
-            margin-top: 50px;
+        .bottom_box {
+            // border: 1px solid red;
+            position: absolute;
+            text-align: center;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+            bottom: 70rpx;
+            left: 0;
+            right: 0;
+            margin: auto;
+            .icon_box {
+                width: 40rpx;
+                height: 36rpx;
+                margin-right: 10rpx;
+                image {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .warm {
+                color: #FFFFFF;
+            }
         }
     }
 </style>
 <template>
-    <view class="choose_login">
-        <view class="title">申请成功</view>
-        <button type="primary" @tap="btnClick">提交</button>
+    <view class="allianceSuccess_container" @tap="btnClick">
+        <view class="img_box">
+            <image src="../images/apply_success.png"/>>
+        </view>
+        <view class="bottom_box">
+            <view class="icon_box">
+                <image src="../images/choose_login_icon.png"/>
+            </view>
+            <view class="warm">禁止未成年人购买或使用本公司产品</view>
+        </view>
     </view>
 </template>
 <script>

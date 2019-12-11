@@ -1,10 +1,10 @@
 <template>
   <view class="choose_login">
     <view class="bg_box">
-      <image src="../images/choose_login_bg.png">
+      <image src="../images/choose_login_bg.png" />>
     </view>
     <view class="content_box">
-      <text class="login_title">FLOW福禄</text>
+      <view class="title">FLOW福禄</view>
       <view class="btn_box">
         <button @tap="btnClick">经销商入口</button>
         <button @tap="btnClick">代理商入口</button>
@@ -12,7 +12,7 @@
       </view>
       <view class="bottom_box">
         <view class="icon_box">
-          <image src="../images/choose_login_icon.png">
+          <image src="../images/choose_login_icon.png" />
         </view>
         <view class="warm">禁止未成年人购买或使用本公司产品</view>
       </view>
@@ -24,7 +24,7 @@
     height: 100%;
   }
   .choose_login {
-    // border: 1rpx solid red;
+    // border: 1rpx solid red; 
     position: relative;
     width: 100%;
     height: 100%;
@@ -32,29 +32,26 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      z-index: -9999;
       image {
+        display: block;
         width: 100%;
         height: 100%;
       }
     }
     .content_box {
-      // border: 2rpx solid red;
+      // border: 2rpx solid yellow;
+      position: relative;
       padding-top: 166rpx;
-      position: relative; 
-      display: block;
-      text {
-        display: block; // border: 1rpx solid white;
+      .title {
+        // border: 1rpx solid red;
         font-size: 76rpx;
         color: white;
         text-align: center;
       }
       .btn_box {
         // border: 1px solid red;
-        display: block;
         margin-top: 305rpx;
         button {
-          display: block;
           width: 540rpx;
           height: 80rpx;
           margin-bottom: 50rpx;
@@ -62,11 +59,15 @@
           font-size: 36rpx;
           font-weight: bold;
           color: #1A1A1A;
+          line-height: 80rpx;
+        }
+        .cooperation_btn {
+          margin-top: -50rpx;
         }
       }
       .bottom_box {
         // border: 1px solid red;
-        margin-top: 200rpx;
+        margin-top: 180rpx;
         text-align: center;
         display: flex;
         flex-flow: row nowrap;
@@ -74,7 +75,6 @@
         align-items: center;
         .icon_box {
           // border: 1px solid transparent;
-          display: block;
           width: 40rpx;
           height: 36rpx;
           image {
@@ -84,8 +84,8 @@
           }
         }
         .warm {
-          display: block;
           margin-left: 15rpx;
+          color: #FFFFFF;
         }
       }
     }
@@ -95,15 +95,28 @@
 <script>
   import wepy from 'wepy';
   export default class chooseInterface extends wepy.page {
-   config = {
+    config = {
       navigationBarTitleText: '选择加盟类型'
     };
     methods = {
-      btnClick(){
-        wepy.redirectTo({ 
-          url: '/pages/applyForalliance',      
+      btnClick() {
+        wepy.navigateTo({
+          url: '/pages/applyForalliance',
         });
       }
+    };
+    onLoad() {
+      wx.showModal({
+        title: '解绑设备',
+        content: '你确定要解绑设备吗？解绑后，你将无法操作该设备，同时分润方案立即停止。',
+        success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
     }
   }
 </script>

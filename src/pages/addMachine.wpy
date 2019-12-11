@@ -1,0 +1,171 @@
+<style lang="less">
+
+    .add_machine {
+        // border: 1rpx solid red;
+        position: relative;
+        height: 100%;
+        .form {
+            margin-top: 30rpx;
+            padding-left: 30rpx;
+            padding-right: 30rpx;
+            .machine_code {
+                // border: 1rpx solid red;
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: space-between;
+                align-items: center;
+                height: 88rpx;
+                margin-top: 30rpx;
+                .input_box {
+                    width: 436rpx;
+                    height: 88rpx;
+                    margin-left: 10rpx;
+                    input {
+                        // border: 1rpx solid red;
+                        display: block;
+                        height: 100%;
+                        border-radius: 10rpx;
+                        background: #E6E6E6;
+                        padding-left: 20rpx;
+                    }
+                }
+                .img_box {
+                    width: 44rpx;
+                    height: 44rpx;
+                    image {
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+            .shop_name {
+                // border: 1rpx solid red;
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: space-between;
+                align-items: center;
+                height: 88rpx;
+                margin-top: 30rpx;
+                .input_box {
+                    width: 500rpx;
+                    height: 88rpx; // border: 1rpx solid green;
+                    input {
+                        // border: 1rpx solid red;
+                        display: block;
+                        height: 100%;
+                        width: 100%;
+                        border-radius: 10rpx;
+                        background: #E6E6E6;
+                        padding-left: 20rpx;
+                        box-sizing: border-box;
+                    }
+                }
+            }
+            .detail_address {
+                // border: 1rpx solid red;
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: space-between;
+                align-items: center;
+                height: 88rpx;
+                margin-top: 30rpx;
+                .input_box {
+                    width: 436rpx;
+                    height: 88rpx;
+                    margin-left: 10rpx;
+                    input {
+                        // border: 1rpx solid red;
+                        display: block;
+                        height: 100%;
+                        border-radius: 10rpx;
+                        background: #E6E6E6;
+                        padding-left: 20rpx;
+                    }
+                }
+                .img_box {
+                    width: 44rpx;
+                    height: 44rpx;
+                    image {
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+        }
+       .submit_box {
+           position: absolute;
+           left: 0;
+           right: 0;
+           margin: auto;
+           width: 560rpx;
+           height: 88rpx;
+          margin-top: 360rpx;
+           button {
+               display: block;
+               width: 100%;
+               height: 100%;
+               border-radius: 44rxp;
+               background: #F95C4C;
+               font-size: 32rxp;
+               color: #FFFFFF;
+               letter-spacing: 20rpx;
+               text-align: center;
+               line-height: 88rpx;
+           }
+       }
+    }
+</style>
+<template>
+    <view class="add_machine">
+        <view class="form">
+            <view class="machine_code">
+                <text>设备编号：</text>
+                <view class="input_box"><input placeholder="请输入设备号或使用扫一扫"/></view>
+                <view class="img_box">
+                    <image src="../images/scan_icon.png"/>
+                </view>
+            </view>
+            <view class="shop_name">
+                <text>门店名称:</text>
+                <view class="input_box"><input placeholder="请输入详细门店地址"/></view>
+            </view>
+            <view class="detail_address">
+                <text>详细地址:</text>
+                <view class="input_box"><input placeholder="请输入详细门店地址"/></view>
+                <view class="img_box">
+                    <image src="../images/address_icon.png"/>
+                </view>
+            </view>
+            <view class="shop_name">
+                <text>货道数量:</text>
+                <view class="input_box"><input/></view>
+            </view>
+            <view class="shop_name">
+                <text>货道容量:</text>
+                <view class="input_box"><input/></view>
+            </view>
+            <view class="shop_name">
+                <text>场地类型:</text>
+                <view class="input_box"><inpu/></view>
+            </view>
+        </view>
+         <view class="submit_box" @tap="submitClick"><button>绑定</button></view>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy';
+    export default class AddMachine extends wepy.page {
+        config = {
+            navigationBarTitleText: '添加设备'
+        };
+        methods = {
+            submitClick(){
+                wx.switchTab({
+                    url:'/pages/index'
+                })
+            }
+        }
+    }
+</script>

@@ -1,0 +1,170 @@
+<style lang="less">
+  page {
+    height: 100%;
+  }
+  .operataeDevice {
+    position: relative;
+    height: 100%;
+    background: #ffffff;
+    .header {
+      // border: 1rpx solid red;
+      padding: 0 53rpx;
+      padding-top: 30rpx;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-between;
+      box-sizing: border-box;
+      .item {
+        // border: 1rpx solid red;
+        .image_box {
+          position: relative;
+          width: 79rpx;
+          height: 79rpx;
+          background: #09bb07;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        .text_box {
+          margin-top: 9rpx;
+          font-size: 22rpx;
+          color: #808080;
+          font-weight: bold;
+          text-align: center;
+        }
+      }
+    }
+    .gray_line {
+      height: 10rpx;
+      background: #eeeeee;
+      margin-top: 30rpx;
+    }
+    .device_information {
+      position: relative; // border: 1rpx solid red;
+      padding-top: 30rpx;
+      padding-left: 30rpx; // overflow: auto;
+      .item {
+        // border: 1rpx solid red;
+        color: #666666;
+        font-size: 28rpx;
+        margin-bottom: 20rpx;
+        text {
+          font-weight: bold;
+          color: black;
+          margin-left: 20rpx;
+        }
+      }
+      .qr_code_box {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+        margin-top: 100rpx; // border: 1rpx solid blue; 
+        text-align: center;
+        .image_box {
+          position: relative;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 289rpx;
+          height: 290rpx;
+          margin-bottom: 10rpx;
+          image {
+            display: block;
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
+</style>
+<template>
+  <view class="operataeDevice">
+    <view class="header">
+      <view class="item" @tap="untying">
+        <view class="image_box"></view>
+        <view class="text_box">解绑设备</view>
+      </view>
+      <view class="item" @tap="cargo">
+        <view class="image_box"></view>
+        <view class="text_box">货道检测</view>
+      </view>
+      <view class="item" @tap="replenish">
+        <view class="image_box"></view>
+        <view class="text_box">补货</view>
+      </view>
+      <view class="item">
+        <view class="image_box"></view>
+        <view class="text_box">实名认证</view>
+      </view>
+    </view>
+    <view class="gray_line"></view>
+    <view class="device_information">
+      <view class="item"><text>设备ID:</text><text>{{ device.deviceId }}</text>
+      </view>
+      <view class="item"><text>设备名称:</text><text>{{ device.deviceName }}</text>
+      </view>
+      <view class="item"><text>设备地址:</text><text>{{ device.deviceAddress }}</text></view>
+      <view class="item"><text>设备类型:</text><text>{{ device.addressType }}</text>
+      </view>
+      <view class="item"><text>设备状态:</text><text>{{ device.deviceStatus }}</text>
+      </view>
+      <view class="item"><text>最近在线:</text><text>{{ device.onlineTime }}</text>
+      </view>
+      <view class="qr_code_box">
+        <view class="image_box">
+          <image src="../images/device_qrcode.png" />
+        </view>
+        <view>设备二维码,长按保存</view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  export default class OperateDevice extends wepy.page {
+    config = {
+      navigationBarTitleText: '设备操作'
+    };
+    data = {
+      device: {
+        deviceId: 'Flow201912115855446',
+        deviceName: '福禄自动售卖机',
+        deviceAddress: '上海市浦东新区陆家嘴金茂大厦',
+        addressType: '酒吧888',
+        deviceStatus: '故障（电机问题）',
+        onlineTime: '2019-12-12 10:13:42'
+      }
+    };
+    methods = {
+      // 解绑
+      untying() {
+        wx.showModal({
+          title: '解绑设备',
+          content: '你确定要解绑设备吗？解绑后，你将无法操作该设备，同时分润方案立即停止。',
+          success(res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+      },
+      // 货道检测
+      cargo() {
+        wx.navigateTo({
+          url: '/pages/cargo'
+        });
+      },
+      // 补货
+      replenish(){
+           wx.navigateTo({
+          url: '/pages/replenish'
+        });
+      }
+    };
+  }
+</script>
+

@@ -1,14 +1,104 @@
-<style lang="less"></style>
+<style lang="less">
+.index {
+  position: relative;
+  .machine_list {
+    // border: 1rpx solid red;
+    width: 670rpx;
+    height: auto;
+    padding-left: 40rpx;
+    padding-right: 40rpx;
+    margin-top: 30rpx;
+    .item_box {
+      // border: 1rpx solid red;
+      height: 176rpx;
+      margin-bottom: 30rpx;
+      border-radius: 12rpx;
+      box-shadow: 1rpx 3rpx 10rpx gray;
+      padding-left: 24rpx;
+      .box_top {
+        height: 88rpx;
+        line-height: 88rpx;
+        border-bottom: 1rpx dashed gray;
+        font-size: 36rpx;
+        font-weight: bold;
+      }
+      .box_bottom {
+        height: 88rpx;
+        line-height: 88rpx; //  border: 0.1rpx solid red;
+      }
+    }
+  } // 添加按钮
+  .add_btn {
+    position: fixed;
+    width: 88rpx;
+    height: 88rpx;
+    right: 30rpx;
+    bottom: 30rpx;
+    image {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+</style>
+
 <template>
-  <view class="choose_login">
-    首页
+  <view class="index">
+    <view class="machine_list">
+      <view class="item_box" wx:for="{{machineList}}" @tap="deviceDetail">
+        <view class="box_top"
+          ><text style="color:{{item.color}}">【{{ item.status }}】</text>
+          <text>{{ item.address }}</text>
+        </view>
+        <view class="box_bottom">{{ item.detailAddress }}</view>
+      </view>
+    </view>
+    <view class="add_btn" @tap="addMachine">
+      <image src="../images/add_icon.png" />
+    </view>
   </view>
 </template>
+
 <script>
 import wepy from 'wepy';
-
 export default class Index extends wepy.page {
-
-  
+  config = {
+    navigationBarTitleText: 'FLOW福禄'
+  };
+  data = {
+    machineList: [
+      {
+        status: '在线',
+        color: '#62EB6F',
+        address: 'FLOW福禄总部',
+        detailAddress: '北京市朝阳区望京SOHO大厦'
+      },
+      {
+        status: '离线',
+        color: '#FF833D',
+        address: '万达广场',
+        detailAddress: '武汉朝阳区望京SOHO大厦'
+      },
+      {
+        status: '故障',
+        color: '#F95C4C',
+        address: 'FLOW福禄总部',
+        detailAddress: '上海市陆家嘴金茂大厦'
+      }
+    ]
+  };
+  methods = {
+    addMachine() {
+      wx.navigateTo({
+        url: '/pages/addMachine'
+      });
+    },
+    deviceDetail() {
+      wx.navigateTo({
+        url: '/pages/operateDevice'
+      });
+    }
+  };
 }
 </script>
