@@ -46,7 +46,7 @@
 <template>
   <view class="index">
     <view class="machine_list">
-      <view class="item_box" wx:for="{{machineList}}" @tap="deviceDetail">
+      <view class="item_box" wx:for="{{machineList}}" wx:key="index" @tap="deviceDetail">
         <view class="box_top"
           ><text style="color:{{item.color}}">【{{ item.status }}】</text>
           <text>{{ item.address }}</text>

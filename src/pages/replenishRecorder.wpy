@@ -4,7 +4,7 @@
   padding-bottom: auto;
   .recoder_item {
     width: 670rpx;
-    height: 286rpx;
+    height: 348rpx;
     border-radius: 12rpx;
     background: white;
     margin-bottom: 30rpx;
@@ -24,9 +24,13 @@
       padding-left: 26rpx;
       text:nth-child(2) {
         margin-left: 20rpx;
+        font-weight: bolder;
+        color: #1a1a1a;
       }
       text:nth-child(3) {
         margin-left: 20rpx;
+        font-weight: bolder;
+        color: #1a1a1a;
       }
     }
     .cargo_info {
@@ -40,6 +44,14 @@
     .check_type {
       margin-top: 20rpx;
       padding-left: 26rpx;
+      text:nth-child(2) {
+        font-weight: bolder;
+        color: #1a1a1a;
+      }
+      text:nth-child(3) {
+        color: #f95c4c;
+        margin-left: 10rpx;
+      }
     }
   }
 }
@@ -52,16 +64,23 @@
         <text>{{ item.time }}</text>
       </view>
       <view class="check_man_info">
-        <text>检测人：</text>
+        <text>补货人：</text>
         <text>{{item.name}}</text>
         <text>{{item.phoneNum}}</text>
       </view>
       <view class="cargo_info">
         <text>货道01:</text>
-        <text>{{-1}}</text>
+        <text>{{item.operate}}</text>
       </view>
       <view class="check_type">
-        <text>货道检测</text>
+        <text>修改前：</text>
+        <text>香芋冰淇淋</text>
+        <text>{{5}}支</text>
+      </view>
+      <view class="check_type">
+        <text>修改后：</text>
+        <text>香芋冰淇淋</text>
+        <text>{{7}}支</text>
       </view>
     </view>
   </view>
@@ -70,7 +89,7 @@
 import wepy from 'wepy';
 export default class CheckRecoder extends wepy.page {
   config = {
-    navigationBarTitleText: '检测记录'
+    navigationBarTitleText: '补货记录'
   };
   data = {
     array: [
@@ -78,19 +97,22 @@ export default class CheckRecoder extends wepy.page {
         date: '2019年12月09日',
         time: '23:10:20',
         name: '周杰伦',
-        phoneNum: 18012345678
+        phoneNum: 18012345678,
+        operate: '+2'
       },
       {
         date: '2019年12月09日',
         time: '23:10:20',
         name: '周杰伦',
-        phoneNum: 18012345678
+        phoneNum: 18012345678,
+         operate: '换商品'
       },
       {
         date: '2019年12月09日',
         time: '23:10:20',
         name: '周杰伦',
-        phoneNum: 18012345678
+        phoneNum: 18012345678,
+         operate: '换商品'
       }
     ]
   };

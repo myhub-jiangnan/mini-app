@@ -1,13 +1,169 @@
-<style lang="less"></style>
+<style lang="less">
+page {
+  height: 100%;
+}
+.replenish_page {
+  position: relative;
+  height: 100%;
+  background: #FFFFFF;
+  //  border: 1rpx solid red;
+  .goods_list {
+    margin-top: 30rpx;
+    .item {
+      // border: 1rpx solid black;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 670rpx;
+      height: 200rpx;
+      padding-top: 20rpx;
+      padding-left: 25rpx;
+      box-shadow: 6rpx 6rpx 1rpx gainsboro;
+      border-radius: 12rpx;
+      margin-bottom:30rpx;
+      .top_box {
+        font-size: 24rpx;
+        color: #546ff2;
+      }
+      .bottom_box {
+        position: relative;
+        margin-top:12rpx;
+        .img_box {
+          display: inline-block;
+          width: 120rpx;
+          height: 120rpx;
+          image {
+            display: block;
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .bottom_center_box {
+          // border: 1rpx solid red;
+          display: inline-block;
+          margin-left: 20rpx;
+         view:nth-child(1){
+           font-size: 32rpx;
+           font-weight: bold;
+           color: #1A1A1A;
+         }
+         view:nth-child(2){
+           font-size: 32rpx;
+           color: #F95C4C;
+           font-weight: bolder;
+         }
+         view:nth-child(3){
+           font-size: 26rpx;
+           color: #999999;
+           &>text {
+             color: #F95C4C;
+           }
+         }
+        }
+        .edit_btn {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 26rpx;
+          button {
+            width: 98rpx;
+            height: 36rpx;
+            line-height: 36rpx;
+            background: #F95C4C;
+            border-radius: 18rpx;
+            color: #FFFFFF;
+            font-size: 21rpx;
+            text-align: center;
+            writing-mode:horizontal-tb;
+          }
+        }
+      }
+    }
+  }
+  .edit_box {
+    position: fixed;
+    bottom: 226rpx;
+    right: 15rpx;
+    width: 88rpx;
+    height: 88rpx;
+    image {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  
+}
+</style>
 <template>
-  <view class="replenish_page">补货</view>
+  <view class="replenish_page">
+    <view class="goods_list">
+      <view class="item" wx:for="{{goodList}}" wx:key="index">
+        <view class="top_box">
+          <text>{{item.name}}</text>
+        </view>
+        <view class="bottom_box">
+          <view class="img_box">
+            <image src="{{item.imgUrl}}" />
+          </view>
+          <view class="bottom_center_box">
+          <view>{{item.goodTitle}}</view>
+          <view>¥{{item.price}}</view>
+          <view>库存:<text>{{item.stockNum}}</text>/8个</view>
+          </view>
+          <view class="edit_btn"><button>编辑</button></view>
+        </view>
+      </view>
+    </view>
+    <view class="edit_box" @tap="replenishRecorder"><image src="../images/replenish/edit_icon.png"/></view>
+  </view>
 </template>
 <script>
 import wepy from 'wepy';
 
 export default class Replenish extends wepy.page {
+  data = {
+    goodList: [
+      {
+        name: '货道01',
+        imgUrl: '../images/replenish/goods01.png',
+        goodTitle: '斩铁剑超凉薄荷',
+        price: 49.0,
+        stockNum: 5
+      },
+       {
+        name: '货道02',
+        imgUrl: '../images/replenish/goods02.png',
+        goodTitle: '斩铁剑超凉薄荷一烟三弹',
+        price: 59.0,
+        stockNum: 3
+      },
+       {
+        name: '货道03',
+        imgUrl: '../images/replenish/goods01.png',
+        goodTitle: '斩铁剑超凉薄荷',
+        price: 49.0,
+        stockNum: 5
+      },
+       {
+        name: '货道04',
+        imgUrl: '../images/replenish/goods02.png',
+        goodTitle: '斩铁剑超凉薄荷',
+        price: 49.0,
+        stockNum: 5
+      },
+    ]
+  };
   config = {
     navigationBarTitleText: '补货'
   };
+  methods={
+    replenishRecorder(){
+      console.log(666);
+      wx.navigateTo({
+        url:"/pages/replenishRecorder"
+      })
+    }
+  }
 }
 </script>

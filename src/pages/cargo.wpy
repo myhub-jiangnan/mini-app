@@ -1,11 +1,13 @@
 <style lang="less">
-  page {
-    height: 100%;
-  }
-  .cargo {
-    height: 100%;
-    background: #f2f2f2;
-    padding-top: 30rpx;
+page {
+  height: 100%;
+}
+.cargo {
+  position: relative;
+  height: 100%;
+  background: #f2f2f2;
+  padding-top: 30rpx;
+  .cargo_page {
     .cargo_list {
       display: flex;
       flex-direction: column;
@@ -90,59 +92,146 @@
       }
     }
   }
+  .mask_layer {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    left: 0px;
+    top: 0px;
+    opacity: 0.5;
+    z-index: 999;
+  }
+  .show_modal {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    width: 560rpx;
+    height: 434rpx;
+    border-radius: 8rpx;
+    background: #ffffff;
+    z-index: 1000;
+    padding-top: 40rpx;
+    .content {
+      // border: 1px solid red;
+      position: relative;
+      width: 280rpx;
+      left: 50%;
+      transform: translateX(-50%);
+      .item {
+        // border: 1rpx solid red;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        margin-top: 10rpx;
+        text {
+          display: block;
+          width: 50%;
+        }
+      }
+    }
+    .stop_btn {
+      position: absolute;
+      // border: 1px solid red;
+      width: 100%;
+      height: 88rpx;
+      line-height: 88rpx;
+      font-size: 32rpx;
+      color: #f95c4c;
+      text-align: center;
+      bottom: 0;
+      border-top: 1px solid #e6e6e6;
+    }
+  }
+}
 </style>
 <template>
   <view class="cargo">
-    <view class="cargo_list">
-      <view class="item_box" wx:for="{{array}}">
-        <view class="left_box">{{ item.name }}</view>
-        <view class="right_box">
-          <view class="right_top_box">
-            <text>货道容量</text>
-            <button>{{ item.number }}</button>
+    <view class="cargo_page">
+      <view class="cargo_list">
+        <view class="item_box" wx:for="{{array}}" wx:key="index">
+          <view class="left_box">{{ item.name }}</view>
+          <view class="right_box">
+            <view class="right_top_box">
+              <text>货道容量</text>
+              <button>{{ item.number }}</button>
+            </view>
+            <view class="right_bottom_box">
+              <button @tap="showModal">电机检测</button>
+            </view>
           </view>
-          <view class="right_bottom_box"><button>电机检测</button></view>
         </view>
       </view>
+      <view class="bottom_box">
+        <button class="btn01" @tap="checkRecoder">检测记录</button>
+        <button class="btn02" @tap="showModal">自动检测</button>
+      </view>
     </view>
-    <view class="bottom_box">
-      <button class="btn01" @tap="checkRecoder">检测记录</button>
-      <button class="btn02">自动检测</button>
+    <!-- 遮罩层 -->
+    <view class="mask_layer" wx:if="{{isFalse}}"></view>
+    <!-- 弹窗 -->
+    <view class="show_modal" wx:if="{{isFalse}}">
+      <view class="content">
+        <view class="item" wx:for="{{checkStatus}}" wx:key="index">
+          <text>{{item.name}}</text>
+          <text>{{item.status}}</text>
+        </view>
+      </view>
+      <view class="stop_btn" @tap="hideModal">停止</view>
     </view>
   </view>
 </template>
 <script>
-  import wepy from 'wepy';
-  export default class Cargo extends wepy.page {
-    config = {
-      navigationBarTitleText: '货道管理'
-    };
-    data = {
-      array: [{
-          name: '货道1',
-          number: 8
-        },
-        {
-          name: '货道2',
-          number: 7
-        },
-        {
-          name: '货道3',
-          number: 6
-        },
-        {
-          name: '货道4',
-          number: 5
-        }
-      ]
-    };
-    methods = {
-      checkRecoder() {
-        console.log(666);
-        wx.navigateTo({
-          url: '/pages/checkRecoder'
-        });
+import wepy from 'wepy';
+export default class Cargo extends wepy.page {
+  config = {
+    navigationBarTitleText: '货道管理'
+  };
+  data = {
+    isFalse: false,
+    array: [
+      {
+        name: '货道1',
+        number: 8
+      },
+      {
+        name: '货道2',
+        number: 7
+      },
+      {
+        name: '货道3',
+        number: 6
+      },
+      {
+        name: '货道4',
+        number: 5
       }
-    };
-  }
+    ],
+    checkStatus: [
+      { name: '货道01', status: '检测完...' },
+      { name: '货道02', status: '检测完...' },
+      { name: '货道03', status: '检测中...' },
+      { name: '货道04', status: '待检测...' },
+      { name: '货道05', status: '待检测...' },
+      { name: '货道06', status: '待检测...' }
+    ]
+  };
+  methods = {
+    checkRecoder() {
+      wx.navigateTo({
+        url: '/pages/checkRecoder'
+      });
+    },
+    // 显示检测情况
+    showModal() {
+      this.isFalse = true;
+    },
+    hideModal() {
+      this.isFalse = false;
+    }
+  };
+}
 </script>

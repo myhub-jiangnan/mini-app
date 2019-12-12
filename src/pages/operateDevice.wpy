@@ -93,7 +93,7 @@
         <view class="image_box"></view>
         <view class="text_box">补货</view>
       </view>
-      <view class="item">
+      <view class="item" @tap="certify">
         <view class="image_box"></view>
         <view class="text_box">实名认证</view>
       </view>
@@ -159,9 +159,23 @@
         });
       },
       // 补货
-      replenish(){
-           wx.navigateTo({
+      replenish() {
+        wx.navigateTo({
           url: '/pages/replenish'
+        });
+      },
+      // 实名认证
+      certify() {
+        wx.showModal({
+          title: '实名认证',
+          content: '开启当前设备的实名认证？',
+          success(res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
         });
       }
     };

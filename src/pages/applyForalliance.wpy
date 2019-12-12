@@ -128,7 +128,7 @@
       <view class="choose_place">
         <view><text>3.您预计将设备铺设的场景</text> </view>
         <checkbox-group>
-          <view class="check_box" wx:for="{{placeArray}}">
+          <view class="check_box" wx:for="{{placeArray}}" wx:key="index">
             <label>
                       <checkbox value="{{item.name}}" checked="{{item.checked}}" />{{
                         item.value
@@ -142,7 +142,7 @@
         <view class="input_name_box">
           <view class="box_input"><input /></view>
           <radio-group>
-            <radio wx:for="{{sexualArray}}" value="{{item.name}}" checked="{{item.checked}}"><text>{{ item.value }}</text></radio>
+            <radio wx:for="{{sexualArray}}" wx:key="index" value="{{item.name}}" checked="{{item.checked}}"><text>{{ item.value }}</text></radio>
           </radio-group>
         </view>
       </view>
