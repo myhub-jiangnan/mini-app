@@ -1,0 +1,307 @@
+<style lang="less">
+  .page_container {
+    position: relative;
+    height: 100%;
+    .order_detail {
+      position: relative;
+      // border: 1rpx solid red;
+      font-size: 28rpx; // 订单信息
+      .order_info {
+        padding: 60rpx 28rpx;
+        padding-bottom: 32rpx;
+        background: #ffffffff;
+        .goodsName {
+          text-align: center;
+        }
+        .price {
+          margin-top: 26rpx;
+          font-size: 48rpx;
+          color: red;
+          text-align: center;
+        }
+        view:nth-child(3) {
+          text-align: center;
+          color: gray;
+          margin-top: 22rpx;
+          font-size: 24rpx;
+        }
+        view:nth-child(4) {
+          margin-top: 58rpx;
+          text:nth-child(2) {
+            float: right;
+          }
+        }
+        view:nth-child(5) {
+          margin-top: 32rpx;
+          padding-bottom: 33rpx;
+          border-bottom: 1rpx solid gray;
+          text:nth-child(2) {
+            float: right;
+          }
+        }
+        view:nth-child(6) {
+          margin-top: 32rpx;
+          text:nth-child(2) {
+            float: right;
+          }
+        }
+        view:nth-child(7) {
+          margin-top: 36rpx;
+          text:nth-child(2) {
+            float: right;
+            margin-left: 15rpx;
+          }
+          text:nth-child(3) {
+            float: right;
+          }
+        }
+      } // 资金流向
+      .money_flow {
+        margin-top: 10rpx;
+        padding: 28rpx 30rpx;
+        background: #ffffffff;
+        view:nth-child(1) {
+          padding-bottom: 27rpx;
+          border-bottom: 1rpx solid gray;
+        }
+        view:nth-child(2) {
+          margin-top: 30rpx;
+        }
+        .name_info {
+          margin-bottom: 32rpx;
+          text:nth-child(2) {
+            float: right;
+            color: red;
+          }
+        }
+      } // 手动退款
+      .drawback {
+        height: 140rpx;
+        padding: 30rpx;
+        .left_box {
+          float: left;
+          .profile {
+            // border: 1rpx solid red;
+            display: inline-block;
+            width: 80rpx;
+            height: 80rpx;
+            margin-right: 20rpx;
+          }
+          .name_info {
+            display: inline-block;
+          }
+        }
+        .drawback_btn {
+          float: right;
+          button {
+            width: 168rpx;
+            height: 68rpx;
+            background: #F95C4C;
+            color: #ffffffff;
+            text-align: center;
+            line-height: 68rpx;
+            border-radius: 6rpx;
+            font-size: 28rpx;
+          }
+        }
+      }
+    }
+    .mask_layer {
+      // border: 1rpx solid red;
+      position: absolute;
+      background-color: black;
+      left: 0px;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+      z-index: 999;
+    }
+    .modal_box {
+      // border: 1rpx solid red;
+      position: absolute;
+      width: 560rpx;
+      height: 468rpx;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      z-index: 999;
+      background: #ffffffff;
+      border-radius: 12rpx;
+      padding-top: 40rpx;
+      view:nth-child(1) {
+        font-size: 36rpx;
+        text-align: center;
+        color: #F95C4C;
+        font-weight: bold;
+        margin-bottom: 36rpx;
+        letter-spacing: 15rpx;
+      }
+      .yellow {
+        color: #F95C4C;
+      }
+      .item_box {
+        padding: 0 30rpx;
+        margin-bottom: 27rpx;
+        text:nth-child(2) {
+          float: right;
+          font-weight: bold;
+        }
+      }
+      .check_box {
+        border-top: 1rpx solid gray;
+        width: 100%;
+        height: 100rpx;
+        line-height: 70rpx;
+        view:nth-child(1) {
+          display: inline-block;
+          text-align: center;
+          color: black;
+          font-weight: bolder;
+          width: 50%;
+        }
+        view:nth-child(2) {
+          display: inline-block;
+          border-left: 1rpx solid gray;
+          text-align: center;
+          width: 50%;
+          color: #F95C4C;
+          font-weight: bolder;
+        }
+      }
+    }
+  }
+</style>
+<template>
+  <view class="page_container">
+    <view class="order_detail">
+      <!-- 订单详情 -->
+      <view class="order_info">
+        <view class="goodsName">{{orderDetail.goodsName}}</view>
+        <view class="price">+ {{orderDetail.price}}</view>
+        <view>交易成功</view>
+        <view>
+          <text>设备名称</text>
+          <text>{{orderDetail.deviceName}}</text>
+        </view>
+        <view>
+          <text>设备地址</text>
+          <text>{{orderDetail.deviceAddress}}</text>
+        </view>
+        <view>
+          <text>设备号</text>
+          <text>{{orderDetail.orderNumer}}</text>
+        </view>
+        <view>
+          <text>支付时间</text>
+          <text>{{orderDetail.payTime}}</text>
+          <text>{{orderDetail.payDate}}</text>
+        </view>
+      </view>
+      <!-- 资金流向 -->
+      <view class="money_flow">
+        <view>资金流向</view>
+        <view class="name_info">
+          <text>经销商姓名</text>
+          <text>{{moneyFlow.dealer}}</text>
+        </view>
+        <view class="name_info">
+          <text>代理商姓名</text>
+          <text>{{moneyFlow.agentName}}</text>
+        </view>
+        <view class="name_info">
+          <text>业务员姓名</text>
+          <text>{{moneyFlow.clerkName}}</text>
+        </view>
+      </view>
+      <!-- 手动退款 -->
+      <view class="drawback">
+        <view class="left_box">
+          <view class="profile">
+            <image src="{{drawback.profileUrl}}" />
+          </view>
+          <view class="name_info">
+            <view>
+              {{drawback.name}}
+            </view>
+            <view>
+              {{drawback.sexual}}
+            </view>
+          </view>
+        </view>
+        <view class="drawback_btn" @tap="showModal"><button>手动退款</button></view>
+      </view>
+    </view>
+    <!-- 遮罩层 -->
+    <view class="mask_layer" wx:if="{{isFalse}}"></view>
+    <!-- 弹窗 -->
+    <view class="modal_box" wx:if="{{isFalse}}">
+      <view>退款</view>
+      <view class="item_box"><text>商品名称</text><text>{{confirmDrawback.goodsName}}</text></view>
+      <view class="item_box"><text>单价</text><text class="yellow">¥{{confirmDrawback.price}}</text></view>
+      <view class="item_box"><text>数量</text><text>{{confirmDrawback.account}}</text></view>
+      <view class="item_box"><text>退款金额</text><text class="yellow">¥{{confirmDrawback.sumOfMoney}}</text></view>
+      <view class="check_box">
+        <view @tap="cancalDrawback">取消</view>
+        <view @tap="confirDrawback">确定</view>
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy';
+  export default class orderDetail extends wepy.page {
+    data = {
+      isFalse: false,
+      orderDetail: {
+        goodsName: '斩铁剑薄荷',
+        price: '49.00',
+        deviceName: 'FLOW总部',
+        deviceAddress: '上海浦东新区陆家嘴金茂大厦',
+        orderNumer: '594656478798',
+        payDate: '2019-12-10',
+        payTime: '12:10:12'
+      },
+      moneyFlow: {
+        dealer: '周杰伦',
+        agentName: '周杰伦',
+        clerkName: '周杰伦'
+      },
+      // 退款人信息
+      drawback: {
+        profileUrl: "../images/orderDetail/profile.png",
+        name: "爱吃西红柿",
+        sexual: "男"
+      },
+      // 退款弹窗确认信息
+      confirmDrawback: {
+        goodsName: "大西瓜",
+        price: "59.00",
+        account: 1,
+        sumOfMoney: "59.00"
+      }
+    };
+    config = {
+      navigationBarTitleText: '订单列表'
+    };
+    methods = {
+      //弹出窗
+      showModal() {
+        this.isFalse = true;
+      },
+      // 取消退款
+      cancalDrawback() {
+        this.isFalse = false;
+      },
+      confirDrawback() {
+        this.isFalse = false;
+        wx.showToast({
+          title: '退款成功！',
+          icon: 'success',
+          duration: 2000
+        })
+      }
+    }
+  }
+</script>

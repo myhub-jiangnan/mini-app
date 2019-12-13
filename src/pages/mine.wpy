@@ -1,13 +1,283 @@
 <style lang="less">
-
+  page {
+    background: #ffffff;
+    // background: #FFF95C4C;
+  }
+  .mine_page {
+    padding: 11rpx 30rpx;
+    padding-bottom: 0;
+    height: 390rpx; // 卡片部分
+    .header {
+      position: relative;
+      width: 100%;
+      height: 390rpx;
+      padding-top: 33rpx;
+      .bg_box {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -100;
+      }
+      .first_layer {
+        // border: 1rpx solid red;
+        height: 80rpx;
+        padding: 0 34rpx;
+        .user_info {
+          // border: 1rpx solid red;
+          .profile_box {
+            // border: 1rpx solid red;
+            display: inline-block;
+            width: 80rpx;
+            height: 80rpx;
+          }
+          .name_info {
+            position: relative;
+            margin-left: 25rpx; // top: 50%;
+            display: inline-block;
+            view:nth-child(1) {
+              font-size: 28rpx;
+              color: #FFFFFFFF;
+              font-weight: bold;
+            }
+            view:nth-child(2) {
+              text:nth-child(1) {
+                display: inline-block;
+                color: #ffffff;
+                font-size: 24rpx;
+              }
+              button {
+                display: inline-block;
+                margin-left: 22rpx;
+                width: 130rpx;
+                height: 34rpx;
+                padding: 0;
+                border-radius: 17rpx;
+                background: #F95C4C;
+                color: #ffffff;
+                text-align: center;
+                line-height: 34rpx;
+                font-size: 20rpx;
+              }
+            }
+          }
+        }
+      }
+      .second_layer {
+        margin-top: 40rpx;
+        padding-left: 34rpx;
+        color: #ffffff;
+        view:nth-child(1) {
+          font-size: 24rpx;
+        }
+        view:nth-child(2) {
+          margin-top: 16rpx;
+          font-size: 48rpx;
+        }
+      }
+      .third_layer {
+        // border: 1rpx solid red;
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: 124rpx; // margin-top: 20rpx;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff; // opacity: 0.5;
+        .income {
+          position: relative;
+          width: 33.3333%;
+          border-right: 1rpx solid gray;
+          text-align: center;
+          z-index: 1000;
+          view:nth-child(1) {
+            font-size: 36rpx;
+          }
+          view:nth-child(2) {
+            margin-top: 16rpx;
+            font-size: 20rpx;
+          }
+        }
+        .bg {
+          position: absolute;
+          background-color: gray;
+          left: 0px;
+          top: 0px;
+          width: 100%;
+          height: 100%;
+          opacity: 0.5;
+          z-index: -100;
+        }
+      }
+    } // 分润管理
+    .share_benifit {
+      // border: 1rpx solid red;
+      margin-top: 29rpx;
+      view:nth-child(1) {
+        font-size: 32rpx;
+        color: black;
+        font-weight: bold;
+      }
+      .container {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 150rpx;
+        margin-top: 29rpx;
+        padding: 0 34rpx;
+        box-shadow: 5rpx 5rpx 6rpx gray;
+        .section {
+          //  border: 1rpx solid red;
+          view:nth-child(1) {
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 72rpx;
+            height: 72rpx;
+            background: #F95C4C;
+          }
+          view:nth-child(2) {
+            margin-top: 16rpx;
+            font-size: 24rpx;
+            text-align: center;
+          }
+        }
+      }
+    } //  我的工具
+    .my_tool {
+      // border: 1rpx solid red;
+      margin-top: 28rpx;
+      view:nth-child(1) {
+        font-size: 32rpx;
+        font-weight: bold;
+      }
+      .container {
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: space-between;
+        //  border: 1rpx solid red;
+       
+        height: 264rpx;
+        width: 100%;
+        margin-top: 28rpx;
+        .section {
+          position: relative;
+          // border: 1rpx solid red;
+          // margin-top: 58rpx;
+          view:nth-child(1) {
+            display: inline-flex;
+            width: 30rpx;
+            height: 30rpx;
+            background: #F95C4C;
+          }
+          view:nth-child(2) {
+            display: inline-block;
+            margin-left: 12rpx;
+          }
+          view:nth-child(3) {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            width: 13rpx;
+            height: 13rpx;
+            background: #F95C4C;
+          }
+        }
+      }
+    }
+  }
 </style>
 <template>
-  <view class="choose_login">
-   我的页面
+  <view class="mine_page">
+    <!-- 卡片部分 -->
+    <view class="header">
+      <view class="bg_box">
+        <image src="../images/mine/card_bg.png" />
+      </view>
+      <view class="first_layer">
+        <view class="user_info">
+          <view class="profile_box">
+            <image src='../images/mine/profile.png' />
+          </view>
+          <view class="name_info">
+            <view>周杰伦</view>
+            <view><text>18310209876</text><button>修改手机号</button></view>
+          </view>
+        </view>
+      </view>
+      <view class="second_layer">
+        <view>余额（元）</view>
+        <view>8866.99</view>
+      </view>
+      <view class="third_layer">
+        <view class="today_income income">
+          <view>888.00</view>
+          <view>今日收益（元）</view>
+        </view>
+        <view class="yestoday_incom income">
+          <view>777.00</view>
+          <view>昨日收益（元）</view>
+        </view>
+        <view class="total_incom income">
+          <view>666666.00</view>
+          <view>累计收益（元）</view>
+        </view>
+        <view class="bg"></view>
+      </view>
+    </view>
+    <!-- 分润部分 -->
+    <view class="share_benifit">
+      <view>分润管理</view>
+      <view class="container">
+        <view class="section">
+          <view></view>
+          <view>人员管理</view>
+        </view>
+        <view class="section">
+          <view></view>
+          <view>分润比例</view>
+        </view>
+        <view class="section">
+          <view></view>
+          <view>收益记录</view>
+        </view>
+      </view>
+    </view>
+    <!-- 我的工具 -->
+    <view class="my_tool">
+      <view>我的工具</view>
+      <view class="container">
+        <view class="section">
+          <view> </view>
+          <view>提现</view>
+          <view></view>
+        </view>
+        <view class="section">
+          <view> </view>
+          <view>提现</view>
+          <view></view>
+        </view>
+        <view class="section">
+          <view> </view>
+          <view>提现</view>
+          <view></view>
+        </view>
+      </view>
+    </view>
   </view>
 </template>
 <script>
-import wepy from 'wepy';
-
-export default class Mine extends wepy.page {}
+  import wepy from 'wepy';
+  export default class Mine extends wepy.page {
+    config = {
+      navigationBarTitleText: '我的'
+    };
+  }
 </script>

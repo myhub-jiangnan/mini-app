@@ -1,18 +1,13 @@
 <style lang="less">
-@import './styles/base';
-@import './styles/icon';
-@import './styles/style';
-page {
-  height: 100%;
-}
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-}
+@import './styles/base.less';
+// .container {
+//   height: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: space-between;
+//   box-sizing: border-box;
+// }
 </style>
 
 <script>
@@ -21,6 +16,11 @@ import 'wepy-async-function';
 export default class extends wepy.app {
   config = {
     pages: [
+      // 我的
+      'pages/mine',
+      'pages/index',
+      // 订单详情
+      'pages/orderDetail',
       // 订单列表
       'pages/order',
       // 设备操作
@@ -29,7 +29,6 @@ export default class extends wepy.app {
       'pages/replenishRecorder',
       // 补货
       'pages/replenish',
-
       // 货道管理
       'pages/cargo',
       // 选择登录类型页面
@@ -40,13 +39,10 @@ export default class extends wepy.app {
       'pages/aa',
       // 申请加盟
       'pages/applyForalliance',
-      'pages/index',
       'pages/authorize',
       // 添加设备
       'pages/addMachine',
-      'pages/allianceSuccess',
-      // 我的
-      'pages/mine'
+      'pages/allianceSuccess'
     ],
     window: {
       backgroundTextStyle: 'light',
