@@ -236,7 +236,7 @@
     <view class="share_benifit">
       <view>分润管理</view>
       <view class="container">
-        <view class="section">
+        <view class="section" @tap="peopleManage">
           <view></view>
           <view>人员管理</view>
         </view>
@@ -279,5 +279,13 @@
     config = {
       navigationBarTitleText: '我的'
     };
+      methods = {
+      peopleManage() {
+        console.log(66);
+        wx.navigateTo({
+          url: "/pages/peopleManage"
+        });
+      }
+    }
   }
 </script>

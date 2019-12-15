@@ -20,7 +20,7 @@
 	},
 	"compileType": "miniprogram",
 	"appid": "wx1c09320f1ed19d7b",
-	"projectname": "flow",
+	"projectname": "mini-app",
 	"miniprogramRoot": "dist/",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},

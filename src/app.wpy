@@ -16,8 +16,11 @@ import 'wepy-async-function';
 export default class extends wepy.app {
   config = {
     pages: [
+      //人员管理
+      'pages/peopleManage',
       // 我的
       'pages/mine',
+
       'pages/index',
       // 订单详情
       'pages/orderDetail',

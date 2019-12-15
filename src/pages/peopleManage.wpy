@@ -1,0 +1,45 @@
+<style lang="less">
+.page_container {
+  height: 100%;
+  padding: 30rpx 40rpx;
+  padding-bottom: 0;
+  .section {
+    border: 1px solid red;
+    width: 670rpx;
+    height: 176rpx;
+    padding: 0 30rpx;
+    .top_box {
+      border: 1px solid red;
+      height: 88rpx;
+      justify-content: space-between;
+      button:nth-child(2) {
+        width: 120rpx;
+        height: 54rpx;
+        line-height: 54rpx;
+        font-size: 26rpx;
+      }
+    }
+  }
+}
+</style>
+<template>
+  <view class="page_container">
+    <view class="section">
+      <view class="top_box flex">
+        <view>
+          <text>周杰伦</text>
+          <text class="phone_num">13678946589</text>
+        </view>
+        <button type="warn">删除</button>
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class peopleManage extends wepy.page {
+  config = {
+    navigationBarTitleText: '人员管理'
+  };
+}
+</script>

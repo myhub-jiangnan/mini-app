@@ -14,10 +14,6 @@ view {
   -ms-box-sizing: border-box;
 }
 
-.border(@color) {
-  border: 1rpx solid @color;
-}
-
 image {
   display: block;
   width: 100%;
@@ -40,16 +36,39 @@ image {
 }
 
 // 弹性盒模型
-.flex(@justify-content) {
+.flex {
   display: flex;
   display: -webkit-box;
+  display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
-  display: -webkit-flex;
-  flex-flow: row nowrap;
-  justify-content: @justify-content;
+  justify-content: center;
   align-items: center;
 }
+
+.flex_item {
+  text-align: center;
+}
+
+/* 让flex_item 里的文字垂直居中 */
+.flex_item::before {
+  display: inline-block;
+  content: "";
+  height: 100%;
+  vertical-align: middle;
+}
+
+
+/* 表单输入: input_cell 为表单输入的单元格，把标签和输入框放一行 */
+.input_cell {
+  padding: 16px;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  border: 1px solid gray;
+}
+
 
 .box-shadow(@x, @y, @blur, @color) {
   box-shadow: @x @y @blur @color;
