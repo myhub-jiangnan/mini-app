@@ -105,18 +105,18 @@
         });
       }
     };
-    onLoad() {
-      wx.showModal({
-        title: '解绑设备',
-        content: '你确定要解绑设备吗？解绑后，你将无法操作该设备，同时分润方案立即停止。',
-        success(res) {
-          if (res.confirm) {
-            console.log('用户点击确定')
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
-        }
-      })
-    }
+    // onLoad() {
+    //   wx.showModal({
+    //     title: '解绑设备',
+    //     content: '你确定要解绑设备吗？解绑后，你将无法操作该设备，同时分润方案立即停止。',
+    //     success(res) {
+    //       if (res.confirm) {
+    //         console.log('用户点击确定')
+    //       } else if (res.cancel) {
+    //         console.log('用户点击取消')
+    //       }
+    //     }
+    //   })
+    // }
   }
 </script>

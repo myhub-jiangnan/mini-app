@@ -1,84 +1,84 @@
 <style lang="less">
-@import './styles/base.less';
-// .container {
-//   height: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: space-between;
-//   box-sizing: border-box;
-// }
+  @import './styles/base.less';
+  .border() {
+    border: 1rpx solid red;
+  }
 </style>
 
 <script>
-import wepy from 'wepy';
-import 'wepy-async-function';
-export default class extends wepy.app {
-  config = {
-    pages: [
-      //人员管理
-      'pages/peopleManage',
-      // 我的
-      'pages/mine',
-
-      'pages/index',
-      // 订单详情
-      'pages/orderDetail',
-      // 订单列表
-      'pages/order',
-      // 设备操作
-      'pages/operateDevice',
-      // 补货记录
-      'pages/replenishRecorder',
-      // 补货
-      'pages/replenish',
-      // 货道管理
-      'pages/cargo',
-      // 选择登录类型页面
-      'pages/chooseInterface',
-      //检测记录
-      'pages/checkRecoder',
-      //test
-      'pages/aa',
-      // 申请加盟
-      'pages/applyForalliance',
-      'pages/authorize',
-      // 添加设备
-      'pages/addMachine',
-      'pages/allianceSuccess'
-    ],
-    window: {
-      backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'flow',
-      navigationBarTextStyle: 'black'
-    },
-    tabBar: {
-      color: '#999999',
-      selectedColor: '#ff6a3c',
-      backgroundColor: '#ffffff',
-      borderStyle: 'black',
-      list: [
-        {
-          pagePath: 'pages/index',
-          text: '设备',
-          iconPath: '/images/icon_home.png',
-          selectedIconPath: '/images/icon_home_active.png'
-        },
-        {
-          pagePath: 'pages/order',
-          text: '订单',
-          iconPath: '/images/icon_classify.png',
-          selectedIconPath: '/images/icon_classify_active.png'
-        },
-        {
-          pagePath: 'pages/mine',
-          text: '我的',
-          iconPath: 'images/icon_info.png',
-          selectedIconPath: '/images/icon_info_active.png'
-        }
-      ]
+  import wepy from 'wepy';
+  import 'wepy-async-function';
+  export default class extends wepy.app {
+    config = {
+      pages: [
+        'pages/authorize',
+        // 分润记录
+        'pages/incomRecorder',
+        //人员管理
+        'pages/peopleManage',
+        // 我的
+        'pages/mine',
+        //收益
+        'pages/index',
+        // 订单详情
+        'pages/orderDetail',
+        // 订单列表
+        'pages/order',
+        // 设备操作
+        'pages/operateDevice',
+        // 补货记录
+        'pages/replenishRecorder',
+        // 补货
+        'pages/replenish',
+        // 货道管理
+        'pages/cargo',
+        // 选择登录类型页面
+        'pages/chooseInterface',
+        //检测记录
+        'pages/checkRecoder',
+        //test
+        'pages/aa',
+        // 申请加盟
+        'pages/applyForalliance',
+        // 添加设备
+        'pages/addMachine',
+        'pages/allianceSuccess'
+      ],
+      window: {
+        backgroundTextStyle: 'light',
+        navigationBarBackgroundColor: '#fff',
+        navigationBarTitleText: 'flow',
+        navigationBarTextStyle: 'black'
+      },
+      tabBar: {
+        color: '#999999',
+        selectedColor: '#ff6a3c',
+        backgroundColor: '#ffffff',
+        borderStyle: 'black',
+        list: [{
+            pagePath: 'pages/index',
+            text: '设备',
+            iconPath: '/images/icon_home.png',
+            selectedIconPath: '/images/icon_home_active.png'
+          },
+          {
+            pagePath: 'pages/order',
+            text: '订单',
+            iconPath: '/images/icon_classify.png',
+            selectedIconPath: '/images/icon_classify_active.png'
+          },
+          {
+            pagePath: 'pages/mine',
+            text: '我的',
+            iconPath: 'images/icon_info.png',
+            selectedIconPath: '/images/icon_info_active.png'
+          }
+        ]
+      }
+    };
+    constructor() {
+      super();
+      this.use('promisify');
     }
-  };
-}
+  }
 </script>

@@ -1,0 +1,38 @@
+<style lang="less">
+.incom_recorder_page {
+  height: 100%;
+  padding-top: 30rpx;
+  .search_box {
+    picker {
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 670rpx;
+      height: 64rpx;
+      border-radius: 32rpx;
+      // border: 1rpx solid red;
+      button {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+</style>
+<template>
+  <view class="incom_recorder_page">
+    <view class="search_box">
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+        <button class="weui-btn" type="default">单列选择器</button>
+      </picker>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class IncomRecorder extends wepy.page {
+  config = {
+    navigationBarTitleText: '收益记录'
+  };
+}
+</script>

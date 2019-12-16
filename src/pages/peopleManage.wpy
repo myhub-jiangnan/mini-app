@@ -1,45 +1,171 @@
 <style lang="less">
-.page_container {
-  height: 100%;
-  padding: 30rpx 40rpx;
-  padding-bottom: 0;
-  .section {
-    border: 1px solid red;
-    width: 670rpx;
-    height: 176rpx;
-    padding: 0 30rpx;
-    .top_box {
-      border: 1px solid red;
-      height: 88rpx;
-      justify-content: space-between;
+  .page_container {
+    height: 100%;
+    padding: 30rpx 0;
+    padding-bottom: 0;
+    .section {
+      // border: 1px solid red;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 670rpx;
+      height: 176rpx;
+      padding: 0 30rpx;
+      background: white;
+      border-radius: 12rpx;
+      margin-bottom: 30rpx;
+      .top_box {
+        // border: 1px solid red;
+        height: 88rpx;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1rpx solid gainsboro;
+        view:nth-child(1) {
+          // border: 1rpx solid red;
+          text:nth-child(2) {
+            margin-left: 20rpx;
+          }
+        }
+        view:nth-child(2) {
+          // border: 1rpx solid blue;
+          height: 54rpx;
+          width: 120rpx;
+          line-height: 54rpx;
+          font-size: 26rpx;
+          background: #E64340;
+          text-align: center;
+          color: #f7f7f7;
+          border-radius: 12rpx;
+        }
+      }
+      .bottom_box {
+        // border: 1rpx solid red;
+        height: 88rpx;
+        justify-content: space-between;
+        .right_box {
+          view:nth-child(2) {
+            width: 9rpx;
+            height: 17rpx;
+            margin-left: 20rpx;
+          }
+        }
+      }
+    }
+    .footer {
+      position: fixed;
+      bottom: 0;
+      height: 120rpx;
+      width: 100%;
+      background: white;
+      padding: 28rpx 30rpx;
+      button {
+        height: 64rpx;
+        line-height: 64rpx;
+        font-size: 30rpx;
+        border-radius: 8rpx;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+      }
+      button:nth-child(1) {
+        width: 256rpx;
+      }
       button:nth-child(2) {
-        width: 120rpx;
-        height: 54rpx;
-        line-height: 54rpx;
-        font-size: 26rpx;
+        width: 417rpx;
       }
     }
   }
-}
 </style>
 <template>
   <view class="page_container">
-    <view class="section">
-      <view class="top_box flex">
+    <view class="section" wx:for="{{array}}" wx:key="this">
+      <view class="top_box">
         <view>
-          <text>周杰伦</text>
-          <text class="phone_num">13678946589</text>
+          <text>{{item.name}}</text>
+          <text class="phone_num">{{item.cellPhone}}</text>
         </view>
-        <button type="warn">删除</button>
+        <view>删除</view>
       </view>
+      <view class="bottom_box flex">
+        <view class="">分润设备</view>
+        <view class="right_box flex">
+          <view>共
+            <text>{{item.deviceNum}}</text>台
+          </view>
+          <view class="">
+            <image src="../images/toright_icon.png">
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="footer flex">
+      <button type="primary" @tap="incomRecorder">分润收益</button>
+      <button type="warn">添加人员</button>
     </view>
   </view>
 </template>
 <script>
-import wepy from 'wepy';
-export default class peopleManage extends wepy.page {
-  config = {
-    navigationBarTitleText: '人员管理'
-  };
-}
+  import wepy from 'wepy';
+  export default class peopleManage extends wepy.page {
+    data = {
+      array: [{
+          name: "周杰伦",
+          cellPhone: 13812346578,
+          deviceNum: 6
+        },
+        {
+          name: "周杰伦",
+          cellPhone: 13812346578,
+          deviceNum: 6
+        },
+        {
+          name: "周杰伦",
+          cellPhone: 13812346578,
+          deviceNum: 6
+        },
+        {
+          name: "周杰伦",
+          cellPhone: 13812346578,
+          deviceNum: 6
+        },
+        {
+          name: "周杰伦",
+          cellPhone: 13812346578,
+          deviceNum: 6
+        },
+        {
+          name: "周杰伦",
+          cellPhone: 13812346578,
+          deviceNum: 6
+        },
+        {
+          name: "周杰伦",
+          cellPhone: 13812346578,
+          deviceNum: 6
+        },
+        {
+          name: "周杰伦",
+          cellPhone: 13812346578,
+          deviceNum: 6
+        },
+        {
+          name: "周杰伦",
+          cellPhone: 13812346578,
+          deviceNum: 6
+        }
+      ]
+    };
+    config = {
+      navigationBarTitleText: '人员管理'
+    };
+    methods = {
+      incomRecorder(){
+        console.log(66);
+          wx.navigateTo({
+          url: '/pages/incomRecorder'
+        });
+      }
+    }
+  }
 </script>

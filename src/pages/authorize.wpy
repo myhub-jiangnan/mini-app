@@ -1,27 +1,115 @@
 <template>
   <view class="authorize-contianer">
     <image class="authorize-icon" src="../images/authorize.png" />
-      <view class="auth-item">FLOW申请获取以下权限：</view>
-      <view class="auth-item">获取你的公开信息（头像、昵称等）</view>
-      <view class="btn-authorize">
-        <button @tap="pageJump" type="primary">授权</button>
-      </view>
+    <view class="auth-item">FLOW申请获取以下权限：</view>
+    <view class="auth-item">获取你的公开信息（头像、昵称等）</view>
+    <view class="btn-authorize">
+      <button @tap="authorize" type="primary" open-type="getUserInfo">授权</button>
+    </view>
   </view>
 </template>
 <script>
   import wepy from 'wepy';
+  import 'wepy-async-function';
   export default class Authorize extends wepy.page {
     config = {
       navigationBarTitleText: '授权登录'
     };
     methods = {
-      pageJump() {
-        wepy.redirectTo({
-          url: '/pages/chooseInterface'
-        });
+      authorize() {
+        wx.showModal({
+          title: '微信授权登录',
+          content: 'FLOW申请获取以下权限：获取你的公开信息（头像、昵称、地区、性别等信息。）',
+          success(res1) {
+            if (res1.confirm) {
+              wx.login({
+                success(res2) {
+                  if (res2.code) {
+                    console.log('*****code=' + res2.code);
+                    wx.request({
+                      url: 'http://flow.dev.redsoul.cn/app/user/login',
+                      method: "post",
+                      header: {
+                        'content-type': 'application/x-www-form-urlencoded',
+                      },
+                      data: {
+                        code: res2.code
+                      },
+                      success: function(res3) {
+                        console.log("login接口调用成功！");
+                        // console.log(res.data.code);
+                        if (res3.data.code == 0) {
+                          let token = res3.data.data.token;
+                          console.log("toke:"+ JSON.stringify(res3));
+                          wx.getSetting({
+                            success: (res4) => {
+                              if (res4.authSetting['scope.userInfo']) {
+                                wx.getUserInfo({
+                                  success: (res5) => {                         
+                                    console.log("获取用户信息成功：" + JSON.stringify(res5));
+                                    wx.request({
+                                      url: 'http://flow.dev.redsoul.cn/app/user/saveUserInfo',
+                                      method: "post",
+                                      header: {
+                                        'content-type': 'application/x-www-form-urlencoded',
+                                        'token':token
+                                      },
+                                      data: {
+                                        userInfo: JSON.stringify(res5.userInfo),
+                                        rawData: JSON.stringify(res5.rawData),
+                                        signature: JSON.stringify(res5.signature),
+                                        encryptedData: JSON.stringify(res5.encryptedData),
+                                        iv: JSON.stringify(res5.iv)
+                                      },
+                                    })
+                                  },
+                                  fail() {
+                                    console.log("获取用户信息失败！");
+                                  }
+                                });
+                              }
+                            },
+                          });
+                        }
+                      }
+                    })
+                  } else {
+                    console.log('登录失败！' + res.errMsg)
+                  }
+                }
+              })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+        //--------------
+        // let res = await wx.showModal({
+        //   title: '微信授权登录',
+        //   content: 'FLOW申请获取以下权限：获取你的公开信息（头像、昵称、地区、性别等信息。）',
+        // })
+        // if (res.confirm) {
+        //   let res = await wx.login({});
+        //   if (res.code) {
+        //     console.log("*****code:*****" + res.code);
+        //     let res = await wx.request({
+        //       url: 'http://flow.dev.redsoul.cn/app/user/login',
+        //       method: "post",
+        //       header: {
+        //         'content-type': 'application/x-www-form-urlencoded',
+        //       },
+        //       data: {
+        //         code: res.code
+        //       }
+        //     })
+        //   }else{
+        //     console.log("获取登录凭证失败");
+        //   }
+        // } else if (res.cancel) {
+        //   console.log('用户点击取消')
+        // }
       }
     };
-    events = {};
   }
 </script>
 <style lang="less">
