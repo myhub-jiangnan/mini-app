@@ -24,7 +24,7 @@ const wxRequest = async (params = {}, url) => {
   return res;
 };
 
-
+  
 module.exports = {
   wxRequest
 }

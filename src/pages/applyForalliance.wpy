@@ -130,9 +130,9 @@
         <checkbox-group>
           <view class="check_box" wx:for="{{placeArray}}" wx:key="index">
             <label><checkbox value="{{item.name}}" checked="{{item.checked}}" />{{
-                                  item.value
-                                }}
-                              </label>
+                                    item.value
+                                  }}
+                                </label>
           </view>
         </checkbox-group>
         <view class="input_box"><input placeholder="其他" /></view>
