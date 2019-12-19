@@ -1,7 +1,6 @@
 <style lang="less">
   page {
-    background: #ffffff;
-    // background: #FFF95C4C;
+    background: #ffffff; // background: #FFF95C4C;
   }
   .mine_page {
     padding: 11rpx 30rpx;
@@ -159,16 +158,13 @@
         display: flex;
         flex-flow: column wrap;
         justify-content: center;
-        align-items: space-between;
-        //  border: 1rpx solid red;
-       
+        align-items: space-between; // border: 1rpx solid red;
         height: 264rpx;
         width: 100%;
         margin-top: 28rpx;
         .section {
-          position: relative;
-          // border: 1rpx solid red;
-          // margin-top: 58rpx;
+          position: relative; // border: 1rpx solid red;
+          margin-top: 38rpx;
           view:nth-child(1) {
             display: inline-flex;
             width: 30rpx;
@@ -176,6 +172,8 @@
             background: #F95C4C;
           }
           view:nth-child(2) {
+            font-size: 28rpx;
+            font-weight: normal;
             display: inline-block;
             margin-left: 12rpx;
           }
@@ -240,11 +238,11 @@
           <view></view>
           <view>人员管理</view>
         </view>
-        <view class="section">
+        <view class="section" @tap="shareIncom">
           <view></view>
           <view>分润比例</view>
         </view>
-        <view class="section">
+        <view class="section" @tap="incomRecorder">
           <view></view>
           <view>收益记录</view>
         </view>
@@ -254,19 +252,19 @@
     <view class="my_tool">
       <view>我的工具</view>
       <view class="container">
-        <view class="section">
+        <view class="section" @tap="withDraw">
           <view> </view>
           <view>提现</view>
           <view></view>
         </view>
-        <view class="section">
+        <view class="section" @tap="agent">
           <view> </view>
-          <view>提现</view>
+          <view>代理商</view>
           <view></view>
         </view>
-        <view class="section">
+        <view class="section" @tap="applyList">
           <view> </view>
-          <view>提现</view>
+          <view>申请列表</view>
           <view></view>
         </view>
       </view>
@@ -279,13 +277,40 @@
     config = {
       navigationBarTitleText: '我的'
     };
-      methods = {
+    methods = {
       peopleManage() {
         console.log(66);
         wx.navigateTo({
           url: "/pages/peopleManage"
         });
-      }
+      },
+      // 跳转至收益记录
+      incomRecorder() {
+        wx.navigateTo({
+          url: "/pages/incomRecorder"
+        });
+      },
+      // 跳转至分润页面
+      shareIncom() {
+        wx.navigateTo({
+          url: "/pages/shareIncom"
+        });
+      },
+      withDraw() {
+        wx.navigateTo({
+          url: "/pages/withDraw"
+        })
+      },
+      agent() {
+        wx.navigateTo({
+          url: "/pages/agent"
+        });
+      },
+      applyList() {
+        wx.navigateTo({
+          url: "/pages/applyList"
+        });
+      },
     }
   }
 </script>

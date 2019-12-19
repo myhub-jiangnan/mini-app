@@ -3,17 +3,98 @@
   height: 100%;
   padding-top: 30rpx;
   .search_box {
+    position: relative;
+    height: 64rpx;
     picker {
       position: relative;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 670rpx;
+      width: 100%;
       height: 64rpx;
       border-radius: 32rpx;
+      .picker_btn {
+        position: relative;
+        width: 670rpx;
+        height: 64rpx !important;
+        line-height: 64rpx;
+        left: 50%;
+        transform: translateX(-50%);
+        padding-left: 30rpx;
+        font-size: 26rpx;
+        border-radius: 32rpx;
+        background: #e6e6e6;
+      }
+    }
+    .icon {
+      position: absolute;
+      width: 30rpx;
+      height: 30rpx;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      right: 70rpx;
+      z-index: 100;
+      border: 1rpx solid red;
+    }
+  } //  选择时间
+  .choose_time {
+    // border: 1rpx solid red;
+    width: 100%;
+    height: 98rpx;
+    margin-top: 30rpx;
+    background: #e6e6e6;
+    justify-content: space-between !important;
+    padding: 0 30rpx;
+    .picker_box {
+      position: relative;
+      width: 196rpx;
+      height: 56rpx;
+      // border: 1px solid yellow;
+      border-radius: 30rpx;
+      background: white;
+      .picker_btn {
+        position: absolute;
+        top: 0;
+        width: 196rpx;
+        height: 56rpx;
+        line-height: 56rpx;
+        font-size: 28rpx;
+        // border: 1rpx solid red;
+      }
+      .pick_icon {
+        position: absolute;
+      width: 30rpx;
+      height: 30rpx;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      right: 70rpx;
+      z-index: 100;
+      border: 1rpx solid red;
+      }
+    }
+  } //  展示记录
+  .recoder_list {
+    width: 100%;
+    padding: 30rpx 40rpx; // border: 1rpx solid red;
+    .recoder_item {
       // border: 1rpx solid red;
-      button {
-        width: 100%;
-        height: 100%;
+      margin-bottom: 30rpx;
+      view:nth-child(1) {
+        height: 78rpx;
+        line-height: 78rpx;
+        padding: 0 26rpx;
+        border-bottom: 1rpx solid gainsboro;
+        text:nth-child(2) {
+          float: right;
+        }
+      }
+      view:nth-child(2) {
+        height: 78rpx;
+        line-height: 78rpx;
+        padding: 0 26rpx;
+        text:nth-child(2) {
+          float: right;
+          color: #e64340;
+        }
       }
     }
   }
@@ -22,17 +103,86 @@
 <template>
   <view class="incom_recorder_page">
     <view class="search_box">
-      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-        <button class="weui-btn" type="default">单列选择器</button>
+      <picker bindchange="bindPickerChange" range="{{array}}">
+        <view class="picker_btn" type="default">{{array[index]}}</view>
       </picker>
+      <view class="icon"></view>
+    </view>
+    <!-- 选择日期 -->
+    <view class="choose_time flex">
+      <view class="flex_item picker_box">
+        <picker
+          mode="date"
+          value="{{date}}"
+          start="2019-01-01"
+          end="2019-12-31"
+          bindchange="bindDateChange"
+        >
+          <view class="picker_btn" type="default">{{date}}</view>
+        </picker>
+      </view>
+      <view class="flex_item">累计总收益：¥
+        <text>99999</text>
+      </view>
+    </view>
+    <!-- 收益列表展示 -->
+    <view class="recoder_list">
+      <view class="recoder_item" wx:for="{{recorderList}}" wx:key="{{index}}">
+        <view>
+          <text>{{item.date}}</text>
+          <text>{{item.sumOfMoney}}</text>
+        </view>
+        <view>
+          <text>{{item.name}}</text>
+          <text>{{item.sumOfMoney}}</text>
+        </view>
+      </view>
     </view>
   </view>
 </template>
 <script>
 import wepy from 'wepy';
 export default class IncomRecorder extends wepy.page {
+  data = {
+    array: ['请选择要查看的设备', 0, 1, 2, 3, 4, 5],
+    index: 0,
+    // 日期选择里的date
+    date: '2019-12-01',
+    // 记录列表
+    recorderList: [
+      {
+        date: '2019-12-03',
+        sumOfMoney: 888888,
+        name: '周杰伦',
+        money: '6666'
+      },
+      {
+        date: '2019-12-03',
+        sumOfMoney: 888888,
+        name: '周杰伦',
+        money: '6666'
+      },
+      {
+        date: '2019-12-03',
+        sumOfMoney: 888888,
+        name: '周杰伦',
+        money: '6666'
+      }
+    ]
+  };
   config = {
     navigationBarTitleText: '收益记录'
+  };
+  methods = {
+    bindPickerChange: function(e) {
+      console.log(e.detail);
+      console.log('picker发送选择改变，携带值为', e.detail.value);
+      this.index = e.detail.value;
+    },
+    bindDateChange: function(e) {
+      console.log('picker发送选择改变，携带值为', e.detail.value);
+      this.date = e.detail.value;
+    }
   };
 }
 </script>

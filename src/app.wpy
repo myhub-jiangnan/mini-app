@@ -1,13 +1,14 @@
 <style lang="less">
 @import './styles/base.less';
 </style>
-
 <script>
 import wepy from 'wepy';
 import 'wepy-async-function';
 export default class extends wepy.app {
   config = {
     pages: [
+      'pages/index',
+      // 授权登录
       'pages/authorize',
       // 分润记录
       'pages/incomRecorder',
@@ -16,7 +17,6 @@ export default class extends wepy.app {
       // 我的
       'pages/mine',
       //收益
-      'pages/index',
       // 订单详情
       'pages/orderDetail',
       // 订单列表
@@ -39,7 +39,15 @@ export default class extends wepy.app {
       'pages/applyForalliance',
       // 添加设备
       'pages/addMachine',
-      'pages/allianceSuccess'
+      'pages/allianceSuccess',
+      //分润
+      'pages/shareIncom',
+      //我的提现
+      'pages/withDraw',
+      //代理商
+      'pages/agent',
+      //申请列表
+      'pages/applyList'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -79,8 +87,6 @@ export default class extends wepy.app {
     this.use('promisify');
   }
   // 全局数据中暴露api
-  globalData = {
-   
-  };
+  globalData = {};
 }
 </script>

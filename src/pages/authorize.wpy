@@ -4,8 +4,8 @@
     <view class="auth-item">FLOW申请获取以下权限：</view>
     <view class="auth-item">获取你的公开信息（头像、昵称等）</view>
     <view class="btn-authorize">
-      <button open-type="getUserInfo" type="primary" @tap="authorize">授权</button>
-      <button open-type="getPhoneNumber" type="primary" @getphonenumber="getPhoneNumbera">获取手机号</button>
+      <!-- <button open-type="getUserInfo" type="primary" @getuserinfo="authorize">授权</button> -->
+      <button open-type="getPhoneNumber" type="primary" @getphonenumber="getUserPhoneNumber">获取手机号</button>
     </view>
   </view>
 </template>
@@ -18,7 +18,7 @@
       navigationBarTitleText: '授权登录'
     };
     methods = {
-      // 获取用户信息
+      // 获取用户信息   
       async authorize() {
         let res1 = await wepy.showModal({
           title: '微信授权登录',
@@ -28,8 +28,8 @@
           //  wx.login 获取code ,通过code 换取用户登录状态信息
           let res2 = await wepy.login({});
           if (res2.code) {
-            console.log('Code：' + res2.code);
-            // 拿到了code 就访问login 接口； 
+            // console.log('Code：' + res2.code);
+            // 拿到了code 就访问getToken 接口； 
             let res3 = await api.httpPost('http://flow.dev.redsoul.cn/app/public/getToken', {
               code: res2.code
             })
@@ -53,14 +53,43 @@
           }
         }
       },
+      
       //获取手机号
-      async getPhoneNumbera(e) {
-        console.log("encrypted:********" + this.encryptedData);
+      async getUserPhoneNumber(e) {
+        console.log("encrypted:********" + e.detail.encryptedData);
         let res1 = await api.httpPost('http://flow.dev.redsoul.cn/app/user/saveUserMobile', {
           encryptedData: e.detail.encryptedData,
           iv: e.detail.iv
         });
-        console.log("手机号：" + res1);
+          let res2 = await wepy.login({});
+          if (res2.code) {
+            // console.log('Code：' + res2.code);
+            // 拿到了code 就访问getToken 接口； 
+            let res3 = await api.httpPost('http://flow.dev.redsoul.cn/app/public/getToken', {
+              code: res2.code
+            })
+            if (res3.code == 0) {
+              console.log("/public/getToken接口调用成功");
+              let token = res3.data.token;
+              wx.setStorageSync("token", token);
+              let res4 = await wepy.getSetting({});
+              if (res4.authSetting['scope.userInfo']) {
+                let res5 = await wepy.getUserInfo({});
+                let res6 = await api.httpPost('http://flow.dev.redsoul.cn/app/user/saveUserInfo', {
+                  userInfo: JSON.stringify(res5.userInfo),
+                  rawData: JSON.stringify(res5.rawData),
+                  signature: JSON.stringify(res5.signature),
+                  encryptedData: JSON.stringify(res5.encryptedData),
+                  iv: JSON.stringify(res5.iv)
+                });
+                console.log("saveUserInfo接口调用成功");
+              }
+            }
+          }
+        wx.switchTab({
+          url:"/pages/index"
+        });
+
       }
     };
   }

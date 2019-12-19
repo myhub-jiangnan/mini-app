@@ -1,0 +1,13 @@
+<style lang="less"></style>
+<template>
+  <view class="choose_login"> 代理商</view>
+</template>
+<script>
+import wepy from 'wepy';
+
+export default class Agent extends wepy.page {
+    config = {
+    navigationBarTitleText: '代理商'
+  };
+}
+</script>

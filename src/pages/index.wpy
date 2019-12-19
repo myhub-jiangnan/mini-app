@@ -2,7 +2,9 @@
   .index {
     position: relative;
     .machine_list {
-      // border: 1rpx solid red;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%); // border: 1rpx solid red;
       width: 670rpx;
       height: auto;
       padding-left: 40rpx;
@@ -110,5 +112,20 @@
         });
       }
     };
+    onLoad() {
+   
+      let value = wx.getStorageSync('token');
+      if (value) {
+       
+        wx.switchTab({
+          url:  "/pages/index",
+        });
+      }else {
+      
+      wx.redirectTo({
+          url: '/pages/authorize',  
+        });
+      }
+    }
   }
 </script>

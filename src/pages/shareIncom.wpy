@@ -1,0 +1,12 @@
+<style lang="less"></style>
+<template>
+  <view class="ShareIncom"></view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class ShareIncom extends wepy.page {
+  config = {
+    navigationBarTitleText: '分润'
+  };
+}
+</script>
