@@ -8,8 +8,14 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/index',
-      // 授权登录
+      // 选择登录类型页面
+      'pages/chooseInterface',
+
+      // 授权手机登录
       'pages/authorize',
+      //授权用户信息
+      'pages/authorizeUserInfo',
+
       // 分润记录
       'pages/incomRecorder',
       //人员管理
@@ -29,8 +35,7 @@ export default class extends wepy.app {
       'pages/replenish',
       // 货道管理
       'pages/cargo',
-      // 选择登录类型页面
-      'pages/chooseInterface',
+
       //检测记录
       'pages/checkRecoder',
       //test

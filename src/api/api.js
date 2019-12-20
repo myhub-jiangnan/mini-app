@@ -10,6 +10,10 @@ const httpPost = (url, data) => {
       },
       data: data,
       success: function (res) {
+        if (res.code == 300) {
+          //TODO token失效
+        }
+        //TODO 回传所有数据
         resolve(res.data);
       },
       fail: function (err) {

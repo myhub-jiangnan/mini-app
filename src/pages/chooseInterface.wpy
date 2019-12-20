@@ -6,9 +6,9 @@
     <view class="content_box">
       <view class="title">FLOW福禄</view>
       <view class="btn_box">
-        <button @tap="btnClick">经销商入口</button>
-        <button @tap="btnClick">代理商入口</button>
-        <button @tap="btnClick">加盟合作</button>
+        <button open-type="getPhoneNumber" @getphonenumber="getUserPhoneNumber">经销商入口</button>
+        <button open-type="getPhoneNumber" @getphonenumber="getUserPhoneNumber">代理商入口</button>
+        <button open-type="getPhoneNumber" @getphonenumber="getUserPhoneNumber">加盟合作</button>
       </view>
       <view class="bottom_box">
         <view class="icon_box">
@@ -94,17 +94,40 @@
 
 <script>
   import wepy from 'wepy';
+   import api from "../api/api";
   export default class chooseInterface extends wepy.page {
     config = {
       navigationBarTitleText: '选择加盟类型'
     };
     methods = {
-      btnClick() {
-        wepy.navigateTo({
-          url: '/pages/applyForalliance',
-        });
+      //获取手机号
+      async getUserPhoneNumber(e) {
+        wx.redirectTo({
+          url: "/pages/authorizeUserInfo"
+        })
+        let res2 = await wepy.login({});
+        if (res2.code) {
+          // 拿到了code 就访问getToken 接口； 
+          let res3 = await api.httpPost('http://flow.dev.redsoul.cn/app/public/getToken', {
+            code: res2.code
+          })
+          // 拿到token存起来
+          if (res3.code == 0) {
+            console.log("/public/getToken接口调用成功");
+            let token = res3.data.token;
+            console.log("从后端拿到的token值:" + token);
+            wx.setStorageSync("token", token);
+            console.log("token 存起来了");
+            //  让后端拿到手机号
+            let res1 = await api.httpPost('http://flow.dev.redsoul.cn/app/user/saveUserMobile', {
+              encryptedData: e.detail.encryptedData,
+              iv: e.detail.iv
+            });
+          }
+        }
       }
     };
+
     // onLoad() {
     //   wx.showModal({
     //     title: '解绑设备',

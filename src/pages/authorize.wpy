@@ -2,7 +2,7 @@
   <view class="authorize-contianer">
     <image class="authorize-icon" src="../images/authorize.png" />
     <view class="auth-item">FLOW申请获取以下权限：</view>
-    <view class="auth-item">获取你的公开信息（头像、昵称等）</view>
+    <view class="auth-item">获取你的手机号</view>
     <view class="btn-authorize">
       <!-- <button open-type="getUserInfo" type="primary" @getuserinfo="authorize">授权</button> -->
       <button open-type="getPhoneNumber" type="primary" @getphonenumber="getUserPhoneNumber">获取手机号</button>
@@ -18,78 +18,32 @@
       navigationBarTitleText: '授权登录'
     };
     methods = {
-      // 获取用户信息   
-      async authorize() {
-        let res1 = await wepy.showModal({
-          title: '微信授权登录',
-          content: 'FLOW申请获取以下权限：获取你的公开信息（头像、昵称、地区、性别等信息。）',
-        });
-        if (res1.confirm) {
-          //  wx.login 获取code ,通过code 换取用户登录状态信息
-          let res2 = await wepy.login({});
-          if (res2.code) {
-            // console.log('Code：' + res2.code);
-            // 拿到了code 就访问getToken 接口； 
-            let res3 = await api.httpPost('http://flow.dev.redsoul.cn/app/public/getToken', {
-              code: res2.code
-            })
-            if (res3.code == 0) {
-              console.log("/public/getToken接口调用成功");
-              let token = res3.data.token;
-              wx.setStorageSync("token", token);
-              let res4 = await wepy.getSetting({});
-              if (res4.authSetting['scope.userInfo']) {
-                let res5 = await wepy.getUserInfo({});
-                let res6 = await api.httpPost('http://flow.dev.redsoul.cn/app/user/saveUserInfo', {
-                  userInfo: JSON.stringify(res5.userInfo),
-                  rawData: JSON.stringify(res5.rawData),
-                  signature: JSON.stringify(res5.signature),
-                  encryptedData: JSON.stringify(res5.encryptedData),
-                  iv: JSON.stringify(res5.iv)
-                });
-                console.log("saveUserInfo接口调用成功");
-              }
-            }
-          }
-        }
-      },
-      
       //获取手机号
       async getUserPhoneNumber(e) {
-        console.log("encrypted:********" + e.detail.encryptedData);
-        let res1 = await api.httpPost('http://flow.dev.redsoul.cn/app/user/saveUserMobile', {
-          encryptedData: e.detail.encryptedData,
-          iv: e.detail.iv
-        });
-          let res2 = await wepy.login({});
-          if (res2.code) {
-            // console.log('Code：' + res2.code);
-            // 拿到了code 就访问getToken 接口； 
-            let res3 = await api.httpPost('http://flow.dev.redsoul.cn/app/public/getToken', {
-              code: res2.code
+           wx.redirectTo({
+              url: "/pages/authorizeUserInfo"
             })
-            if (res3.code == 0) {
-              console.log("/public/getToken接口调用成功");
-              let token = res3.data.token;
-              wx.setStorageSync("token", token);
-              let res4 = await wepy.getSetting({});
-              if (res4.authSetting['scope.userInfo']) {
-                let res5 = await wepy.getUserInfo({});
-                let res6 = await api.httpPost('http://flow.dev.redsoul.cn/app/user/saveUserInfo', {
-                  userInfo: JSON.stringify(res5.userInfo),
-                  rawData: JSON.stringify(res5.rawData),
-                  signature: JSON.stringify(res5.signature),
-                  encryptedData: JSON.stringify(res5.encryptedData),
-                  iv: JSON.stringify(res5.iv)
-                });
-                console.log("saveUserInfo接口调用成功");
-              }
-            }
+        let res2 = await wepy.login({});
+        if (res2.code) {
+          // 拿到了code 就访问getToken 接口； 
+          let res3 = await api.httpPost('http://flow.dev.redsoul.cn/app/public/getToken', {
+            code: res2.code
+          })
+          // 拿到token存起来
+          if (res3.code == 0) {
+            console.log("/public/getToken接口调用成功");
+            let token = res3.data.token;
+            console.log("从后端拿到的token值:"+token);
+            wx.setStorageSync("token", token);
+             console.log("token 存起来了");
+            //  让后端拿到手机号
+            let res1 = await api.httpPost('http://flow.dev.redsoul.cn/app/user/saveUserMobile', {
+              encryptedData: e.detail.encryptedData,
+              iv: e.detail.iv
+            });
+         
           }
-        wx.switchTab({
-          url:"/pages/index"
-        });
-
+        }
       }
     };
   }
