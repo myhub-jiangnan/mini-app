@@ -177,36 +177,85 @@
     methods = {
       //  根据状态选择展示设备
       bindPickerChange: function(e) {
-        console.log(e.detail);
         this.index = e.detail.value;
+        console.log(this.deviceStatus[this.index] + "设备：");
         let params = {};
-        if (deviceName != '') {
-          params.deviceName = deviceName;
+        let that = this;
+        let getApiDeviceList = async function(obj) {
+          // 获取设备列表
+          let res1 = await api.httpPost('http://flow.dev.redsoul.cn/app/device/getDeviceList', obj);
+          // 设置信息数组
+          let deviceArrayLength = res1.data.pageRows.length;
+          if (deviceArrayLength === 0) {
+            that.isFalse = true;
+          } else {
+            that.isFalse = false;
+            let deviceArray = res1.data.pageRows;
+            for (let i = 0; i < deviceArray.length; i++) {
+              let deviceObj = {}
+              deviceObj.deviceId = deviceArray[i].deviceMac;
+              deviceObj.deviceName = deviceArray[i].deviceName;
+              deviceObj.deviceAddress = deviceArray[i].deviceAddress;
+              deviceObj.deviceStatus = deviceArray[i].deviceStatus;
+              deviceObj.deviceOnlineStatus = deviceArray[i].deviceOnlineStatus;
+              that.deviceInfoArray.push(deviceObj);
+            }
+            that.$apply();
+          }
+          let token = await wepy.getStorageSync('token');
+          params.token = token;
         }
-        // 查询全部设备
-        if (e.detail.value == 0) {} else if (e.detail.value == 1) {
+        let token = wepy.getStorageSync('token');
+        params.token = token;
+        if (e.detail.value == 0) {
+          getApiDeviceList(params);
+        } else if (e.detail.value == 1) {
           params.deviceOnlineStatus = 1;
+          getApiDeviceList(params);
         } else if (e.detail.value == 2) {
           params.deviceOnlineStatus = 0;
+          getApiDeviceList(params);
         } else if (e.detail.value == 3) {
           params.deviceRunningStatus = 1;
+          getApiDeviceList(params);
         } else if (e.detail.value == 4) {
           params.deviceStockStatus = 1;
+          getApiDeviceList(params);
         }
-        deviceInfoArray = apiGetDeviceList();
         console.log(this.deviceInfoArray);
-        console.log(this.deviceInfoArray);
-        // this.onLoad();
         this.$apply();
+      },
+      // ******************************************************************************************************************
+      // 点击搜索
+      async submitSearch() {
+        console.log(this.inputContent);
+        // 获取设备列表
+        let res1 = await api.httpPost('http://flow.dev.redsoul.cn/app/device/getDeviceList', {deviceName:this.inputContent});
+        // 设置信息数组
+        let deviceArrayLength = res1.data.pageRows.length;
+        if (deviceArrayLength === 0) {
+          this.isFalse = true;
+        } else {
+          this.isFalse = false;
+          let deviceArray = res1.data.pageRows;
+          for (let i = 0; i < deviceArray.length; i++) {
+            let deviceObj = {}
+            deviceObj.deviceId = deviceArray[i].deviceMac;
+            deviceObj.deviceName = deviceArray[i].deviceName;
+            deviceObj.deviceAddress = deviceArray[i].deviceAddress;
+            deviceObj.deviceStatus = deviceArray[i].deviceStatus;
+            deviceObj.deviceOnlineStatus = deviceArray[i].deviceOnlineStatus;
+            this.deviceInfoArray.push(deviceObj);
+          }
+          this.$apply();
+        }
+       console.log(this.deviceInfoArray);
       }
+      // ******************************************************************************************************************
     };
     // 获取input 输入框的值
     getInputValue(e) {
       this.inputContent = e.detail.value;
-    };
-    // 点击搜索
-    submitSearch() {
-      console.log(this.inputContent);
     };
     // 添加设备 
     addMachine() {
@@ -219,42 +268,37 @@
       wx.navigateTo({
         url: '/pages/operateDevice'
       });
-    }
-  };
-  async onLoad() {
-    // 判断是否有token , 没有token 则去登录页面授权登录；
-    let value = wepy.getStorageSync('token');
-    console.log("index页面获取的到的token:" + value);
-    if (value == '') {
-      wepy.redirectTo({
-        url: '/pages/chooseInterface'
-      });
-    } else {
-      deviceInfoArray = apiGetDeviceList();
-      console.log(this.deviceInfoArray);
-      this.$apply();
-    }
-  }
-  function apiGetDeviceList(params) {
-    // 获取设备列表
-    let res1 = api.httpPost('http://flow.dev.redsoul.cn/app/device/getDeviceList', params);
-    // 设置信息数组
-    let deviceArrayLength = res1.data.pageRows.length;
-    console.log(deviceArrayLength);
-    if (deviceArrayLength === 0) {
-      this.isFalse = true;
-    } else {
-      this.isFalse = false;
-      let deviceArray = res1.data.pageRows;
-      for (let i = 0; i < deviceArray.length; i++) {
-        let deviceObj = {}
-        deviceObj.deviceId = deviceArray[i].deviceMac;
-        deviceObj.deviceName = deviceArray[i].deviceName;
-        deviceObj.deviceAddress = deviceArray[i].deviceAddress;
-        deviceObj.deviceStatus = deviceArray[i].deviceStatus;
-        deviceObj.deviceOnlineStatus = deviceArray[i].deviceOnlineStatus;
-        this.deviceInfoArray.push(deviceObj);
+    };
+    async onLoad() {
+      // 判断是否有token , 没有token 则去登录页面授权登录；
+      let token = await wepy.getStorageSync('token');
+      if (token == '') {
+        wepy.redirectTo({
+          url: '/pages/chooseInterface'
+        });
+      } else {
+        // 获取设备列表
+        let res1 = await api.httpPost('http://flow.dev.redsoul.cn/app/device/getDeviceList', token);
+        // 设置信息数组
+        let deviceArrayLength = res1.data.pageRows.length;
+        if (deviceArrayLength === 0) {
+          this.isFalse = true;
+        } else {
+          this.isFalse = false;
+          let deviceArray = res1.data.pageRows;
+          for (let i = 0; i < deviceArray.length; i++) {
+            let deviceObj = {}
+            deviceObj.deviceId = deviceArray[i].deviceMac;
+            deviceObj.deviceName = deviceArray[i].deviceName;
+            deviceObj.deviceAddress = deviceArray[i].deviceAddress;
+            deviceObj.deviceStatus = deviceArray[i].deviceStatus;
+            deviceObj.deviceOnlineStatus = deviceArray[i].deviceOnlineStatus;
+            this.deviceInfoArray.push(deviceObj);
+          }
+          console.log(this.deviceInfoArray);
+          this.$apply();
+        }
       }
-    }
+    };
   }
 </script>
