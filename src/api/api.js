@@ -9,7 +9,7 @@ const httpPost = (url, data) => {
         token: wx.getStorageSync('token')
       },
       data: data,
-      success: function(res) {
+      success: async function(res) {
         if (res.code == 0) {
           //TODO 回传所有数据
           resolve(res.data);

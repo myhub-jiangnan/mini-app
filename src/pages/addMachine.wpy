@@ -252,10 +252,10 @@ export default class AddMachine extends wepy.page {
     },
     // 获取地理位置
     async getLocation() {
-      console.log('地理位置');
       let res = await wepy.getLocation({});
       this.formObj.deviceLat = res.latitude;
       this.formObj.deviceLng = res.longitude;
+      console.log('已获取地理位置');
     }
   };
   async onLoad() {
@@ -264,12 +264,14 @@ export default class AddMachine extends wepy.page {
   // 绑定按钮
   async submitClick() {
     let url = this.apiUrl;
+    
     console.log(this.formObj);
     let res = await api.httpPost(`${url}/app/device/addDevice`, this.formObj);
-
-    // wx.switchTab({
-    //   url: '/pages/index'
-    // });
+    if (res.code == 0) {
+      wx.switchTab({
+        url: '/pages/index'
+      });
+    }
   }
 }
 </script>
