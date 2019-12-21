@@ -128,14 +128,8 @@
       navigationBarTitleText: '设备操作'
     };
     data = {
-      device: {
-        deviceId: 'Flow201912115855446',
-        deviceName: '福禄自动售卖机',
-        deviceAddress: '上海市浦东新区陆家嘴金茂大厦',
-        addressType: '酒吧888',
-        deviceStatus: '故障（电机问题）',
-        onlineTime: '2019-12-12 10:13:42'
-      }
+  
+      device:""
     };
     methods = {
       // 解绑
@@ -179,6 +173,13 @@
         });
       }
     };
+   async onLoad(){
+     let deviceDetail = await wepy.getStorageSync('deviceDetail');
+     this.device = deviceDetail;
+     console.log("设备详情");
+     console.log(this.device);
+     this.$apply();
+    }
   }
 </script>
 

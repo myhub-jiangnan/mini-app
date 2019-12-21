@@ -1,125 +1,125 @@
 <style lang="less">
-  .index {
-    position: relative;
-    background: white;
-    padding-top: 30rpx;
-    .header {
-      //  border: 1rpx solid black;
-      height: 64rpx;
-      padding: 0 40rpx;
-      margin-bottom: 30rpx;
+.index {
+  position: relative;
+  background: white;
+  padding-top: 30rpx;
+  .header {
+    //  border: 1rpx solid black;
+    height: 64rpx;
+    padding: 0 40rpx;
+    margin-bottom: 30rpx;
+    justify-content: space-between;
+    view:nth-child(1) {
+      // border: 1rpx solid red;
+      height: 64rpx; // width: 60rpx;
       justify-content: space-between;
       view:nth-child(1) {
-        // border: 1rpx solid red;
-        height: 64rpx; // width: 60rpx;
-        justify-content: space-between;
-        view:nth-child(1) {
-          font-size: 30rpx;
-          picker {
-            display: inline-block;
-            height: 50rpx;
-            width: 70rpx;
-            font-size: 50rpx; // border: 1rpx solid red;
-            .picker_btn {
-              height: 50rpx; // background: red;
-            }
+        font-size: 30rpx;
+        picker {
+          display: inline-block;
+          height: 50rpx;
+          width: 70rpx;
+          font-size: 50rpx; // border: 1rpx solid red;
+          .picker_btn {
+            height: 50rpx; // background: red;
           }
-        }
-        view:nth-child(2) {
-          width: 16rpx;
-          height: 16rpx;
-          background: red;
-          margin-left: 10rpx;
         }
       }
       view:nth-child(2) {
-        // border: 1rpx solid red;
-        height: 64rpx;
-        view:nth-child(1) {
-          width: 444rpx;
-          height: 100%;
-          input {
-            display: block;
-            width: 100%;
-            height: 100%;
-            background: #F6F6F6;
-            border-radius: 32rpx;
-            font-size: 26rpx;
-          }
-        }
-        view:nth-child(2) {
-          margin-left: 20rpx;
-          width: 98rpx;
-          height: 54rpx;
-          line-height: 54rpx;
-          color: white;
-          text-align: center;
-          font-size: 26rpx;
-          background: #F95C4C;
-          border-radius: 12rpx;
-        }
+        width: 16rpx;
+        height: 16rpx;
+        background: red;
+        margin-left: 10rpx;
       }
     }
-    .no_deviec {
-      image {
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 670rpx;
-        height: 176rpx;
-      }
-      view {
-        margin-top: 30rpx;
-        font-size: 24rpx;
-        text-align: center; // color: #F6F6F6;
-      }
-    }
-    .machine_list {
+    view:nth-child(2) {
       // border: 1rpx solid red;
+      height: 64rpx;
+      view:nth-child(1) {
+        width: 444rpx;
+        height: 100%;
+        input {
+          display: block;
+          width: 100%;
+          height: 100%;
+          background: #f6f6f6;
+          border-radius: 32rpx;
+          font-size: 26rpx;
+        }
+      }
+      view:nth-child(2) {
+        margin-left: 20rpx;
+        width: 98rpx;
+        height: 54rpx;
+        line-height: 54rpx;
+        color: white;
+        text-align: center;
+        font-size: 26rpx;
+        background: #f95c4c;
+        border-radius: 12rpx;
+      }
+    }
+  }
+  .no_deviec {
+    image {
       position: relative;
       left: 50%;
       transform: translateX(-50%);
       width: 670rpx;
-      height: auto;
-      padding-left: 40rpx;
-      padding-right: 40rpx;
-      margin-top: 30rpx;
-      .item_box {
-        // border: 1rpx solid red;
-        height: 176rpx;
-        margin-bottom: 30rpx;
-        border-radius: 12rpx;
-        box-shadow: 1rpx 3rpx 10rpx gray;
-        padding-left: 24rpx;
-        .box_top {
-          height: 88rpx;
-          line-height: 88rpx;
-          border-bottom: 1rpx dashed gray;
-          font-size: 36rpx;
-          font-weight: bold;
-        }
-        .box_bottom {
-          height: 88rpx;
-          line-height: 88rpx; //  border: 0.1rpx solid red;
-        }
-      }
-    } // 添加按钮
-    .add_btn {
-      position: fixed;
-      width: 88rpx;
-      height: 88rpx;
-      right: 30rpx;
-      bottom: 30rpx;
-      image {
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
+      height: 176rpx;
     }
-    .hidden {
-      display: none;
+    view {
+      margin-top: 30rpx;
+      font-size: 24rpx;
+      text-align: center; // color: #F6F6F6;
     }
   }
+  .machine_list {
+    // border: 1rpx solid red;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 670rpx;
+    height: auto;
+    padding-left: 40rpx;
+    padding-right: 40rpx;
+    margin-top: 30rpx;
+    .item_box {
+      // border: 1rpx solid red;
+      height: 176rpx;
+      margin-bottom: 30rpx;
+      border-radius: 12rpx;
+      box-shadow: 1rpx 3rpx 10rpx gray;
+      padding-left: 24rpx;
+      .box_top {
+        height: 88rpx;
+        line-height: 88rpx;
+        border-bottom: 1rpx dashed gray;
+        font-size: 36rpx;
+        font-weight: bold;
+      }
+      .box_bottom {
+        height: 88rpx;
+        line-height: 88rpx; //  border: 0.1rpx solid red;
+      }
+    }
+  } // 添加按钮
+  .add_btn {
+    position: fixed;
+    width: 88rpx;
+    height: 88rpx;
+    right: 30rpx;
+    bottom: 30rpx;
+    image {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .hidden {
+    display: none;
+  }
+}
 </style>
 
 <template>
@@ -128,13 +128,17 @@
       <view class="flex flex_item">
         <view class="flex_item">
           <picker @change="bindPickerChange" range="{{deviceStatus}}">
-            <view class="picker_btn" type="default">{{deviceStatus[index]}}</view>
+            <view class="picker_btn" type="default">{{
+              deviceStatus[index]
+            }}</view>
           </picker>
         </view>
         <view class="flex_item"> </view>
       </view>
       <view class="flex flex_item">
-        <view><input placeholder="请输入设备名称" @input="getInputValue" /> </view>
+        <view
+          ><input placeholder="请输入设备名称" @input="getInputValue" />
+        </view>
         <view @tap="submitSearch">搜索</view>
       </view>
     </view>
@@ -145,11 +149,22 @@
     </view>
     <!-- 设备展示列表 -->
     <view class="machine_list">
-      <view class="item_box" wx:for="{{deviceInfoArray}}" wx:key="index" @tap="deviceDetail">
-        <view class="box_top"><text>【{{item.deviceOnlineStatus }}】</text>
-          <text>{{item.deviceName}}</text>
+      <view
+        class="item_box"
+        wx:for="{{deviceInfoArray}}"
+        wx:key="index"
+        @tap="deviceDetail"
+        data-deviceid="{{item.deviceId}}"
+        data-devicename="{{item.deviceName}}"
+        data-deviceaddress="{{item.deviceAddress}}"
+        data-devicescenedisplay="{{itme.deviceSceneDisplay}}"
+        data-devicestatus="{{item.deviceStatus}}"
+      >
+        <view class="box_top"
+          ><text>【{{ item.deviceOnlineStatus }}】</text>
+          <text>{{ item.deviceName }}</text>
         </view>
-        <view class="box_bottom">{{item.deviceAddress}}</view>
+        <view class="box_bottom">{{ item.deviceAddress }}</view>
       </view>
     </view>
     <view class="add_btn" @tap="addMachine">
@@ -158,147 +173,173 @@
   </view>
 </template>
 <script>
-  import wepy from 'wepy';
-  import api from "../api/api";
-  export default class Index extends wepy.page {
-    config = {
-      navigationBarTitleText: 'FLOW福禄'
-    };
-    data = {
-      // 设备状态的选择列表
-      index: 0,
-      deviceStatus: ["全部", "在线", "离线", "故障", "缺货"],
-      // 设备信息数组
-      deviceInfoArray: [],
-      isFalse: false,
-      // 输入框的值
-      inputContent: ""
-    };
-    methods = {
-      //  根据状态选择展示设备
-      bindPickerChange: function(e) {
-        this.index = e.detail.value;
-        console.log(this.deviceStatus[this.index] + "设备：");
-        let params = {};
-        let that = this;
-        let getApiDeviceList = async function(obj) {
-          // 获取设备列表
-          let res1 = await api.httpPost('http://flow.dev.redsoul.cn/app/device/getDeviceList', obj);
-          // 设置信息数组
-          let deviceArrayLength = res1.data.pageRows.length;
-          if (deviceArrayLength === 0) {
-            that.isFalse = true;
-          } else {
-            that.isFalse = false;
-            let deviceArray = res1.data.pageRows;
-            for (let i = 0; i < deviceArray.length; i++) {
-              let deviceObj = {}
-              deviceObj.deviceId = deviceArray[i].deviceMac;
-              deviceObj.deviceName = deviceArray[i].deviceName;
-              deviceObj.deviceAddress = deviceArray[i].deviceAddress;
-              deviceObj.deviceStatus = deviceArray[i].deviceStatus;
-              deviceObj.deviceOnlineStatus = deviceArray[i].deviceOnlineStatus;
-              that.deviceInfoArray.push(deviceObj);
-            }
-            that.$apply();
+import wepy from 'wepy';
+import api from '../api/api';
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: 'FLOW福禄'
+  };
+  data = {
+    // 设备状态的选择列表
+    index: 0,
+    deviceStatus: ['全部', '在线', '离线', '故障', '缺货'],
+    // 设备信息数组
+    deviceInfoArray: [],
+    isFalse: false,
+    // 输入框的值
+    inputContent: ''
+  };
+  methods = {
+    //  根据状态选择展示设备
+    bindPickerChange: function(e) {
+      this.index = e.detail.value;
+      console.log(this.deviceStatus[this.index] + '设备：');
+      let params = {};
+      let that = this;
+      let getApiDeviceList = async function(obj) {
+        // 获取设备列表
+        let res1 = await api.httpPost(
+          'http://flow.dev.redsoul.cn/app/device/getDeviceList',
+          obj
+        );
+        // 设置信息数组
+        let deviceArrayLength = res1.data.pageRows.length;
+        if (deviceArrayLength === 0) {
+          that.isFalse = true;
+        } else {
+          that.isFalse = false;
+          let deviceArray = res1.data.pageRows;
+          for (let i = 0; i < deviceArray.length; i++) {
+            let deviceObj = {};
+            deviceObj.deviceId = deviceArray[i].deviceMac;
+            deviceObj.deviceName = deviceArray[i].deviceName;
+            deviceObj.deviceAddress = deviceArray[i].deviceAddress;
+            deviceObj.deviceStatus = deviceArray[i].deviceStatus;
+            deviceObj.deviceOnlineStatus = deviceArray[i].deviceOnlineStatus;
+            that.deviceInfoArray.push(deviceObj);
           }
-          let token = await wepy.getStorageSync('token');
-          params.token = token;
+          that.$apply();
         }
-        let token = wepy.getStorageSync('token');
+        let token = await wepy.getStorageSync('token');
         params.token = token;
-        if (e.detail.value == 0) {
-          getApiDeviceList(params);
-        } else if (e.detail.value == 1) {
-          params.deviceOnlineStatus = 1;
-          getApiDeviceList(params);
-        } else if (e.detail.value == 2) {
-          params.deviceOnlineStatus = 0;
-          getApiDeviceList(params);
-        } else if (e.detail.value == 3) {
-          params.deviceRunningStatus = 1;
-          getApiDeviceList(params);
-        } else if (e.detail.value == 4) {
-          params.deviceStockStatus = 1;
-          getApiDeviceList(params);
+      };
+      let token = wepy.getStorageSync('token');
+      params.token = token;
+      if (e.detail.value == 0) {
+        getApiDeviceList(params);
+      } else if (e.detail.value == 1) {
+        params.deviceOnlineStatus = 1;
+        getApiDeviceList(params);
+      } else if (e.detail.value == 2) {
+        params.deviceOnlineStatus = 0;
+        getApiDeviceList(params);
+      } else if (e.detail.value == 3) {
+        params.deviceRunningStatus = 1;
+        getApiDeviceList(params);
+      } else if (e.detail.value == 4) {
+        params.deviceStockStatus = 1;
+        getApiDeviceList(params);
+      }
+      console.log(this.deviceInfoArray);
+      this.$apply();
+    }
+    // ******************************************************************************************************************
+    // ******************************************************************************************************************
+  };
+  async onLoad() {
+    // 判断是否有token , 没有token 则去登录页面授权登录；
+    let token = await wepy.getStorageSync('token');
+    console.log(token);
+    if (!token) {
+      wepy.redirectTo({
+        url: '/pages/chooseInterface'
+      });
+    } else {
+      // 获取设备列表
+      let res1 = await api.httpPost(
+        'http://flow.dev.redsoul.cn/app/device/getDeviceList',
+        {
+          token: token
+        }
+      );
+      // 设置信息数组
+      let deviceArrayLength = res1.data.pageRows.length;
+      if (deviceArrayLength === 0) {
+        this.isFalse = true;
+      } else {
+        this.isFalse = false;
+        let deviceArray = res1.data.pageRows;
+        for (let i = 0; i < deviceArray.length; i++) {
+          let deviceObj = {};
+          deviceObj.deviceId = deviceArray[i].deviceMac;
+          deviceObj.deviceName = deviceArray[i].deviceName;
+          deviceObj.deviceSceneDisplay = deviceArray[i].deviceSceneDisplay;
+          deviceObj.deviceAddress = deviceArray[i].deviceAddress;
+          deviceObj.deviceStatus = deviceArray[i].deviceStatus;
+          deviceObj.deviceOnlineStatus = deviceArray[i].deviceOnlineStatus;
+          this.deviceInfoArray.push(deviceObj);
         }
         console.log(this.deviceInfoArray);
         this.$apply();
-      },
-      // ******************************************************************************************************************
-      // 点击搜索
-      async submitSearch() {
-        console.log(this.inputContent);
-        // 获取设备列表
-        let res1 = await api.httpPost('http://flow.dev.redsoul.cn/app/device/getDeviceList', {deviceName:this.inputContent});
-        // 设置信息数组
-        let deviceArrayLength = res1.data.pageRows.length;
-        if (deviceArrayLength === 0) {
-          this.isFalse = true;
-        } else {
-          this.isFalse = false;
-          let deviceArray = res1.data.pageRows;
-          for (let i = 0; i < deviceArray.length; i++) {
-            let deviceObj = {}
-            deviceObj.deviceId = deviceArray[i].deviceMac;
-            deviceObj.deviceName = deviceArray[i].deviceName;
-            deviceObj.deviceAddress = deviceArray[i].deviceAddress;
-            deviceObj.deviceStatus = deviceArray[i].deviceStatus;
-            deviceObj.deviceOnlineStatus = deviceArray[i].deviceOnlineStatus;
-            this.deviceInfoArray.push(deviceObj);
-          }
-          this.$apply();
-        }
-       console.log(this.deviceInfoArray);
       }
-      // ******************************************************************************************************************
-    };
-    // 获取input 输入框的值
-    getInputValue(e) {
-      this.inputContent = e.detail.value;
-    };
-    // 添加设备 
-    addMachine() {
-      wx.navigateTo({
-        url: '/pages/addMachine'
-      });
-    };
-    // 设备详情
-    deviceDetail() {
-      wx.navigateTo({
-        url: '/pages/operateDevice'
-      });
-    };
-    async onLoad() {
-      // 判断是否有token , 没有token 则去登录页面授权登录；
-      let token = await wepy.getStorageSync('token');
-      if (token == '') {
-        wepy.redirectTo({
-          url: '/pages/chooseInterface'
-        });
-      } else {
-        // 获取设备列表
-        let res1 = await api.httpPost('http://flow.dev.redsoul.cn/app/device/getDeviceList', token);
-        // 设置信息数组
-        let deviceArrayLength = res1.data.pageRows.length;
-        if (deviceArrayLength === 0) {
-          this.isFalse = true;
-        } else {
-          this.isFalse = false;
-          let deviceArray = res1.data.pageRows;
-          for (let i = 0; i < deviceArray.length; i++) {
-            let deviceObj = {}
-            deviceObj.deviceId = deviceArray[i].deviceMac;
-            deviceObj.deviceName = deviceArray[i].deviceName;
-            deviceObj.deviceAddress = deviceArray[i].deviceAddress;
-            deviceObj.deviceStatus = deviceArray[i].deviceStatus;
-            deviceObj.deviceOnlineStatus = deviceArray[i].deviceOnlineStatus;
-            this.deviceInfoArray.push(deviceObj);
-          }
-          console.log(this.deviceInfoArray);
-          this.$apply();
-        }
-      }
-    };
+    }
   }
+  // 获取input 输入框的值
+  getInputValue(e) {
+    this.inputContent = e.detail.value;
+  }
+  // 添加设备
+  addMachine() {
+    wx.navigateTo({
+      url: '/pages/addMachine'
+    });
+  }
+  // 设备详情
+  deviceDetail(e) {
+    console.log('点击：');
+    console.log(e.currentTarget.dataset.deviceid);
+    let deviceDetail = {};
+    deviceDetail.deviceId = e.currentTarget.dataset.deviceid;
+    deviceDetail.deviceName = e.currentTarget.dataset.devicename;
+    deviceDetail.deviceAddress = e.currentTarget.dataset.deviceaddress;
+    deviceDetail.deviceSceneDisplay =
+      e.currentTarget.dataset.devicescenedisplay;
+    deviceDetail.deviceStatus = e.currentTarget.dataset.devicestatus;
+    wx.setStorageSync('deviceDetail', deviceDetail);
+    wx.navigateTo({
+      url: '/pages/operateDevice'
+    });
+  }
+  // 点击搜索
+  async submitSearch() {
+    console.log(this.inputContent);
+    // 获取设备列表
+    let res1 = await api.httpPost(
+      'http://flow.dev.redsoul.cn/app/device/getDeviceList',
+      {
+        deviceName: this.inputContent
+      }
+    );
+    // 设置信息数组
+    let deviceArrayLength = res1.data.pageRows.length;
+    if (deviceArrayLength === 0) {
+      this.isFalse = true;
+    } else {
+      this.isFalse = false;
+      let deviceArray = res1.data.pageRows;
+      for (let i = 0; i < deviceArray.length; i++) {
+        let deviceObj = {};
+        deviceObj.deviceId = deviceArray[i].deviceMac;
+        deviceObj.deviceName = deviceArray[i].deviceName;
+        deviceObj.deviceAddress = deviceArray[i].deviceAddress;
+        deviceObj.deviceSceneDisplay = deviceArray[i].deviceSceneDisplay;
+        deviceObj.deviceStatus = deviceArray[i].deviceStatus;
+        deviceObj.deviceOnlineStatus = deviceArray[i].deviceOnlineStatus;
+        this.deviceInfoArray.push(deviceObj);
+      }
+      this.$apply();
+    }
+    console.log(this.deviceInfoArray);
+  }
+}
 </script>

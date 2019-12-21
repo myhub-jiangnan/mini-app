@@ -5,17 +5,24 @@
 import wepy from 'wepy';
 import 'wepy-async-function';
 export default class extends wepy.app {
+  data = {
+    apiUrl: 'http://flow.dev.redsoul.cn'
+  };
   config = {
     pages: [
+      // 授权手机登录
+      'pages/authorize',
+      // 添加设备
+      'pages/addMachine',
+
       'pages/index',
+      // 订单列表
+      'pages/order',
       // 选择登录类型页面
       'pages/chooseInterface',
 
-      // 授权手机登录
-      'pages/authorize',
       //授权用户信息
       'pages/authorizeUserInfo',
-
       // 分润记录
       'pages/incomRecorder',
       //人员管理
@@ -25,8 +32,6 @@ export default class extends wepy.app {
       //收益
       // 订单详情
       'pages/orderDetail',
-      // 订单列表
-      'pages/order',
       // 设备操作
       'pages/operateDevice',
       // 补货记录
@@ -35,15 +40,12 @@ export default class extends wepy.app {
       'pages/replenish',
       // 货道管理
       'pages/cargo',
-
       //检测记录
       'pages/checkRecoder',
       //test
       'pages/aa',
       // 申请加盟
       'pages/applyForalliance',
-      // 添加设备
-      'pages/addMachine',
       'pages/allianceSuccess',
       //分润
       'pages/shareIncom',
@@ -85,13 +87,16 @@ export default class extends wepy.app {
           selectedIconPath: '/images/icon_info_active.png'
         }
       ]
+    },
+    permission: {
+      'scope.userLocation': {
+        desc: '你的位置信息将用于小程序位置接口的效果展示' // 高速公路行驶持续后台定位
+      }
     }
   };
   constructor() {
     super();
     this.use('promisify');
   }
-  // 全局数据中暴露api
-  globalData = {};
 }
 </script>

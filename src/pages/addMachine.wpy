@@ -1,171 +1,275 @@
 <style lang="less">
-
-    .add_machine {
-        // border: 1rpx solid red;
-        position: relative;
-        height: 100%;
-        .form {
-            margin-top: 30rpx;
-            padding-left: 30rpx;
-            padding-right: 30rpx;
-            .machine_code {
-                // border: 1rpx solid red;
-                display: flex;
-                flex-flow: row nowrap;
-                justify-content: space-between;
-                align-items: center;
-                height: 88rpx;
-                margin-top: 30rpx;
-                .input_box {
-                    width: 436rpx;
-                    height: 88rpx;
-                    margin-left: 10rpx;
-                    input {
-                        // border: 1rpx solid red;
-                        display: block;
-                        height: 100%;
-                        border-radius: 10rpx;
-                        background: #E6E6E6;
-                        padding-left: 20rpx;
-                    }
-                }
-                .img_box {
-                    width: 44rpx;
-                    height: 44rpx;
-                    image {
-                        display: block;
-                        width: 100%;
-                        height: 100%;
-                    }
-                }
-            }
-            .shop_name {
-                // border: 1rpx solid red;
-                display: flex;
-                flex-flow: row nowrap;
-                justify-content: space-between;
-                align-items: center;
-                height: 88rpx;
-                margin-top: 30rpx;
-                .input_box {
-                    width: 500rpx;
-                    height: 88rpx; // border: 1rpx solid green;
-                    input {
-                        // border: 1rpx solid red;
-                        display: block;
-                        height: 100%;
-                        width: 100%;
-                        border-radius: 10rpx;
-                        background: #E6E6E6;
-                        padding-left: 20rpx;
-                        box-sizing: border-box;
-                    }
-                }
-            }
-            .detail_address {
-                // border: 1rpx solid red;
-                display: flex;
-                flex-flow: row nowrap;
-                justify-content: space-between;
-                align-items: center;
-                height: 88rpx;
-                margin-top: 30rpx;
-                .input_box {
-                    width: 436rpx;
-                    height: 88rpx;
-                    margin-left: 10rpx;
-                    input {
-                        // border: 1rpx solid red;
-                        display: block;
-                        height: 100%;
-                        border-radius: 10rpx;
-                        background: #E6E6E6;
-                        padding-left: 20rpx;
-                    }
-                }
-                .img_box {
-                    width: 44rpx;
-                    height: 44rpx;
-                    image {
-                        display: block;
-                        width: 100%;
-                        height: 100%;
-                    }
-                }
-            }
+.add_machine {
+  // border: 1rpx solid red;
+  position: relative;
+  height: 100%;
+  .form {
+    margin-top: 30rpx;
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+    .machine_code {
+      // border: 1rpx solid red;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      height: 88rpx;
+      margin-top: 30rpx;
+      .input_box {
+        width: 436rpx;
+        height: 88rpx;
+        margin-left: 10rpx;
+        input {
+          // border: 1rpx solid red;
+          display: block;
+          height: 100%;
+          border-radius: 10rpx;
+          background: #e6e6e6;
+          padding-left: 20rpx;
         }
-       .submit_box {
-           position: absolute;
-           left: 0;
-           right: 0;
-           margin: auto;
-           width: 560rpx;
-           height: 88rpx;
-          margin-top: 360rpx;
-           button {
-               display: block;
-               width: 100%;
-               height: 100%;
-               border-radius: 44rxp;
-               background: #F95C4C;
-               font-size: 32rxp;
-               color: #FFFFFF;
-               letter-spacing: 20rpx;
-               text-align: center;
-               line-height: 88rpx;
-           }
-       }
+      }
+      .img_box {
+        width: 44rpx;
+        height: 44rpx;
+        image {
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+      }
     }
+    .shop_name {
+      // border: 1rpx solid red;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      height: 88rpx;
+      margin-top: 30rpx;
+      .input_box {
+        width: 500rpx;
+        height: 88rpx; // border: 1rpx solid green;
+        input {
+          display: block;
+          width: 100%;
+          height: 88rpx;
+          line-height: 88rpx;
+          border-radius: 10rpx;
+          background: #e6e6e6;
+          padding-left: 20rpx;
+          box-sizing: border-box;
+        }
+        picker {
+          display: block;
+          width: 100%;
+          height: 100%;
+          .picker_btn {
+            // border: 1rpx solid red;
+            display: block;
+            width: 100%;
+            height: 88rpx;
+            line-height: 88rpx;
+            border-radius: 10rpx;
+            background: #e6e6e6;
+            padding-left: 20rpx;
+            box-sizing: border-box;
+          }
+        }
+      }
+    }
+    .detail_address {
+      // border: 1rpx solid red;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      height: 88rpx;
+      margin-top: 30rpx;
+      .input_box {
+        width: 436rpx;
+        height: 88rpx;
+        margin-left: 10rpx;
+        input {
+          // border: 1rpx solid red;
+          display: block;
+          height: 100%;
+          border-radius: 10rpx;
+          background: #e6e6e6;
+          padding-left: 20rpx;
+        }
+      }
+      .img_box {
+        width: 44rpx;
+        height: 44rpx;
+        image {
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+  .submit_box {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 560rpx;
+    height: 88rpx;
+    margin-top: 360rpx;
+    button {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 44rxp;
+      background: #f95c4c;
+      font-size: 32rxp;
+      color: #ffffff;
+      letter-spacing: 20rpx;
+      text-align: center;
+      line-height: 88rpx;
+    }
+  }
+}
 </style>
 <template>
-    <view class="add_machine">
-        <view class="form">
-            <view class="machine_code">
-                <text>设备编号：</text>
-                <view class="input_box"><input placeholder="请输入设备号或使用扫一扫"/></view>
-                <view class="img_box">
-                    <image src="../images/scan_icon.png"/>
-                </view>
-            </view>
-            <view class="shop_name">
-                <text>门店名称:</text>
-                <view class="input_box"><input placeholder="请输入详细门店地址"/></view>
-            </view>
-            <view class="detail_address">
-                <text>详细地址:</text>
-                <view class="input_box"><input placeholder="请输入详细门店地址"/></view>
-                <view class="img_box">
-                    <image src="../images/address_icon.png"/>
-                </view>
-            </view>
-            <view class="shop_name">
-                <text>货道数量:</text>
-                <view class="input_box"><input/></view>
-            </view>
-            <view class="shop_name">
-                <text>货道容量:</text>
-                <view class="input_box"><input/></view>
-            </view>
-            <view class="shop_name">
-                <text>场地类型:</text>
-                <view class="input_box"><inpu/></view>
-            </view>
+  <view class="add_machine">
+    <view class="form">
+      <view class="machine_code">
+        <text>设备编号：</text>
+        <view class="input_box"
+          ><input placeholder="请输入设备号或使用扫一扫" @input="getdeviceMac"
+        /></view>
+        <view class="img_box">
+          <image src="../images/scan_icon.png" />
         </view>
-         <view class="submit_box" @tap="submitClick"><button>绑定</button></view>
+      </view>
+      <view class="shop_name">
+        <text>设备名称:</text>
+        <view class="input_box"
+          ><input placeholder="请输入详细门店地址" @input="getDeviceName"
+        /></view>
+      </view>
+      <view class="detail_address">
+        <text>详细地址:</text>
+        <view class="input_box"
+          ><input placeholder="请输入详细门店地址" @input="getDetailSalesroom"
+        /></view>
+        <view class="img_box" @tap="getLocation">
+          <image src="../images/address_icon.png" />
+        </view>
+      </view>
+      <view class="shop_name">
+        <text>货道数量:</text>
+        <view class="input_box">
+          <picker
+            @change="bindPickerChange01"
+            value="{{stockNumberIndex}}"
+            range="{{stockNumber}}"
+          >
+            <view class="picker_btn" type="default"
+              >{{ stockNumber[stockNumberIndex] }}
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class="shop_name">
+        <text>货道容量:</text>
+        <view class="input_box">
+          <picker
+            @change="bindPickerChange02"
+            value="{{stockCapacityIndex}}"
+            range="{{stockCapacity}}"
+          >
+            <view class="picker_btn" type="default"
+              >{{ stockCapacity[stockCapacityIndex] }}
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class="shop_name">
+        <text>场地类型:</text>
+        <view class="input_box">
+          <picker
+            @change="bindPickerChange03"
+            value="{{screenTypeIndex}}"
+            range="{{screenType}}"
+          >
+            <view class="picker_btn" type="default"
+              >{{ screenType[screenTypeIndex] }}
+            </view>
+          </picker>
+        </view>
+      </view>
     </view>
+    <view class="submit_box" @tap="submitClick"><button>绑定</button></view>
+  </view>
 </template>
 <script>
-    import wepy from 'wepy';
-    export default class AddMachine extends wepy.page {
-        config = {
-            navigationBarTitleText: '添加设备'
-        };
-        methods = {
-            submitClick(){
-                wx.switchTab({
-                    url:'/pages/index'
-                })
-            }
-        }
+import wepy from 'wepy';
+import api from '../api/api';
+export default class AddMachine extends wepy.page {
+  data = {
+    apiUrl: '',
+    stockNumberIndex: 0,
+    stockCapacityIndex: 0,
+    screenTypeIndex: 0,
+    // 货道数量
+    stockNumber: [1, 2, 3, 4, 5, 6],
+    // 货道容量
+    stockCapacity: [1, 2, 3, 4, 5, 6],
+    // 场地类型
+    screenType: ['酒吧', 'KTV', '棋牌室'],
+    // 提交的表单数据
+    formObj: {}
+  };
+  config = {
+    navigationBarTitleText: '添加设备'
+  };
+  methods = {
+    // 设备编号：
+    getdeviceMac(e) {
+      this.formObj.deviceMac = e.detail.value;
+    },
+    // 设备名称：
+    getDeviceName(e) {
+      this.formObj.deviceName;
+    },
+    bindPickerChange01(e) {
+      this.stockNumberIndex = e.detail.value;
+      this.formObj.stockNumber = this.stockNumber[this.stockNumberIndex];
+      console.log('货道数量：' + this.stockNumber[this.stockNumberIndex]);
+    },
+    bindPickerChange02(e) {
+      this.stockCapacityIndex = e.detail.value;
+      this.formObj.stockCapacity = this.stockCapacity[this.stockCapacityIndex];
+      console.log('货道容量：' + this.stockCapacity[this.stockCapacityIndex]);
+    },
+    bindPickerChange03(e) {
+      this.screenTypeIndex = e.detail.value;
+      this.formObj.screen = this.screenType[this.screenTypeIndex];
+      console.log('场地类型：' + this.screenType[this.screenTypeIndex]);
+    },
+    // 获取地理位置
+    async getLocation() {
+      console.log('地理位置');
+      let res = await wepy.getLocation({});
+      this.formObj.deviceLat = res.latitude;
+      this.formObj.deviceLng = res.longitude;
     }
+  };
+  async onLoad() {
+    this.apiUrl = this.$parent.data.apiUrl;
+  }
+  // 绑定按钮
+  async submitClick() {
+    let url = this.apiUrl;
+    console.log(this.formObj);
+    let res = await api.httpPost(`${url}/app/device/addDevice`, this.formObj);
+
+    // wx.switchTab({
+    //   url: '/pages/index'
+    // });
+  }
+}
 </script>
