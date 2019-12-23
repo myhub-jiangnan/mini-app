@@ -153,9 +153,12 @@
       <view class="detail_address">
         <text>详细地址:</text>
         <view class="input_box"
-          ><input placeholder="请输入详细门店地址" @input="getDetailSalesroom"
+          ><input
+            placeholder="请输入详细门店地址"
+            @input="getDetailSalesroom"
+            value="{{formObj.deviceAddress}}"
         /></view>
-        <view class="img_box" @tap="getLocation">
+        <view class="img_box" @tap="chooseLocation">
           <image src="../images/address_icon.png" />
         </view>
       </view>
@@ -210,7 +213,6 @@ import wepy from 'wepy';
 import api from '../api/api';
 export default class AddMachine extends wepy.page {
   data = {
-    apiUrl: '',
     stockNumberIndex: 0,
     stockCapacityIndex: 0,
     screenTypeIndex: 0,
@@ -219,7 +221,20 @@ export default class AddMachine extends wepy.page {
     // 货道容量
     stockCapacity: [1, 2, 3, 4, 5, 6],
     // 场地类型
-    screenType: ['酒吧', 'KTV', '棋牌室'],
+    screenType: [
+      '酒吧',
+      '夜店',
+      'KTV',
+      '餐饮店',
+      '便利店',
+      '桌游棋牌',
+      '网咖',
+      '足浴按摩店',
+      '轰趴店',
+      '纹身店',
+      '酒店',
+      '其他'
+    ],
     // 提交的表单数据
     formObj: {}
   };
@@ -233,7 +248,8 @@ export default class AddMachine extends wepy.page {
     },
     // 设备名称：
     getDeviceName(e) {
-      this.formObj.deviceName;
+      console.log('输入');
+      this.formObj.deviceName = e.detail.value;
     },
     bindPickerChange01(e) {
       this.stockNumberIndex = e.detail.value;
@@ -247,30 +263,73 @@ export default class AddMachine extends wepy.page {
     },
     bindPickerChange03(e) {
       this.screenTypeIndex = e.detail.value;
-      this.formObj.screen = this.screenType[this.screenTypeIndex];
+      let screenType = this.screenType[this.screenTypeIndex];
+      if (screenType === '酒吧') {
+        this.formObj.screen = 1;
+      } else if (screenType === '夜店') {
+        this.formObj.screen = 2;
+      } else if (screenType === 'KTV') {
+        this.formObj.screen = 4;
+      } else if (screenType === '餐饮店') {
+        this.formObj.screen = 5;
+      } else if (screenType === '便利店') {
+        this.formObj.screen = 6;
+      } else if (screenType === '桌游棋牌') {
+        this.formObj.screen = 15;
+      } else if (screenType === '网咖') {
+        this.formObj.screen = 16;
+      } else if (screenType === '足浴按摩店') {
+        this.formObj.screen = 17;
+      } else if (screenType === '轰趴店') {
+        this.formObj.screen = 18;
+      } else if (screenType === '纹身店') {
+        this.formObj.screen = 19;
+      } else if (screenType === '酒店') {
+        this.formObj.screen = 20;
+      } else if (screenType === '其他') {
+        this.formObj.screen = 21;
+      }
+      this.$apply();
       console.log('场地类型：' + this.screenType[this.screenTypeIndex]);
+      console.log('formOBj中的screen值：' + this.formObj.screen);
     },
     // 获取地理位置
-    async getLocation() {
-      let res = await wepy.getLocation({});
+    async chooseLocation() {
+      let res = await wepy.chooseLocation({});
       this.formObj.deviceLat = res.latitude;
       this.formObj.deviceLng = res.longitude;
-      console.log('已获取地理位置');
+      this.formObj.deviceAddress = res.address;
+      console.log('已获取地理位置' + res.address);
+      this.$apply();
     }
   };
-  async onLoad() {
-    this.apiUrl = this.$parent.data.apiUrl;
-  }
+  async onLoad() {}
   // 绑定按钮
   async submitClick() {
-    let url = this.apiUrl;
-    
-    console.log(this.formObj);
+    let url = this.$parent.data.apiUrl;
     let res = await api.httpPost(`${url}/app/device/addDevice`, this.formObj);
     if (res.code == 0) {
-      wx.switchTab({
-        url: '/pages/index'
+      let showToast = await wx.showToast({
+        title: '注册成功！',
+        icon: 'success',
+        duration: 2000
       });
+      setTimeout(() => {
+        wepy.switchTab({
+          url: '/pages/index'
+        });
+      }, 1000);
+    } else if (res.code === 1) {
+      let showToast = await wx.showToast({
+        title: '已经注册！',
+        icon: 'warn',
+        duration: 2000
+      });
+      setTimeout(() => {
+        wepy.switchTab({
+          url: '/pages/index'
+        });
+      }, 1000);
     }
   }
 }

@@ -9,18 +9,19 @@ const httpPost = (url, data) => {
         token: wx.getStorageSync('token')
       },
       data: data,
-      success: async function(res) {
-        if (res.code == 0) {
-          //TODO 回传所有数据
-          resolve(res.data);
-        } else if (res.code == 300) {
-          //TODO token失效
-          //调用/app/public/getToken 获取新的token 同时判断是否需要重新获取用户信息以及手机号
-          console.log('token失效，需要重新调用/app/public/getToken');
-        } else {
-          console.log(res);
-          reject(res.msg);
-        }
+      success: function(res) {
+        resolve(res.data);
+        // if (res.code == 0) {
+        //   TODO 回传所有数据
+        //   resolve(res.data);
+        // } else if (res.code == 300) {
+        //   //TODO token失效
+        //   //调用/app/public/getToken 获取新的token 同时判断是否需要重新获取用户信息以及手机号
+        //   console.log('token失效，需要重新调用/app/public/getToken');
+        // } else {
+        //   console.log(res);
+        //   reject(res.msg);
+        // }
       },
       fail: function(err) {
         reject(err);

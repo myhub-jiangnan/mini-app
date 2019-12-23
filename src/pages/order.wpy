@@ -1,235 +1,244 @@
 <style lang="less">
-@import '../styles/base.less';
-page {
-  background: #ffffff;
-}
-.order_list {
-  height: 100%;
-  padding-top: 30rpx;
-  background: #ffffff;
-  .search_box {
-    // border: 1rpx solid red;
-    height: 64rpx;
-    padding: 0 30rpx;
-    view:nth-child(1) {
-      display: inline-block;
-      width: 533rpx;
-      height: 100%;
-      input {
-        display: block;
-        width: 100%;
-        height: 100%;
-        border-radius: 32rpx;
-        background: #e6e6e6;
-        padding-left: 24rpx;
-        font-size: 26rpx;
-      }
-    }
-    view:nth-child(2) {
-      // border: 1rpx solid red;
-      position: relative;
-      bottom: 50%;
-      transform: translateY(50%);
-      display: inline-block;
-      margin-left: 49rpx;
-      button {
-        width: 98rpx;
-        height: 54rpx;
-        line-height: 54rpx;
-        background: #f95c4c;
-        color: #e6e6e6;
-        font-size: 20rpx;
-      }
-    }
-  }
-  .data_list {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center; // border: 1rpx solid red;
-    height: 98rpx;
-    background: #e6e6e6;
-    padding: 0 30rpx;
-    margin-top: 30rpx;
-    .btn_box {
-      width: 186rpx;
-      height: 56rpx;
-      button {
-        width: 100%;
-        height: 100%;
-        border-radius: 28rpx;
-        line-height: 56rpx;
-        font-size: 30rpx;
-        background: #ffffff;
-        text-align: left;
-      }
-    }
-    view:nth-child(2) {
-      font-size: 24rpx;
-    }
+  @import '../styles/base.less';
+  page {
+    background: #ffffff;
   }
   .order_list {
-    // border: 1px solid red;
-    width: 670rpx;
-    padding: 0 40rpx;
+    height: 100%;
     padding-top: 30rpx;
     background: #ffffff;
-    .middle();
-    .order_item {
-      // .border(red);
-      width: 100%;
-      height: 226rpx;
-      border-radius: 12rpx;
-      box-shadow: 2rpx 6rpx 6rpx #e6e6e6;
-      font-size: 28rpx;
-      margin-bottom: 30rpx;
+    .search_box {
+      // border: 1rpx solid red;
+      height: 64rpx;
+      padding: 0 30rpx;
       view:nth-child(1) {
-        position: relative;
-        height: 78rpx;
-        line-height: 78rpx;
-        border-bottom: 1rpx solid #e6e6e6;
-        padding-left: 26rpx;
-        text:nth-child(2) {
-          margin-left: 30rpx;
-          padding: 0 26rpx;
-        }
-        text:nth-child(3) {
-          position: absolute;
-          right: 26rpx;
-          margin-left: 30rpx;
-          color: red;
+        display: inline-block;
+        width: 533rpx;
+        height: 100%;
+        input {
+          display: block;
+          width: 100%;
+          height: 100%;
+          border-radius: 32rpx;
+          background: #e6e6e6;
+          padding-left: 24rpx;
+          font-size: 26rpx;
         }
       }
       view:nth-child(2) {
-        // .border(red);
-        padding: 0 26rpx;
-        padding-top: 30rpx;
-        font-size: 28rpx;
-        text:nth-child(2) {
-          float: right;
-          font-weight: bold;
-          color: black;
+        // border: 1rpx solid red;
+        position: relative;
+        bottom: 50%;
+        transform: translateY(50%);
+        display: inline-block;
+        margin-left: 49rpx;
+        button {
+          width: 98rpx;
+          height: 54rpx;
+          line-height: 54rpx;
+          background: #f95c4c;
+          color: #e6e6e6;
+          font-size: 20rpx;
         }
       }
-      view:nth-child(3) {
+    }
+    .data_list {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center; // border: 1rpx solid red;
+      height: 98rpx;
+      background: #e6e6e6;
+      padding: 0 30rpx;
+      margin-top: 30rpx;
+      .btn_box {
+        width: 186rpx;
+        height: 56rpx;
+        picker {
+          // border: 1px solid red;
+          width: 186rpx;
+          height: 56rpx;
+          border-radius: 28rpx;
+          line-height: 56rpx;
+          font-size: 30rpx;
+          background: #ffffff;
+          text-align: left;
+          .picker {
+            width: 186rpx;
+            height: 56rpx;
+            font-size: 25rpx;
+            text-align: center;
+            // color: red;
+          }
+        }
+      }
+      view:nth-child(2) {
+        font-size: 24rpx;
+      }
+    }
+    .no_deviec {
+      // border: 1px solid red;
+      image {
+        // border: 1px solid red;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 670rpx;
+        height: 176rpx;
+      }
+      view {
+        margin-top: 30rpx;
+        font-size: 24rpx;
+        text-align: center; // color: #F6F6F6;
+      }
+    }
+    .order_list {
+      // border: 1px solid red;
+      width: 670rpx;
+      padding: 0 40rpx;
+      padding-top: 30rpx;
+      background: #ffffff;
+      .middle();
+      .order_item {
         // .border(red);
-        padding: 0 26rpx;
-        padding-top: 20rpx;
+        width: 100%;
+        height: 226rpx;
+        border-radius: 12rpx;
+        box-shadow: 2rpx 6rpx 6rpx #e6e6e6;
         font-size: 28rpx;
-        text:nth-child(2) {
-          float: right;
-          font-weight: bold;
-          color: black;
+        margin-bottom: 30rpx;
+        view:nth-child(1) {
+          position: relative;
+          height: 78rpx;
+          line-height: 78rpx;
+          border-bottom: 1rpx solid #e6e6e6;
+          padding-left: 26rpx;
+          text:nth-child(2) {
+            position: absolute;
+            right: 26rpx;
+            margin-left: 30rpx;
+            color: red;
+          }
+        }
+        view:nth-child(2) {
+          // .border(red);
+          padding: 0 26rpx;
+          padding-top: 30rpx;
+          font-size: 28rpx;
+          text:nth-child(2) {
+            float: right;
+            font-weight: bold;
+            color: black;
+          }
+        }
+        view:nth-child(3) {
+          // .border(red);
+          padding: 0 26rpx;
+          padding-top: 20rpx;
+          font-size: 28rpx;
+          text:nth-child(2) {
+            float: right;
+            font-weight: bold;
+            color: black;
+          }
         }
       }
     }
   }
-}
 </style>
 <template>
   <view class="order_list">
     <view class="search_box">
       <view>
-        <input placeholder="请输入要搜索的经销商/代理商手机号">
+        <input placeholder="请输入要搜索的经销商/代理商手机号" />
       </view>
       <view>
         <button>搜索</button>
       </view>
     </view>
+    <!-- 选择某个时间段的订单 -->
     <view class="data_list">
       <view class="btn_box">
-        <button>全部</button>
+        <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" @change="bindDateChange">
+          <view class="picker">
+            {{ date }}
+          </view>
+        </picker>
       </view>
       <view>
-        <view>累计销售额：¥{{statistics.salsMoney}}</view>
-        <view>累计单量：{{statistics.salesNum}}</view>
+        <view>累计销售额：¥{{ statistics.salsMoney }}</view>
+        <view>累计单量：{{ statistics.salesNum }}</view>
       </view>
     </view>
+    <!-- 暂无订单 -->
+    <view class="no_deviec" wx:if="{{isFalse}}">
+      <image src="../images/index/flwo_img.png"></image>
+      <view>~~ 您暂无订单，请添加设备！！！~~</view>
+    </view>
     <view class="order_list">
-      <view class="order_item" wx:for="{{listArray}}" wx:key="index" @tap="checkDetail">
+      <view class="order_item" wx:for="{{orderList}}" wx:key="index" @tap="getOrderDetail" data-orderid="{{item.orderId}}">
         <view>
-          <text>{{item.date}}</text>
-          <text>{{item.time}}</text>
-          <text>+¥{{item.price}}</text>
+          <text>{{ item.orderPayTimeDisplay }}</text>
+          <text>+¥{{ item.orderAmount }}</text>
         </view>
         <view>
           <text>设备名称</text>
-          <text>{{item.goodsName}}</text>
+          <text>{{ item.deviceName }}</text>
         </view>
         <view>
           <text>商品名称</text>
-          <text>{{item.deviceName}}</text>
+          <text>{{ item.orderGoodsName }}</text>
         </view>
       </view>
     </view>
   </view>
 </template>
 <script>
-import wepy from 'wepy';
-import api from '../api/api';
-export default class OrderList extends wepy.page {
-  data = {
-    statistics: {
-      salsMoney: 888888,
-      salesNum: 5000
-    }
-    // listArray: [
-    //   {
-    //     date: '2019-12-10',
-    //     time: '22:10:10',
-    //     price: 49.0,
-    //     deviceName: 'Flow总部',
-    //     goodsName: '大西瓜'
-    //   },
-    //   {
-    //     date: '2019-12-10',
-    //     time: '22:10:10',
-    //     price: 49.0,
-    //     deviceName: 'Flow总部',
-    //     goodsName: '大西瓜'
-    //   },
-    //   {
-    //     date: '2019-12-10',
-    //     time: '22:10:10',
-    //     price: 49.0,
-    //     deviceName: 'Flow总部',
-    //     goodsName: '大西瓜'
-    //   },
-    //   {
-    //     date: '2019-12-10',
-    //     time: '22:10:10',
-    //     price: 49.0,
-    //     deviceName: 'Flow总部',
-    //     goodsName: '大西瓜'
-    //   },
-    //   {
-    //     date: '2019-12-10',
-    //     time: '22:10:10',
-    //     price: 49.0,
-    //     deviceName: 'Flow总部',
-    //     goodsName: '大西瓜'
-    //   }
-    // ]
-  };
-  config = {
-    navigationBarTitleText: '订单列表'
-  };
-  methods = {
-    checkDetail() {
-      console.log(6666);
-      wx.navigateTo({
-        url: '/pages/orderDetail'
+  import wepy from 'wepy';
+  import api from '../api/api';
+  export default class OrderList extends wepy.page {
+    data = {
+      // 暂无订单 图片提醒；
+      isFalse: false,
+      statistics: {
+        salsMoney: 888888,
+        salesNum: 5000
+      },
+      //
+      date: '',
+      // 订单信息列表
+      orderList: []
+    };
+    config = {
+      navigationBarTitleText: '订单列表'
+    };
+    methods = {
+      // 获取订单详情
+      getOrderDetail(e) {
+        let orderId = e.currentTarget.dataset.orderid;
+        wepy.setStorageSync('orderId', orderId);
+        wx.navigateTo({
+          url: '/pages/orderDetail'
+        });
+      },
+      // 选择某个时间段的订单
+      bindDateChange(e) {
+        this.date = e.detail.value;
+        console.log(this.date);
+        this.$apply();
+      }
+    };
+    async onLoad() {
+      let url = this.$parent.data.apiUrl;
+      let token = await wepy.getStorageSync('token');
+      // 订单列表
+      let res = await api.httpPost(`${url}/app/order/getOrderList`, {
+        token: token
       });
+      if (res.code == 0) {
+        this.orderList = res.data.pageRows;
+      }
+      this.$apply();
     }
-  };
-
-  async onLoad() {
-    console.log(888);
-    // 订单列表
-     let token = await wepy.getStorageSync('token');
-    api.httpPost('http://flow.dev.redsoul.cn/app/order/getOrderList',{
-      token: token
-    });
   }
-}
 </script>

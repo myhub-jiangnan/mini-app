@@ -244,7 +244,6 @@ export default class Index extends wepy.page {
       this.$apply();
     }
     // ******************************************************************************************************************
-    // ******************************************************************************************************************
   };
   async onLoad() {
     // 判断是否有token , 没有token 则去登录页面授权登录；
@@ -279,11 +278,13 @@ export default class Index extends wepy.page {
           deviceObj.deviceOnlineStatus = deviceArray[i].deviceOnlineStatus;
           this.deviceInfoArray.push(deviceObj);
         }
-        console.log(this.deviceInfoArray);
-        this.$apply();
+         this.$apply();
+        // console.log(this.deviceInfoArray);
+      
       }
     }
-  }
+  };
+
   // 获取input 输入框的值
   getInputValue(e) {
     this.inputContent = e.detail.value;

@@ -1,9 +1,18 @@
-<style lang="less"></style>
+<style lang="less">
+
+</style>
 <template>
-  <view class="choose_login"> aaaaa</view>
+  <view class="choose_login">
+    <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+      <view class="picker">
+        当前选择：{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}
+      </view>
+    </picker>
+  </view>
 </template>
 <script>
-import wepy from 'wepy';
-
-export default class Aa extends wepy.page {}
+  import wepy from 'wepy';
+  export default class Aa extends wepy.page {
+    
+  }
 </script>

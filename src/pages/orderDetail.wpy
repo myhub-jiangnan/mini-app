@@ -3,8 +3,7 @@
     position: relative;
     height: 100%;
     .order_detail {
-      position: relative;
-      // border: 1rpx solid red;
+      position: relative; // border: 1rpx solid red;
       font-size: 28rpx; // 订单信息
       .order_info {
         padding: 60rpx 28rpx;
@@ -96,7 +95,7 @@
           button {
             width: 168rpx;
             height: 68rpx;
-            background: #F95C4C;
+            background: #f95c4c;
             color: #ffffffff;
             text-align: center;
             line-height: 68rpx;
@@ -133,15 +132,17 @@
       view:nth-child(1) {
         font-size: 36rpx;
         text-align: center;
-        color: #F95C4C;
+        color: #f95c4c;
         font-weight: bold;
         margin-bottom: 36rpx;
         letter-spacing: 15rpx;
       }
       .yellow {
-        color: #F95C4C;
+        color: #f95c4c;
       }
       .item_box {
+        // background: red;
+        // border: 1px solid red;
         padding: 0 30rpx;
         margin-bottom: 27rpx;
         text:nth-child(2) {
@@ -166,7 +167,7 @@
           border-left: 1rpx solid gray;
           text-align: center;
           width: 50%;
-          color: #F95C4C;
+          color: #f95c4c;
           font-weight: bolder;
         }
       }
@@ -178,25 +179,25 @@
     <view class="order_detail">
       <!-- 订单详情 -->
       <view class="order_info">
-        <view class="goodsName">{{orderDetail.goodsName}}</view>
-        <view class="price">+ {{orderDetail.price}}</view>
+        <view class="goodsName">{{ orderDetail.orderGoodsName }}</view>
+        <view class="price">+ {{ orderDetail.orderAmount }}</view>
         <view>交易成功</view>
         <view>
           <text>设备名称</text>
-          <text>{{orderDetail.deviceName}}</text>
+          <text>{{ orderDetail.deviceName }}</text>
         </view>
         <view>
           <text>设备地址</text>
-          <text>{{orderDetail.deviceAddress}}</text>
+          <text>{{ orderDetail.deviceCity }}</text>
         </view>
         <view>
           <text>设备号</text>
-          <text>{{orderDetail.orderNumer}}</text>
+          <text>{{ orderDetail.deviceMac }}</text>
         </view>
         <view>
           <text>支付时间</text>
-          <text>{{orderDetail.payTime}}</text>
-          <text>{{orderDetail.payDate}}</text>
+          <text>{{ orderDetail.orderPayTimeDisplay }}</text>
+          <text>{{ orderDetail.payDate }}</text>
         </view>
       </view>
       <!-- 资金流向 -->
@@ -204,15 +205,15 @@
         <view>资金流向</view>
         <view class="name_info">
           <text>经销商姓名</text>
-          <text>{{moneyFlow.dealer}}</text>
+          <text>{{ moneyFlow.dealer }}</text>
         </view>
         <view class="name_info">
           <text>代理商姓名</text>
-          <text>{{moneyFlow.agentName}}</text>
+          <text>{{ moneyFlow.agentName }}</text>
         </view>
         <view class="name_info">
           <text>业务员姓名</text>
-          <text>{{moneyFlow.clerkName}}</text>
+          <text>{{ moneyFlow.clerkName }}</text>
         </view>
       </view>
       <!-- 手动退款 -->
@@ -223,10 +224,10 @@
           </view>
           <view class="name_info">
             <view>
-              {{drawback.name}}
+              {{ drawback.name }}
             </view>
             <view>
-              {{drawback.sexual}}
+              {{ drawback.sexual }}
             </view>
           </view>
         </view>
@@ -238,10 +239,10 @@
     <!-- 弹窗 -->
     <view class="modal_box" wx:if="{{isFalse}}">
       <view>退款</view>
-      <view class="item_box"><text>商品名称</text><text>{{confirmDrawback.goodsName}}</text></view>
-      <view class="item_box"><text>单价</text><text class="yellow">¥{{confirmDrawback.price}}</text></view>
-      <view class="item_box"><text>数量</text><text>{{confirmDrawback.account}}</text></view>
-      <view class="item_box"><text>退款金额</text><text class="yellow">¥{{confirmDrawback.sumOfMoney}}</text></view>
+      <view class="item_box"><text>商品名称</text><text></text></view>
+      <view class="item_box"><text>单价</text><text class="yellow">¥</text></view>
+      <view class="item_box"><text>数量</text><text>{{ confirmDrawback.account }}</text></view>
+      <view class="item_box"><text>退款金额</text><text class="yellow">¥</text></view>
       <view class="check_box">
         <view @tap="cancalDrawback">取消</view>
         <view @tap="confirDrawback">确定</view>
@@ -251,43 +252,21 @@
 </template>
 <script>
   import wepy from 'wepy';
+  import api from '../api/api';
   export default class orderDetail extends wepy.page {
     data = {
       isFalse: false,
-      orderDetail: {
-        goodsName: '斩铁剑薄荷',
-        price: '49.00',
-        deviceName: 'FLOW总部',
-        deviceAddress: '上海浦东新区陆家嘴金茂大厦',
-        orderNumer: '594656478798',
-        payDate: '2019-12-10',
-        payTime: '12:10:12'
-      },
-      moneyFlow: {
-        dealer: '周杰伦',
-        agentName: '周杰伦',
-        clerkName: '周杰伦'
-      },
+      orderDetail: {}
       // 退款人信息
-      drawback: {
-        profileUrl: "../images/orderDetail/profile.png",
-        name: "爱吃西红柿",
-        sexual: "男"
-      },
       // 退款弹窗确认信息
-      confirmDrawback: {
-        goodsName: "大西瓜",
-        price: "59.00",
-        account: 1,
-        sumOfMoney: "59.00"
-      }
     };
     config = {
-      navigationBarTitleText: '订单列表'
+      navigationBarTitleText: '订单详情'
     };
     methods = {
       //弹出窗
       showModal() {
+        console.log(10101010);
         this.isFalse = true;
       },
       // 取消退款
@@ -300,8 +279,23 @@
           title: '退款成功！',
           icon: 'success',
           duration: 2000
-        })
+        });
       }
+    };
+    async onLoad() {
+      let url = this.$parent.data.apiUrl;
+      let orderId = await wepy.getStorageSync('orderId');
+      console.log('orderid:' + orderId);
+      // 订单详情
+      let res = await api.httpPost(`${url}/app/order/getOrderInfo`, {
+        orderId: orderId
+      });
+      this.orderDetail = res.data;
+      // 订单退款
+      let res02 = await api.httpPost(`${url}/app/order/refundOrder`, {
+        orderId: orderId
+      });
+      this.$apply();
     }
   }
 </script>

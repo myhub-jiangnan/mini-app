@@ -21,9 +21,12 @@
           position: relative;
           width: 79rpx;
           height: 79rpx;
-          background: #09bb07;
           left: 50%;
           transform: translateX(-50%);
+          image {
+            width: 100%;
+            height: 100%;
+          }
         }
         .text_box {
           margin-top: 9rpx;
@@ -59,7 +62,7 @@
         left: 0;
         right: 0;
         margin: auto;
-        margin-top: 100rpx; // border: 1rpx solid blue; 
+        margin-top: 100rpx; // border: 1rpx solid blue;
         text-align: center;
         .image_box {
           position: relative;
@@ -82,19 +85,27 @@
   <view class="operataeDevice">
     <view class="header">
       <view class="item" @tap="untying">
-        <view class="image_box"></view>
+        <view class="image_box">
+          <image src="../images/operateDevice/untying.png" />
+        </view>
         <view class="text_box">解绑设备</view>
       </view>
       <view class="item" @tap="cargo">
-        <view class="image_box"></view>
+        <view class="image_box">
+          <image src="../images/operateDevice/cargo_icon.png" />
+        </view>
         <view class="text_box">货道检测</view>
       </view>
       <view class="item" @tap="replenish">
-        <view class="image_box"></view>
+        <view class="image_box">
+          <image src="../images/operateDevice/replenish_icon.png" />
+        </view>
         <view class="text_box">补货</view>
       </view>
       <view class="item" @tap="certify">
-        <view class="image_box"></view>
+        <view class="image_box">
+          <image src="../images/operateDevice/certify_icon.png" />
+        </view>
         <view class="text_box">实名认证</view>
       </view>
     </view>
@@ -128,8 +139,7 @@
       navigationBarTitleText: '设备操作'
     };
     data = {
-  
-      device:""
+      device: ''
     };
     methods = {
       // 解绑
@@ -139,12 +149,12 @@
           content: '你确定要解绑设备吗？解绑后，你将无法操作该设备，同时分润方案立即停止。',
           success(res) {
             if (res.confirm) {
-              console.log('用户点击确定')
+              console.log('用户点击确定');
             } else if (res.cancel) {
-              console.log('用户点击取消')
+              console.log('用户点击取消');
             }
           }
-        })
+        });
       },
       // 货道检测
       cargo() {
@@ -165,21 +175,20 @@
           content: '开启当前设备的实名认证？',
           success(res) {
             if (res.confirm) {
-              console.log('用户点击确定')
+              console.log('用户点击确定');
             } else if (res.cancel) {
-              console.log('用户点击取消')
+              console.log('用户点击取消');
             }
           }
         });
       }
     };
-   async onLoad(){
-     let deviceDetail = await wepy.getStorageSync('deviceDetail');
-     this.device = deviceDetail;
-     console.log("设备详情");
-     console.log(this.device);
-     this.$apply();
+    async onLoad() {
+      let deviceDetail = await wepy.getStorageSync('deviceDetail');
+      this.device = deviceDetail;
+      console.log('设备详情');
+      console.log(this.device);
+      this.$apply();
     }
   }
 </script>
-
