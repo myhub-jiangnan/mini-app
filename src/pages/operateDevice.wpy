@@ -23,10 +23,6 @@
           height: 79rpx;
           left: 50%;
           transform: translateX(-50%);
-          image {
-            width: 100%;
-            height: 100%;
-          }
         }
         .text_box {
           margin-top: 9rpx;
@@ -71,11 +67,6 @@
           width: 289rpx;
           height: 290rpx;
           margin-bottom: 10rpx;
-          image {
-            display: block;
-            width: 100%;
-            height: 100%;
-          }
         }
       }
     }
@@ -89,6 +80,12 @@
           <image src="../images/operateDevice/untying.png" />
         </view>
         <view class="text_box">解绑设备</view>
+      </view>
+      <view class="item" @tap="editDeviceInfo">
+        <view class="image_box">
+          <image src="../images/operateDevice/edit_icon.png" />
+        </view>
+        <view class="text_box">编辑设备</view>
       </view>
       <view class="item" @tap="cargo">
         <view class="image_box">
@@ -134,6 +131,7 @@
 
 <script>
   import wepy from 'wepy';
+  import api from '../api/api';
   export default class OperateDevice extends wepy.page {
     config = {
       navigationBarTitleText: '设备操作'
@@ -144,16 +142,34 @@
     methods = {
       // 解绑
       untying() {
+        let that = this;
         wx.showModal({
           title: '解绑设备',
           content: '你确定要解绑设备吗？解绑后，你将无法操作该设备，同时分润方案立即停止。',
-          success(res) {
+          async success(res) {
             if (res.confirm) {
+              let url = that.$parent.data.apiUrl;
               console.log('用户点击确定');
+              let res2 = await api.httpPost(`${url}/app/device/delDevice`, {
+                deviceId: that.device.deviceId
+              });
+              if (res2.code === 0) {
+                wepy.showToast({
+                  title: '解绑成功',
+                  icon: 'success',
+                  duration: 2000
+                })
+              }
             } else if (res.cancel) {
               console.log('用户点击取消');
             }
           }
+        });
+      },
+      // 编辑设备信息
+      editDeviceInfo() {
+        wx.navigateTo({
+          url: '/pages/editDeviceInfo'
         });
       },
       // 货道检测
@@ -170,24 +186,33 @@
       },
       // 实名认证
       certify() {
+        let that = this;
         wx.showModal({
           title: '实名认证',
           content: '开启当前设备的实名认证？',
           success(res) {
+            let url = that.$parent.data.apiUrl;
             if (res.confirm) {
-              console.log('用户点击确定');
+              let res = api.httpPost(`${url}/app/device/saveDeviceInfo`, {
+                deviceRealCheck: 1
+              });
+              console.log('已开启实名认证');
             } else if (res.cancel) {
-              console.log('用户点击取消');
+              let res = api.httpPost(`${url}/app/device/saveDeviceInfo`, {
+                deviceRealCheck: 0
+              });
+              console.log('已取消实名认证');
             }
           }
         });
       }
     };
     async onLoad() {
-      let deviceDetail = await wepy.getStorageSync('deviceDetail');
+      let deviceDetail = await wepy.getStorageSync('deviceObjInfo');
       this.device = deviceDetail;
-      console.log('设备详情');
-      console.log(this.device);
+      let deviceObjInfo = wepy.getStorageSync("deviceObjInfo");
+      console.log("展示设备的所有信息：");
+      console.log(deviceObjInfo);
       this.$apply();
     }
   }

@@ -37,7 +37,7 @@
             display: inline-block;
             view:nth-child(1) {
               font-size: 28rpx;
-              color: #FFFFFFFF;
+              color: #ffffffff;
               font-weight: bold;
             }
             view:nth-child(2) {
@@ -53,7 +53,7 @@
                 height: 34rpx;
                 padding: 0;
                 border-radius: 17rpx;
-                background: #F95C4C;
+                background: #f95c4c;
                 color: #ffffff;
                 text-align: center;
                 line-height: 34rpx;
@@ -136,8 +136,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: 72rpx;
-            height: 72rpx;
-            background: #F95C4C;
+            height: 72rpx; // background: #F95C4C;
           }
           view:nth-child(2) {
             margin-top: 16rpx;
@@ -165,27 +164,34 @@
         .section {
           position: relative; // border: 1rpx solid red;
           margin-top: 38rpx;
+          .t5 {
+            // border: 1rpx solid red;
+            top: 5rpx;
+          }
+          .t {
+            top: 8rpx;
+          }
           view:nth-child(1) {
+            position: relative;
             display: inline-flex;
             width: 30rpx;
             height: 30rpx;
-            background: #F95C4C;
           }
           view:nth-child(2) {
+            // border: 1px solid red;
             font-size: 28rpx;
             font-weight: normal;
             display: inline-block;
             margin-left: 12rpx;
           }
           view:nth-child(3) {
-            position: absolute;
+            position: absolute; // border: 1px solid red;
             top: 0;
             bottom: 0;
             right: 0;
             margin: auto;
-            width: 13rpx;
-            height: 13rpx;
-            background: #F95C4C;
+            width: 9rpx;
+            height: 17rpx; // background: #F95C4C;
           }
         }
       }
@@ -202,10 +208,11 @@
       <view class="first_layer">
         <view class="user_info">
           <view class="profile_box">
-            <image src='../images/mine/profile.png' />
+            <!-- <image src="../images/mine/profile.png" /> -->
+             <image src="{{userInfo.avatarUrl}}" />
           </view>
           <view class="name_info">
-            <view>周杰伦</view>
+            <view>{{userInfo.nickName}}</view>
             <view><text>18310209876</text><button>修改手机号</button></view>
           </view>
         </view>
@@ -235,15 +242,21 @@
       <view>分润管理</view>
       <view class="container">
         <view class="section" @tap="peopleManage">
-          <view></view>
+          <view>
+            <image src="../images/mine/management_icon.png" />
+          </view>
           <view>人员管理</view>
         </view>
         <view class="section" @tap="shareIncom">
-          <view></view>
+          <view>
+            <image src="../images/mine/share_income_icon.png" />
+          </view>
           <view>分润比例</view>
         </view>
         <view class="section" @tap="incomRecorder">
-          <view></view>
+          <view>
+            <image src="../images/mine/share_income_icon.png" />
+          </view>
           <view>收益记录</view>
         </view>
       </view>
@@ -253,19 +266,30 @@
       <view>我的工具</view>
       <view class="container">
         <view class="section" @tap="withDraw">
-          <view> </view>
+          <view class="t5">
+            <image src="../images/mine/withdraw_icon.png" />
+          </view>
           <view>提现</view>
-          <view></view>
+          <view>
+            <image src="../images/mine/toward_right_icon.png" />
+          </view>
         </view>
         <view class="section" @tap="agent">
-          <view> </view>
+          <view>
+            <image src="../images/mine/agent_icon.png" /> </view>
           <view>代理商</view>
-          <view></view>
+          <view>
+            <image src="../images/mine/toward_right_icon.png" />
+          </view>
         </view>
         <view class="section" @tap="applyList">
-          <view> </view>
+          <view class="t">
+            <image src="../images/mine/apply_list_icon.png" />
+          </view>
           <view>申请列表</view>
-          <view></view>
+          <view>
+            <image src="../images/mine/toward_right_icon.png" />
+          </view>
         </view>
       </view>
     </view>
@@ -274,6 +298,9 @@
 <script>
   import wepy from 'wepy';
   export default class Mine extends wepy.page {
+    data = {
+      userInfo: {}
+    };
     config = {
       navigationBarTitleText: '我的'
     };
@@ -281,36 +308,44 @@
       peopleManage() {
         console.log(66);
         wx.navigateTo({
-          url: "/pages/peopleManage"
+          url: '/pages/peopleManage'
         });
       },
       // 跳转至收益记录
       incomRecorder() {
         wx.navigateTo({
-          url: "/pages/incomRecorder"
+          url: '/pages/incomRecorder'
         });
       },
       // 跳转至分润页面
       shareIncom() {
         wx.navigateTo({
-          url: "/pages/shareIncom"
+          url: '/pages/shareIncom'
         });
       },
       withDraw() {
         wx.navigateTo({
-          url: "/pages/withDraw"
-        })
+          url: '/pages/withDraw'
+        });
       },
       agent() {
         wx.navigateTo({
-          url: "/pages/agent"
+          url: '/pages/agent'
         });
       },
       applyList() {
         wx.navigateTo({
-          url: "/pages/applyList"
+          url: '/pages/applyList'
         });
-      },
+      }
+    };
+    async onLoad() {
+      //  获取用户信息
+      let res = await wepy.getUserInfo({});
+      this.userInfo.nickName = res.userInfo.nickName;
+      this.userInfo.avatarUrl = res.userInfo.avatarUrl;
+      this.$apply();
+    
     }
   }
 </script>

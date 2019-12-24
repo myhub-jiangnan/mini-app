@@ -1,4 +1,4 @@
-  <style lang="less">
+<style lang="less">
 page {
   height: 100%;
 }
@@ -134,8 +134,7 @@ page {
       }
     }
     .stop_btn {
-      position: absolute;
-      // border: 1px solid red;
+      position: absolute; // border: 1px solid red;
       width: 100%;
       height: 88rpx;
       line-height: 88rpx;
@@ -152,15 +151,17 @@ page {
   <view class="cargo">
     <view class="cargo_page">
       <view class="cargo_list">
-        <view class="item_box" wx:for="{{array}}" wx:key="index">
-          <view class="left_box">{{ item.name }}</view>
+        <view class="item_box" wx:for="{{channelList}}" wx:key="index">
+          <view class="left_box">货道</view>
           <view class="right_box">
             <view class="right_top_box">
               <text>货道容量</text>
-              <button>{{ item.number }}</button>
+              <button>{{ item.channelCapacity }}</button>
             </view>
             <view class="right_bottom_box">
-              <button @tap="showModal">电机检测</button>
+              <button @tap="testChannel" data-channelid="{{item.channelId}}">
+                电机检测
+              </button>
             </view>
           </view>
         </view>
@@ -176,8 +177,8 @@ page {
     <view class="show_modal" wx:if="{{isFalse}}">
       <view class="content">
         <view class="item" wx:for="{{checkStatus}}" wx:key="index">
-          <text>{{item.name}}</text>
-          <text>{{item.status}}</text>
+          <text>{{ item.name }}</text>
+          <text>{{ item.status }}</text>
         </view>
       </view>
       <view class="stop_btn" @tap="hideModal">停止</view>
@@ -186,40 +187,55 @@ page {
 </template>
 <script>
 import wepy from 'wepy';
+import api from '../api/api';
 export default class Cargo extends wepy.page {
   config = {
     navigationBarTitleText: '货道管理'
   };
   data = {
     isFalse: false,
-    array: [
+    checkStatus: [
       {
-        name: '货道1',
-        number: 8
+        name: '货道01',
+        status: '检测完...'
       },
       {
-        name: '货道2',
-        number: 7
+        name: '货道02',
+        status: '检测完...'
       },
       {
-        name: '货道3',
-        number: 6
+        name: '货道03',
+        status: '检测中...'
       },
       {
-        name: '货道4',
-        number: 5
+        name: '货道04',
+        status: '待检测...'
+      },
+      {
+        name: '货道05',
+        status: '待检测...'
+      },
+      {
+        name: '货道06',
+        status: '待检测...'
       }
     ],
-    checkStatus: [
-      { name: '货道01', status: '检测完...' },
-      { name: '货道02', status: '检测完...' },
-      { name: '货道03', status: '检测中...' },
-      { name: '货道04', status: '待检测...' },
-      { name: '货道05', status: '待检测...' },
-      { name: '货道06', status: '待检测...' }
-    ]
+    channelList: null
   };
   methods = {
+    // 电机检测
+    async testChannel(e) {
+      let channelId = e.currentTarget.dataset.channelid;
+      console.log('channelId的值为：');
+      console.log(channelId);
+      let url = this.$parent.data.apiUrl;
+      let res = await api.httpPost(`${url}/app/device/testChannel`,{
+        channelId :channelId 
+      });
+      if(res.code==0){
+        console.log("检测完成！");
+      }
+    },
     checkRecoder() {
       wx.navigateTo({
         url: '/pages/checkRecoder'
@@ -233,5 +249,19 @@ export default class Cargo extends wepy.page {
       this.isFalse = false;
     }
   };
+  async onLoad() {
+    let deviceObjInfo = await wepy.getStorageSync('deviceObjInfo');
+    let url = this.$parent.data.apiUrl;
+    let res = await api.httpPost(`${url}/app/device/getDeviceInfo`, {
+      deviceId: deviceObjInfo.deviceId
+    });
+    // 货道列表
+    let channelList = res.data.channelList;
+    this.channelList = channelList;
+    this.$apply();
+    console.log('设备货道信息：');
+    // console.log(res);
+    console.log(this.channelList);
+  }
 }
 </script>

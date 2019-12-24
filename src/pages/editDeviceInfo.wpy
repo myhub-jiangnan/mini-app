@@ -1,0 +1,349 @@
+<style lang="less">
+.add_machine {
+  // border: 1rpx solid red;
+  position: relative;
+  height: 100%;
+  .form {
+    margin-top: 30rpx;
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+    .machine_code {
+      // border: 1rpx solid red;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      height: 88rpx;
+      margin-top: 30rpx;
+      .input_box {
+        width: 436rpx;
+        height: 88rpx;
+        margin-left: 10rpx;
+        input {
+          // border: 1rpx solid red;
+          display: block;
+          height: 100%;
+          border-radius: 10rpx;
+          background: #e6e6e6;
+          padding-left: 20rpx;
+        }
+      }
+      .img_box {
+        width: 44rpx;
+        height: 44rpx;
+        image {
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+    .shop_name {
+      // border: 1rpx solid red;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      height: 88rpx;
+      margin-top: 30rpx;
+      .input_box {
+        width: 500rpx;
+        height: 88rpx; // border: 1rpx solid green;
+        input {
+          display: block;
+          width: 100%;
+          height: 88rpx;
+          line-height: 88rpx;
+          border-radius: 10rpx;
+          background: #e6e6e6;
+          padding-left: 20rpx;
+          box-sizing: border-box;
+        }
+        picker {
+          display: block;
+          width: 100%;
+          height: 100%;
+          .picker_btn {
+            // border: 1rpx solid red;
+            display: block;
+            width: 100%;
+            height: 88rpx;
+            line-height: 88rpx;
+            border-radius: 10rpx;
+            background: #e6e6e6;
+            padding-left: 20rpx;
+            box-sizing: border-box;
+          }
+        }
+      }
+    }
+    .detail_address {
+      // border: 1rpx solid red;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      height: 88rpx;
+      margin-top: 30rpx;
+      .input_box {
+        width: 436rpx;
+        height: 88rpx;
+        margin-left: 10rpx;
+        input {
+          // border: 1rpx solid red;
+          display: block;
+          height: 100%;
+          border-radius: 10rpx;
+          background: #e6e6e6;
+          padding-left: 20rpx;
+        }
+      }
+      .img_box {
+        width: 44rpx;
+        height: 44rpx;
+        image {
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+  .submit_box {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 560rpx;
+    height: 88rpx;
+    margin-top: 360rpx;
+    button {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 44rxp;
+      background: #f95c4c;
+      font-size: 32rxp;
+      color: #ffffff;
+      letter-spacing: 20rpx;
+      text-align: center;
+      line-height: 88rpx;
+    }
+  }
+}
+</style>
+<template>
+  <view class="add_machine">
+    <view class="form">
+      <view class="machine_code">
+        <text>设备编号：</text>
+        <view class="input_box"
+          ><input
+            value="{{formObj.deviceMac}}"
+            placeholder="请输入设备号或使用扫一扫"
+            @input="getdeviceMac"
+        /></view>
+        <view class="img_box">
+          <image src="../images/scan_icon.png" />
+        </view>
+      </view>
+      <view class="shop_name">
+        <text>设备名称:</text>
+        <view class="input_box"
+          ><input
+            value="{{formObj.deviceName}}"
+            placeholder="请输入详细门店地址"
+            @input="getDeviceName"
+        /></view>
+      </view>
+      <view class="detail_address">
+        <text>详细地址:</text>
+        <view class="input_box"
+          ><input
+            placeholder="请输入详细门店地址"
+            @input="getDetailSalesroom"
+            value="{{formObj.deviceAddress}}"
+        /></view>
+        <view class="img_box" @tap="chooseLocation">
+          <image src="../images/address_icon.png" />
+        </view>
+      </view>
+      <view class="shop_name">
+        <text>货道数量:</text>
+        <view class="input_box">
+          <picker
+            @change="bindPickerChange01"
+            value="{{stockNumberIndex}}"
+            range="{{stockNumber}}"
+          >
+            <view class="picker_btn" type="default"
+              >{{ stockNumber[stockNumberIndex] }}
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class="shop_name">
+        <text>货道容量:</text>
+        <view class="input_box">
+          <picker
+            @change="bindPickerChange02"
+            value="{{stockCapacityIndex}}"
+            range="{{stockCapacity}}"
+          >
+            <view class="picker_btn" type="default"
+              >{{ stockCapacity[stockCapacityIndex] }}
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class="shop_name">
+        <text>场地类型:</text>
+        <view class="input_box">
+          <picker
+            @change="bindPickerChange03"
+            value="{{screenTypeIndex}}"
+            range="{{screenType}}"
+          >
+            <view class="picker_btn" type="default"
+              >{{ screenType[screenTypeIndex] }}
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class="submit_box" @tap="saveEdit"><button>保存</button></view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import api from '../api/api';
+export default class editDeviceInfo extends wepy.page {
+  data = {
+    stockNumberIndex: 0,
+    stockCapacityIndex: 0,
+    screenTypeIndex: 0,
+    // 货道数量
+    stockNumber: [1, 2, 3, 4, 5, 6],
+    // 货道容量
+    stockCapacity: [1, 2, 3, 4, 5, 6],
+    // 场地类型
+    screenType: [
+      '酒吧',
+      '夜店',
+      'KTV',
+      '餐饮店',
+      '便利店',
+      '桌游棋牌',
+      '网咖',
+      '足浴按摩店',
+      '轰趴店',
+      '纹身店',
+      '酒店',
+      '其他'
+    ],
+    // 提交的表单数据
+    formObj: {}
+  };
+  config = {
+    navigationBarTitleText: '编辑设备'
+  };
+  methods = {
+    // 设备编号：
+    getdeviceMac(e) {
+      this.formObj.deviceMac = e.detail.value;
+       this.$apply();
+    },
+    // 设备名称：
+    getDeviceName(e) {
+      console.log('输入');
+      this.formObj.deviceName = e.detail.value;
+       this.$apply();
+    },
+    bindPickerChange01(e) {
+      this.stockNumberIndex = e.detail.value;
+      this.formObj.stockNumber = this.stockNumber[this.stockNumberIndex];
+       this.$apply();
+      console.log('货道数量：' + this.stockNumber[this.stockNumberIndex]);
+    },
+    bindPickerChange02(e) {
+      this.stockCapacityIndex = e.detail.value;
+      this.formObj.stockCapacity = this.stockCapacity[this.stockCapacityIndex];
+       this.$apply();
+      console.log('货道容量：' + this.stockCapacity[this.stockCapacityIndex]);
+    },
+    bindPickerChange03(e) {
+      this.screenTypeIndex = e.detail.value;
+      let screenType = this.screenType[this.screenTypeIndex];
+      if (screenType === '酒吧') {
+        this.formObj.screen = 1;
+      } else if (screenType === '夜店') {
+        this.formObj.screen = 2;
+      } else if (screenType === 'KTV') {
+        this.formObj.screen = 4;
+      } else if (screenType === '餐饮店') {
+        this.formObj.screen = 5;
+      } else if (screenType === '便利店') {
+        this.formObj.screen = 6;
+      } else if (screenType === '桌游棋牌') {
+        this.formObj.screen = 15;
+      } else if (screenType === '网咖') {
+        this.formObj.screen = 16;
+      } else if (screenType === '足浴按摩店') {
+        this.formObj.screen = 17;
+      } else if (screenType === '轰趴店') {
+        this.formObj.screen = 18;
+      } else if (screenType === '纹身店') {
+        this.formObj.screen = 19;
+      } else if (screenType === '酒店') {
+        this.formObj.screen = 20;
+      } else if (screenType === '其他') {
+        this.formObj.screen = 21;
+      }
+      this.$apply();
+      console.log('场地类型：' + this.screenType[this.screenTypeIndex]);
+      console.log('formOBj中的screen值：' + this.formObj.screen);
+    },
+    // 获取地理位置
+    async chooseLocation() {
+      let res = await wepy.chooseLocation({});
+      this.formObj.deviceLat = res.latitude;
+      this.formObj.deviceLng = res.longitude;
+      this.formObj.deviceAddress = res.address;
+      console.log('已获取地理位置' + res.address);
+      this.$apply();
+    },
+    // 保存按钮
+   async saveEdit(){
+         let url = this.$parent.data.apiUrl;
+      let res = await api.httpPost(`${url}/app/device/saveDeviceInfo`, this.formObj);
+      if (res.code == 0|| res.code ==1) {
+        console.log("保存成功！");
+        let showToast = await wx.showToast({
+          title: '保存成功！',
+          icon: 'success',
+          duration: 2000
+        });
+        setTimeout(() => {
+          wepy.switchTab({
+            url: '/pages/index'
+          });
+        }, 1000);
+      }
+    }
+  };
+  async onLoad() {
+    //  获取添加设备时表单中填写的数据；
+    let formObj = await wepy.getStorageSync('formObj');
+    this.formObj.deviceAddress = formObj.deviceAddress;
+    this.formObj.deviceLat =formObj.deviceLat;
+    this.formObj.deviceLng =formObj.deviceLng;
+    this.formObj.deviceName =formObj.deviceName;
+    this.formObj.deviceScene =formObj.screen;
+    // 获取要要编辑的设备的Id 
+    let deviceObj = await wepy.getStorageSync('deviceDetail');
+    this.formObj.deviceId = deviceObj.deviceId;
+    this.$apply();
+     console.log(this.formObj);
+  }
+}
+</script>

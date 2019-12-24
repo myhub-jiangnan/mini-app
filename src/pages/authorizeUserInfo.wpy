@@ -24,6 +24,7 @@ export default class AuthorizeUserInfo extends wepy.page {
     async authorize(e) {
       console.log(e.detail.userInfo);
       let res5 = await wepy.getUserInfo({});
+      
       let res6 = await api.httpPost(
         'http://flow.dev.redsoul.cn/app/user/saveUserInfo',
         {
