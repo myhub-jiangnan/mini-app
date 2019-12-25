@@ -209,11 +209,11 @@
         <view class="user_info">
           <view class="profile_box">
             <!-- <image src="../images/mine/profile.png" /> -->
-             <image src="{{userInfo.avatarUrl}}" />
+            <image src="{{userInfo.avatarUrl}}" />
           </view>
           <view class="name_info">
             <view>{{userInfo.nickName}}</view>
-            <view><text>18310209876</text><button>修改手机号</button></view>
+            <view><text>{{userInfo.mobile}}</text><button>修改手机号</button></view>
           </view>
         </view>
       </view>
@@ -344,8 +344,8 @@
       let res = await wepy.getUserInfo({});
       this.userInfo.nickName = res.userInfo.nickName;
       this.userInfo.avatarUrl = res.userInfo.avatarUrl;
+      this.userInfo.mobile = wepy.getStorageSync("userMobile");
       this.$apply();
-    
     }
   }
 </script>

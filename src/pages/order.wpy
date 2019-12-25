@@ -67,8 +67,7 @@
             width: 186rpx;
             height: 56rpx;
             font-size: 25rpx;
-            text-align: center;
-            // color: red;
+            text-align: center; // color: red;
           }
         }
       }
@@ -175,6 +174,7 @@
       <image src="../images/index/flwo_img.png"></image>
       <view>~~ 您暂无订单，请添加设备！！！~~</view>
     </view>
+    <!-- 订单展示 -->
     <view class="order_list">
       <view class="order_item" wx:for="{{orderList}}" wx:key="index" @tap="getOrderDetail" data-orderid="{{item.orderId}}">
         <view>
@@ -205,9 +205,9 @@
         salesNum: 5000
       },
       //
-   date: '2019-12-23', 
+      orderList: null,
+      date: '2019-12-23',
       // 订单信息列表
-      orderList: []
     };
     config = {
       navigationBarTitleText: '订单列表'
@@ -229,14 +229,18 @@
       }
     };
     async onLoad() {
+      
       let url = this.$parent.data.apiUrl;
       let token = await wepy.getStorageSync('token');
       // 订单列表
-      let res = await api.httpPost(`${url}/app/order/getOrderList`, {
+      let res1 = await api.httpPost(`${url}/app/order/getOrderList`, {
         token: token
       });
-      if (res.code == 0) {
-        this.orderList = res.data.pageRows;
+       
+      if (res1.code == 0) {
+        this.orderList = res1.data.pageRows;
+        console.log("列表信息：");
+        console.log(this.OrderList);
       }
       this.$apply();
     }

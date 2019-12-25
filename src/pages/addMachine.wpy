@@ -223,14 +223,13 @@
         this.formObj.deviceMac = e.detail.value;
       },
       //扫一扫
-       scanCode(){
-       let res =wepy.scanCode({ });
-       console.log( res.result);   // 所扫码的内容；
-       console.log(res.path);   // 当所扫的码为当前小程序二维码时，会返回此字段，内容为二维码携带的 path 
+      scanCode() {
+        let res = wepy.scanCode({});
+        console.log(res.result); // 所扫码的内容；
+        console.log(res.path); // 当所扫的码为当前小程序二维码时，会返回此字段，内容为二维码携带的 path 
       },
       // 设备名称：
       getDeviceName(e) {
-        console.log('输入');
         this.formObj.deviceName = e.detail.value;
       },
       bindPickerChange01(e) {
@@ -247,33 +246,33 @@
         this.screenTypeIndex = e.detail.value;
         let screenType = this.screenType[this.screenTypeIndex];
         if (screenType === '酒吧') {
-          this.formObj.screen = 1;
+          this.formObj.deviceScene = 1;
         } else if (screenType === '夜店') {
-          this.formObj.screen = 2;
+          this.formObj.deviceScene = 2;
         } else if (screenType === 'KTV') {
-          this.formObj.screen = 4;
+          this.formObj.deviceScene = 4;
         } else if (screenType === '餐饮店') {
-          this.formObj.screen = 5;
+          this.formObj.deviceScene = 5;
         } else if (screenType === '便利店') {
-          this.formObj.screen = 6;
+          this.formObj.deviceScene = 6;
         } else if (screenType === '桌游棋牌') {
-          this.formObj.screen = 15;
+          this.formObj.deviceScene = 15;
         } else if (screenType === '网咖') {
-          this.formObj.screen = 16;
+          this.formObj.deviceScene = 16;
         } else if (screenType === '足浴按摩店') {
-          this.formObj.screen = 17;
+          this.formObj.deviceScene = 17;
         } else if (screenType === '轰趴店') {
-          this.formObj.screen = 18;
+          this.formObj.deviceScene = 18;
         } else if (screenType === '纹身店') {
-          this.formObj.screen = 19;
+          this.formObj.deviceScene = 19;
         } else if (screenType === '酒店') {
-          this.formObj.screen = 20;
+          this.formObj.deviceScene = 20;
         } else if (screenType === '其他') {
-          this.formObj.screen = 21;
+          this.formObj.deviceScene = 21;
         }
         this.$apply();
         console.log('场地类型：' + this.screenType[this.screenTypeIndex]);
-        console.log('formOBj中的screen值：' + this.formObj.screen);
+        console.log('formOBj中的screen值：' + this.formObj.deviceScene);
       },
       // 获取地理位置
       async chooseLocation() {
@@ -284,37 +283,36 @@
         console.log('已获取地理位置' + res.address);
         this.$apply();
       },
-          // 绑定按钮
-    async submitClick() {
-      let url = this.$parent.data.apiUrl;
-      let res = await api.httpPost(`${url}/app/device/addDevice`, this.formObj);
-      wepy.setStorageSync("formObj", this.formObj);
-      if (res.code == 0) {
-        let showToast = await wx.showToast({
-          title: '注册成功！',
-          icon: 'success',
-          duration: 2000
-        });
-        setTimeout(() => {
-          wepy.switchTab({
-            url: '/pages/index'
+      // 绑定按钮
+      async submitClick() {
+        let url = this.$parent.data.apiUrl;
+        let res1 = await api.httpPost(`${url}/app/device/addDevice`, this.formObj);
+        console.log("res1返回信息：");
+        console.log(res1);
+        if (res1.code == 0) {
+          let showToast = await wx.showToast({
+            title: '注册成功！',
+            icon: 'success',
+            duration: 2000
           });
-        }, 1000);
-      } else if (res.code === 1) {
-        let showToast = await wx.showToast({
-          title: '已经注册！',
-          icon: 'warn',
-          duration: 2000
-        });
-        setTimeout(() => {
-          wepy.switchTab({
-            url: '/pages/index'
+          setTimeout(() => {
+            wepy.switchTab({
+              url: '/pages/index'
+            });
+          }, 1000);
+        } else if (res1.code == 1) {
+          let showToast = await wx.showToast({
+            title: '已经注册！',
+            icon: 'warn',
+            duration: 2000
           });
-        }, 1000);
+          setTimeout(() => {
+            wepy.switchTab({
+              url: '/pages/index'
+            });
+          }, 1000);
+        }
       }
-    }
     };
-
-     async onLoad() {}
   }
 </script>

@@ -1,3 +1,9 @@
+// const flowApiUrl = 'http://flow.dev.redsoul.cn';
+// //const env = 'online';
+// if (env == 'online') {
+//   flowApiUrl = '....';
+// }
+
 // request get 请求
 const httpPost = (url, data) => {
   return new Promise((resolve, reject) => {
@@ -9,19 +15,39 @@ const httpPost = (url, data) => {
         token: wx.getStorageSync('token')
       },
       data: data,
-      success: function(res) {
+      success: async function (res) {
+        // console.log("res数据信息：");
+        // console.log(res);
         resolve(res.data);
-        // if (res.code == 0) {
-        //   TODO 回传所有数据
+        // if (res.data.code == 0) {
+        //   // TODO 回传所有数据
         //   resolve(res.data);
-        // } else if (res.code == 300) {
+        // } else if (res.data.code == 300) {
         //   //TODO token失效
-        //   //调用/app/public/getToken 获取新的token 同时判断是否需要重新获取用户信息以及手机号
-        //   console.log('token失效，需要重新调用/app/public/getToken');
+          //调用/app/public/getToken 获取新的token 同时判断是否需要重新获取用户信息以及手机号
+          // console.log('token失效，需要重新调用/app/public/getToken');
+        //   let res2 = await wx.login({});
+        //   if (res2.code) {
+        //     // 拿到了code 就访问getToken 接口；
+        //     let res3 = await wx.request({
+        //       url: "http://flow.dev.redsoul.cn/app/public/getToken",
+        //       method: "post",
+        //       header: {
+        //         'content-type': 'application/x-www-form-urlencoded',
+        //         token: wx.getStorageSync('token')
+        //       },
+        //       data: res3.code,
+        //       success: function (res4) { 
+        //         let token = res3.data.token;
+        //         wx.setStorageSync('token', token);
+        //       }
+        //     });              
+        //   }
         // } else {
+        //   console.log('接口失败错误信息：');
         //   console.log(res);
         //   reject(res.msg);
-        // }
+        
       },
       fail: function(err) {
         reject(err);
@@ -43,33 +69,6 @@ const showModal = (title, content) => {
       }
     });
   });
-};
-
-// 获取设备列表
-const getApiDeviceList = async function(obj) {
-  // 获取设备列表
-  let res1 = await api.httpPost(
-    'http://flow.dev.redsoul.cn/app/device/getDeviceList',
-    obj
-  );
-  // 设置信息数组
-  let deviceArrayLength = res1.data.pageRows.length;
-  if (deviceArrayLength === 0) {
-    that.isFalse = true;
-  } else {
-    that.isFalse = false;
-    let deviceArray = res1.data.pageRows;
-    for (let i = 0; i < deviceArray.length; i++) {
-      let deviceObj = {};
-      deviceObj.deviceId = deviceArray[i].deviceMac;
-      deviceObj.deviceName = deviceArray[i].deviceName;
-      deviceObj.deviceAddress = deviceArray[i].deviceAddress;
-      deviceObj.deviceStatus = deviceArray[i].deviceStatus;
-      deviceObj.deviceOnlineStatus = deviceArray[i].deviceOnlineStatus;
-      that.deviceInfoArray.push(deviceObj);
-    }
-    that.$apply();
-  }
 };
 
 export default {

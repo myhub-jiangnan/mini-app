@@ -4,10 +4,9 @@
     <view class="auth-item">FLOW申请获取以下权限：</view>
     <view class="auth-item">获取你的公开信息（头像、昵称等）</view>
     <view class="btn-authorize">
-      <button open-type="getUserInfo" type="primary" @getuserinfo="authorize">
+      <button open-type="getUserInfo" type="primary" @getuserinfo="getUserInformation">
         授权
       </button>
-      <!-- <button open-type="getPhoneNumber" type="primary" @getphonenumber="getUserPhoneNumber">获取手机号</button> -->
     </view>
   </view>
 </template>
@@ -21,10 +20,10 @@ export default class AuthorizeUserInfo extends wepy.page {
   };
   methods = {
     // 获取用户信息
-    async authorize(e) {
+    async getUserInformation(e) {
+      console.log("展示e.detail.userInfo");
       console.log(e.detail.userInfo);
-      let res5 = await wepy.getUserInfo({});
-      
+      let res5 = await wepy.getUserInfo({});     
       let res6 = await api.httpPost(
         'http://flow.dev.redsoul.cn/app/user/saveUserInfo',
         {

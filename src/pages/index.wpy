@@ -83,8 +83,6 @@
       transform: translateX(-50%);
       width: 670rpx;
       height: 100%;
-      padding-left: 40rpx;
-      padding-right: 40rpx;
       margin-top: 30rpx;
       .item_box {
         // border: 1rpx solid red;
@@ -151,8 +149,7 @@
     </view>
     <!-- 设备展示列表 -->
     <view class="machine_list">
-      <view class="item_box" wx:for="{{deviceInfoArray}}" wx:key="index" @tap="deviceDetail" data-deviceobjinfo= "{{item}}" 
-        data-devicestatus="{{item.deviceStatus}}">
+      <view class="item_box" wx:for="{{deviceInfoArray}}" wx:key="index" @tap="deviceDetail" data-deviceobjinfo="{{item}}">
         <view class="box_top"><text>【{{ item.deviceOnlineStatus }}】</text>
           <text>{{ item.deviceName }}</text>
         </view>
@@ -176,7 +173,7 @@
       index: 0,
       deviceStatus: ['全部', '在线', '离线', '故障', '缺货'],
       // 设备信息数组
-      deviceInfoArray: [],
+      deviceInfoArray: null,
       isFalse: false,
       // 输入框的值
       inputContent: ''
@@ -195,25 +192,15 @@
             obj
           );
           // 设置信息数组
-          let deviceArrayLength = res1.data.pageRows.length;
+          let deviceArrayLength = res1.pageRows.length;
           if (deviceArrayLength === 0) {
             that.isFalse = true;
           } else {
             that.isFalse = false;
-            let deviceArray = res1.data.pageRows;
-            for (let i = 0; i < deviceArray.length; i++) {
-              let deviceObj = {};
-              deviceObj.deviceId = deviceArray[i].deviceMac;
-              deviceObj.deviceName = deviceArray[i].deviceName;
-              deviceObj.deviceAddress = deviceArray[i].deviceAddress;
-              deviceObj.deviceStatus = deviceArray[i].deviceStatus;
-              deviceObj.deviceOnlineStatus = deviceArray[i].deviceOnlineStatus;
-              that.deviceInfoArray.push(deviceObj);
-            }
+            that.deviceInfoArray = res1.pageRows;
             that.$apply();
           }
-          let token = await wepy.getStorageSync('token');
-          params.token = token;
+         
         };
         let token = wepy.getStorageSync('token');
         params.token = token;
@@ -249,7 +236,7 @@
       deviceDetail(e) {
         //将单个设备对象的所有信息放入缓存 
         let deviceObjInfo = e.currentTarget.dataset.deviceobjinfo;
-         wx.setStorageSync('deviceObjInfo', deviceObjInfo);
+        wx.setStorageSync('deviceObjInfo', deviceObjInfo);
         wx.navigateTo({
           url: '/pages/operateDevice'
         });
@@ -264,18 +251,13 @@
           }
         );
         // 设置信息数组
-        let deviceArrayLength = res1.data.pageRows.length;
+        let deviceArrayLength = res1.pageRows.length;
         if (deviceArrayLength === 0) {
           this.isFalse = true;
         } else {
           this.isFalse = false;
-          let deviceArray = res1.data.pageRows;
-          for (let i = 0; i < deviceArray.length; i++) {
-            let deviceObj = {};
-            deviceObj = deviceArray[i];
-            this.deviceInfoArray.push(deviceObj);
-          }
-          this.$apply();
+         this.deviceInfoArray = res1.data.pageRows;
+         this.$apply();
         }
         console.log("获取到的数组信息：");
         console.log(this.deviceInfoArray);
@@ -283,14 +265,16 @@
       // ******************************************************************************************************************
     };
     async onLoad() {
-      // 判断是否有token , 没有token 则去登录页面授权登录；
+       // 判断是否有token , 没有token 则去登录页面授权登录；
       let token = await wepy.getStorageSync('token');
-      console.log(token);
       if (!token) {
         wepy.redirectTo({
           url: '/pages/chooseInterface'
         });
-      } else {
+      } 
+    };
+    async onShow() {
+         let token = await wepy.getStorageSync('token');
         // 获取设备列表
         let res1 = await api.httpPost(
           'http://flow.dev.redsoul.cn/app/device/getDeviceList', {
@@ -298,22 +282,18 @@
           }
         );
         // 设置信息数组
+        console.log(res1.data.pageRows.length);
         let deviceArrayLength = res1.data.pageRows.length;
         if (deviceArrayLength === 0) {
           this.isFalse = true;
+          this.deviceInfoArray=null;
         } else {
           this.isFalse = false;
-          let deviceArray = res1.data.pageRows;
-          for (let i = 0; i < deviceArray.length; i++) {
-            let deviceObj = {};
-            deviceObj = deviceArray[i];
-            this.deviceInfoArray.push(deviceObj);
-          }
-          this.$apply();
-          console.log("设备列表信息：");
-          console.log(this.deviceInfoArray);
+          this.deviceInfoArray = res1.data.pageRows;   
+          console.log( this.deviceInfoArray);
         }
+          this.$apply();
       }
-    }
+    
   }
 </script>

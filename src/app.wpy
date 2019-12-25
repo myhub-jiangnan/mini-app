@@ -6,25 +6,27 @@
   import 'wepy-async-function';
   export default class extends wepy.app {
     data = {
+      // env="dev",
+      // env="online",
       apiUrl: 'http://flow.dev.redsoul.cn'
     };
     config = {
       pages: [
         'pages/index',
+        //授权用户信息
+        'pages/authorizeUserInfo',
+        // 授权手机登录
+        'pages/authorize',
         //编辑设备
         'pages/editDeviceInfo',
         // 订单列表
         'pages/order',
         // 订单详情
         'pages/orderDetail',
-        // 授权手机登录
-        'pages/authorize',
         // 添加设备
         'pages/addMachine',
         // 选择登录类型页面
         'pages/chooseInterface',
-        //授权用户信息
-        'pages/authorizeUserInfo',
         // 分润记录
         'pages/incomRecorder',
         //人员管理
@@ -70,20 +72,20 @@
         list: [{
             pagePath: 'pages/index',
             text: '设备',
-            iconPath: '/images/icon_home.png',
-            selectedIconPath: '/images/icon_home_active.png'
+            iconPath: 'images/index/device_icon.png',
+            selectedIconPath: 'images/index/device_active_icon.png'
           },
           {
             pagePath: 'pages/order',
             text: '订单',
-            iconPath: '/images/icon_classify.png',
-            selectedIconPath: '/images/icon_classify_active.png'
+            iconPath: 'images/index/order_icon.png',
+            selectedIconPath: 'images/index/order_active_icon.png'
           },
           {
             pagePath: 'pages/mine',
             text: '我的',
-            iconPath: 'images/icon_info.png',
-            selectedIconPath: '/images/icon_info_active.png'
+            iconPath: 'images/index/me_icon.png',
+            selectedIconPath: 'images/index/me_active_icon.png'
           }
         ]
       },

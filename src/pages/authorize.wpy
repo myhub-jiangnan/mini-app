@@ -5,81 +5,56 @@
     <view class="auth-item">获取你的手机号</view>
     <view class="btn-authorize">
       <!-- <button open-type="getUserInfo" type="primary" @getuserinfo="authorize">授权</button> -->
-      <button
-        open-type="getPhoneNumber"
-        type="primary"
-        @getphonenumber="getUserPhoneNumber"
-      >
-        获取手机号
-      </button>
+      <button open-type="getPhoneNumber" type="primary" @getphonenumber="getUserPhoneNumber">
+                获取手机号
+              </button>
     </view>
   </view>
 </template>
 <script>
-import wepy from 'wepy';
-import 'wepy-async-function';
-import api from '../api/api';
-export default class Authorize extends wepy.page {
-  config = {
-    navigationBarTitleText: '授权登录'
-  };
-  methods = {
-    //获取手机号
-    async getUserPhoneNumber(e) {
-      let res2 = await wepy.login({});
-      if (res2.code) {
-        // 拿到了code 就访问getToken 接口；
-        let res3 = await api.httpPost(
-          'http://flow.dev.redsoul.cn/app/public/getToken',
-          {
-            code: res2.code
-          }
-        );
-        // 拿到token存起来
-        if (res3.code == 0) {
-          console.log('/public/getToken接口调用成功');
-          let token = res3.data.token;
-          console.log('从后端拿到的token值:' + token);
-          wx.setStorageSync('token', token);
-          console.log('token 存起来了');
-          //  让后端拿到手机号
-          let res1 = await api.httpPost(
-            'http://flow.dev.redsoul.cn/app/user/saveUserMobile',
-            {
-              encryptedData: e.detail.encryptedData,
-              iv: e.detail.iv
-            }
-          );
-        }
+  import wepy from 'wepy';
+  import 'wepy-async-function';
+  import api from '../api/api';
+  export default class Authorize extends wepy.page {
+    config = {
+      navigationBarTitleText: '授权登录'
+    };
+    methods = {
+      //获取手机号
+      async getUserPhoneNumber(e) {
+        let res1 = await api.httpPost('http://flow.dev.redsoul.cn/app/user/saveUserMobile', {
+          encryptedData: e.detail.encryptedData,
+          iv: e.detail.iv
+        }); 
+        
+        wx.redirectTo({
+          url: '/pages/authorizeUserInfo'
+        });
       }
-      wx.redirectTo({
-        url: '/pages/authorizeUserInfo'
-      });
-    }
-  };
-}
+    };
+  }
 </script>
 <style lang="less">
-page {
-  height: 100%;
-}
-.authorize-contianer {
-  height: 100%;
-  background: #fff;
-  text-align: center;
-  padding-top: 100rpx;
-  .authorize-icon {
-    width: 128rpx;
-    height: 128rpx;
-    display: block;
-    margin: 0 auto;
-    padding-bottom: 10rpx;
+  page {
+    height: 100%;
   }
-  .auth-item {
-    padding: 5rpx 0;
+  .authorize-contianer {
+    height: 100%;
+    background: #fff;
+    text-align: center;
+    padding-top: 100rpx;
+    .authorize-icon {
+      width: 128rpx;
+      height: 128rpx;
+      display: block;
+      margin: 0 auto;
+      padding-bottom: 10rpx;
+    }
+    .auth-item {
+      padding: 5rpx 0;
+    }
+    .btn-authorize {
+      margin: 100rpx 50rpx;
+    }
   }
-  .btn-authorize {
-    margin: 100rpx 50rpx;
-  }
-}
 </style>
