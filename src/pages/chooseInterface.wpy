@@ -111,9 +111,9 @@
             code: res1.code
           })
           // 拿到token存起来
-          console.log("token值:" + res2.token);
-          wx.setStorageSync("token", res2.token);
-          wx.setStorageSync("userMobile", res2.userMobile);
+          console.log("token值:" + res2.data.token);
+          wx.setStorageSync("token", res2.data.token);
+          wx.setStorageSync("userMobile", res2.data.userMobile);
         }
         wx.redirectTo({
           url: "/pages/authorize"

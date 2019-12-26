@@ -12,8 +12,11 @@
 </template>
 <script>
   import wepy from 'wepy';
+   import api from '../api/api';
   export default class Aa extends wepy.page {
-    
+     config = {
+      navigationBarTitleText: '添加设备'
+    };
 
   }
 </script>

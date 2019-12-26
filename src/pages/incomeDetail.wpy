@@ -1,0 +1,63 @@
+<style lang="less">
+  .income_detail {
+    //  border: 1rpx solid red;
+    height: 100%;
+    background: white;
+    padding-top: 80rpx;
+    .head_tabBar {
+      position: relative;
+      // border: 1rpx solid red;
+      padding: 0 160rpx;
+      padding-bottom: 27rpx;
+      font-size: 30rpx;
+      .active {
+        color: #f95c4c;
+        border-bottom: 4rpx solid #f95c4c;
+      }
+      view {
+        display: inline-block;
+        font-size: 30rpx;
+        padding-bottom: 16rpx;
+        border-bottom: 4rpx solid transparent;
+      }
+      .expenditure {
+       position: absolute;
+       margin-left: 317rpx;
+      }
+    
+    }
+    .gray_line {
+      height: 10rpx;
+      background: #e6e6e6;
+    }
+  }
+</style>
+<template>
+  <view class="income_detail">
+    <view class="head_tabBar">
+      <view class="{{num==1 ?'active':''}}"  data-num=1  @tap="changeColor">收入</view>
+      <view class="[{{num==2? 'active':''}},expenditure]" data-num=2 @tap="changeColor">支出</view>
+    </view>
+    <view class="gray_line"></view>
+   
+  </view>
+</template>
+<script>
+  import wepy from 'wepy';
+  export default class IncomeDetail extends wepy.page {
+    data ={
+      num: 1 
+    }
+    config = {
+      navigationBarTitleText: '收支明细'
+    };
+
+    methods = {
+      changeColor(e){
+       this.num = e.target.dataset.num;
+       this.$apply();
+      },
+   
+    }
+  }
+</script>

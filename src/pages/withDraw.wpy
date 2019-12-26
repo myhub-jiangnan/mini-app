@@ -1,13 +1,128 @@
-<style lang="less"></style>
+<style lang="less">
+  .withDraw_page {
+    height: 100%;
+    background: white;
+    padding: 30rpx 40rpx;
+    .header {
+      width: 670rpx;
+      height: 310rpx;
+      box-shadow: 6rpx 6rpx 12rpx gainsboro;
+      padding: 30rpx 26rpx;
+      border-radius: 12rpx;
+      .first_layer {
+        // border: 1rpx solid red;
+        color: #b3b3b3;
+      }
+      .second_layer {
+        //  border: 1rpx solid red;
+        margin-top: 10rpx;
+        padding-bottom: 30rpx;
+        border-bottom: 1rpx solid gainsboro;
+        text:nth-child(1) {
+          font-size: 36rpx;
+          font-weight: bold;
+        }
+        text:nth-child(2) {
+          font-size: 60rpx;
+          font-weight: bold;
+          margin-left: 20rpx;
+        }
+      }
+      .third_layer {
+        position: relative;
+        margin-top: 15rpx;
+        font-size: 24rpx;
+        text:nth-child(1) {
+          color: #b3b3b3;
+          margin-right: 20rpx;
+        }
+        text:nth-child(3) {
+          position: absolute;
+          right: 0;
+          color: #f95c4c;
+        }
+      }
+      .fourth_layer {
+        position: relative;
+        font-size: 24rpx;
+        margin-top: 15rpx;
+        color: #b3b3b3;
+        text:nth-child(3) {
+          position: absolute;
+          right: 0;
+        }
+      }
+    }
+    .center_container {
+      // border: 1rpx solid red;
+      margin-top: 80rpx;
+      .btn_box {
+         button {
+           width: 340rpx;
+           height: 88rpx;
+           border-radius: 44rpx;
+           background-color: #f95c4c;
+           color: white;      
+         }
+      }
+      view:nth-child(2){
+        margin-top: 40rpx;
+        text-align: center;
+        color: #f95c4c;
+        text {
+          border-bottom: 1rpx solid #f95c4c;
+        }
+      }
+    }
+    .attention_container {
+      // border: 1rpx solid red;
+      margin-top: 129rpx;
+      font-size: 28rpx;
+      color: #b3b3b3;
+        view:nth-child(1){
+          font-size: 32rpx;
+          font-weight: bold;
+          color: #1a1a1a;
+        } 
+        view {
+          margin-top: 20rpx;
+        }
+    }
+  }
+</style>
 <template>
-  <view class="choose_login"> 我的提现</view>
+  <view class="withDraw_page">
+    <view class="header">
+      <view class="first_layer">提现金额</view>
+      <view class="second_layer"><text>¥</text><text>3823.24</text></view>
+      <view class="third_layer"><text>可提现金额:</text><text>¥6868.23</text><text>全部提现</text> </view>
+      <view class="fourth_layer"><text>冻结金额：¥</text><text>2323</text><text>冻结金额需在订单完成12小时后解冻</text> </view>
+    </view>
+    <view class="center_container">
+      <view class="btn_box"><button>提现</button></view>
+      <view @tap="incomeDetail"><text>收支明细</text></view>
+    </view>
+    <view class="attention_container">
+      <view>注意事项:</view>
+      <view>1.最小提现金额为1.00元</view>
+      <view>2.单日提现金额不能大于5000元，次数不限</view>
+      <view>3.每次提现需要扣除0.6%手续费</view>
+    </view>
+  </view>
 </template>
 <script>
-import wepy from 'wepy';
-
-export default class WithDraw extends wepy.page {
-  config = {
+  import wepy from 'wepy';
+  export default class WithDraw extends wepy.page {
+    config = {
       navigationBarTitleText: '我的提现'
     };
-}
+    methods={
+      incomeDetail(){
+        console.log(666);
+         wx.navigateTo({
+          url: '/pages/incomeDetail'
+        });
+      }
+    }
+  }
 </script>

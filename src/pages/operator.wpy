@@ -1,47 +1,19 @@
 <style lang="less">
   .Operator_page {
     position: relative;
-    padding-top: 30rpx;
     height: 100%;
-    background: white; // 顶部搜索
-    .top_search {
-      // border: 1rpx solid red;
-      height: 64rpx;
-      padding: 0 40rpx;
-      justify-content: space-between;
-      .input_box {
-        // border: 1rpx solid red;
-        width: 518rpx;
-        height: 64rpx;
-        input {
-          display: block;
-          width: 100%;
-          height: 100%;
-          padding-left: 24rpx;
-          border-radius: 32rpx;
-          background: #e6e6e6;
-        }
-      }
-      .btn_box {
-        width: 98rpx;
-        height: 54rpx;
-        line-height: 54rpx;
-        text-align: center;
-        border-radius: 3rpx;
-        background: #f95c4c;
-        color: white;
-      }
-    }
+    background: white;
     .header {
-      height: 90rpx; // background: #e6e6e6;
+      height: 90rpx;
+      background: #e6e6e6;
       justify-content: space-between;
       padding: 0 40rpx;
       font-size: 26rpx;
-      margin-top: 50rpx;
       .add_operator {
         view:nth-child(1) {
           width: 24rpx;
           height: 24rpx;
+        
           margin-right: 9rpx;
         }
         view:nth-child(2) {
@@ -82,7 +54,8 @@
         }
         .right_box {
           // border: 1rpx solid red;
-          height: 44rpx; // width: 100rpx;
+          height: 44rpx;
+          // width: 100rpx;
           .image_box {
             display: inline-flex;
             width: 44rpx;
@@ -96,15 +69,11 @@
 </style>
 <template>
   <view class="Operator_page">
-    <view class="top_search flex">
-      <view class="input_box"><input placeholder="请输入要搜索的经销商的手机号" /> </view>
-      <view class="btn_box">搜索</view>
-    </view>
     <view class="header flex">
-      <view>代理商列表</view>
+      <view>运营人员列表</view>
       <view class="add_operator flex" @tap="addOperator">
         <view>
-          <image src="../images/mine/add_icon.png" />
+          <image src="../images/mine/add_icon.png"/>
         </view>
         <view>添加人员</view>
       </view>
@@ -124,18 +93,18 @@
           <view>{{item.mobile}}</view>
         </view>
         <view class="right_box">
+         <view class="image_box">
+           <image src="../images/mine/allot_task_icon.png" />
+         </view>
           <view class="image_box">
-            <image src="../images/mine/allot_task_icon.png" />
-          </view>
+           <image src="../images/mine/capital_statics_icon.png" />
+         </view>
           <view class="image_box">
-            <image src="../images/mine/capital_statics_icon.png" />
-          </view>
+           <image src="../images/mine/edit_icon.png" />
+         </view>
           <view class="image_box">
-            <image src="../images/mine/edit_icon.png" />
-          </view>
-          <view class="image_box">
-            <image src="../images/mine/delete_icon.png" />
-          </view>
+           <image src="../images/mine/delete_icon.png" />
+         </view>
         </view>
       </view>
     </view>
@@ -143,37 +112,50 @@
 </template>
 <script>
   import wepy from 'wepy';
-  export default class Agent extends wepy.page {
+  import api from '../api/api';
+  export default class Operator extends wepy.page {
     data = {
       array: [{
-          name: "马云",
+          name: "周杰伦",
           mobile: 18301234567
         },
         {
-          name: "马云",
+          name: "周杰伦",
           mobile: 18301234567
         },
         {
-          name: "马云",
+          name: "周杰伦",
           mobile: 18301234567
         },
         {
-          name: "马云",
+          name: "周杰伦",
           mobile: 18301234567
         },
         {
-          name: "马云",
+          name: "周杰伦",
           mobile: 18301234567
-        }
+        },
+        {
+          name: "周杰伦",
+          mobile: 18301234567
+        },
+        {
+          name: "周杰伦",
+          mobile: 18301234567
+        },
+        {
+          name: "周杰伦",
+          mobile: 18301234567
+        },
       ]
     }
     config = {
-      navigationBarTitleText: '代理商'
+      navigationBarTitleText: '运营人员'
     };
     methods = {
       addOperator() {
         wx.navigateTo({
-          url: '/pages/addAgent'
+          url: '/pages/addOperator'
         });
       }
     }

@@ -263,11 +263,23 @@
     config = {
       navigationBarTitleText: '订单详情'
     };
-    methods = {
+ methods = {
       //弹出窗
-      showModal() {
-        console.log(10101010);
-        this.isFalse = true;
+      async showModal() {
+        // console.log(10101010);
+        let url = this.$parent.data.apiUrl;
+        let orderId = await wepy.getStorageSync('orderId');
+        let res = await api.httpPost(`${url}/app/order/refundOrder`, {
+          orderId: orderId
+        });
+        if (res.data.code !== 0) {
+          wx.showToast({
+            title:"此订单不能退款！",
+            icon:"warn",
+            duration:2000
+          })
+        };
+        //  this.isFalse = true;
       },
       // 取消退款
       cancalDrawback() {

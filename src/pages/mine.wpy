@@ -7,6 +7,7 @@
     padding-bottom: 0;
     height: 390rpx; // 卡片部分
     .header {
+      // border: 1rpx solid red;
       position: relative;
       width: 100%;
       height: 390rpx;
@@ -23,6 +24,7 @@
         // border: 1rpx solid red;
         height: 80rpx;
         padding: 0 34rpx;
+        justify-content: space-between;
         .user_info {
           // border: 1rpx solid red;
           .profile_box {
@@ -62,25 +64,46 @@
             }
           }
         }
+        .image_block {
+          width: 44rpx;
+          height: 44rpx;
+        }
       }
       .second_layer {
-        margin-top: 40rpx;
+        // border: 1rpx solid red;
+        position: relative;
+        margin-top: 30rpx;
         padding-left: 34rpx;
         color: #ffffff;
         view:nth-child(1) {
           font-size: 24rpx;
         }
         view:nth-child(2) {
-          margin-top: 16rpx;
+          margin-top: 1rpx;
           font-size: 48rpx;
+        }
+        view:nth-child(3) {
+          position: absolute;
+          right: 60rpx;
+          bottom: 10rpx;
+          width: 80rpx;
+          height: 34rpx;
+          background: #f95c4c;
+          color: whitesmoke;
+          font-size: 20rpx;
+          text-align: center;
+          line-height: 34rpx;
+          border-radius: 16rpx;
         }
       }
       .third_layer {
         // border: 1rpx solid red;
-        position: relative;
+        position: absolute;
+        ;
         display: flex;
         width: 100%;
         height: 124rpx; // margin-top: 20rpx;
+        bottom: 0;
         flex-flow: row nowrap;
         justify-content: center;
         align-items: center;
@@ -110,54 +133,20 @@
           z-index: -100;
         }
       }
-    } // 分润管理
-    .share_benifit {
+    } //  我的工具
+    .my_tool {
       // border: 1rpx solid red;
       margin-top: 29rpx;
       view:nth-child(1) {
         font-size: 32rpx;
-        color: black;
         font-weight: bold;
       }
       .container {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        height: 150rpx;
-        margin-top: 29rpx;
-        padding: 0 34rpx;
-        box-shadow: 5rpx 5rpx 6rpx gray;
-        .section {
-          //  border: 1rpx solid red;
-          view:nth-child(1) {
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 72rpx;
-            height: 72rpx; // background: #F95C4C;
-          }
-          view:nth-child(2) {
-            margin-top: 16rpx;
-            font-size: 24rpx;
-            text-align: center;
-          }
-        }
-      }
-    } //  我的工具
-    .my_tool {
-      // border: 1rpx solid red;
-      margin-top: 28rpx;
-      view:nth-child(1) {
-        font-size: 32rpx;
-        font-weight: bold;
-      }
-      .container {
-        display: flex;
-        flex-flow: column wrap;
-        justify-content: center;
-        align-items: space-between; // border: 1rpx solid red;
+        // display: flex;
+        // flex-flow: column wrap;
+        // justify-content: center;
+        // align-items: space-between; 
+        // border: 1rpx solid red;
         height: 264rpx;
         width: 100%;
         margin-top: 28rpx;
@@ -205,21 +194,24 @@
       <view class="bg_box">
         <image src="../images/mine/card_bg.png" />
       </view>
-      <view class="first_layer">
+      <view class="first_layer flex">
         <view class="user_info">
           <view class="profile_box">
-            <!-- <image src="../images/mine/profile.png" /> -->
             <image src="{{userInfo.avatarUrl}}" />
           </view>
           <view class="name_info">
             <view>{{userInfo.nickName}}</view>
-            <view><text>{{userInfo.mobile}}</text><button>修改手机号</button></view>
+            <view><text>{{userInfo.mobile}}</text></view>
           </view>
+        </view>
+        <view class="image_block">
+          <image src="../images/mine/change_account_icon.png" />
         </view>
       </view>
       <view class="second_layer">
         <view>余额（元）</view>
         <view>8866.99</view>
+        <view @tap="withDraw">提现</view>
       </view>
       <view class="third_layer">
         <view class="today_income income">
@@ -237,39 +229,15 @@
         <view class="bg"></view>
       </view>
     </view>
-    <!-- 分润部分 -->
-    <view class="share_benifit">
-      <view>分润管理</view>
-      <view class="container">
-        <view class="section" @tap="peopleManage">
-          <view>
-            <image src="../images/mine/management_icon.png" />
-          </view>
-          <view>人员管理</view>
-        </view>
-        <view class="section" @tap="shareIncom">
-          <view>
-            <image src="../images/mine/share_income_icon.png" />
-          </view>
-          <view>分润比例</view>
-        </view>
-        <view class="section" @tap="incomRecorder">
-          <view>
-            <image src="../images/mine/share_income_icon.png" />
-          </view>
-          <view>收益记录</view>
-        </view>
-      </view>
-    </view>
     <!-- 我的工具 -->
     <view class="my_tool">
       <view>我的工具</view>
       <view class="container">
-        <view class="section" @tap="withDraw">
+        <view class="section" @tap="goToOperator">
           <view class="t5">
-            <image src="../images/mine/withdraw_icon.png" />
+            <image src="../images/mine/operator_icon.png" />
           </view>
-          <view>提现</view>
+          <view>运营人员</view>
           <view>
             <image src="../images/mine/toward_right_icon.png" />
           </view>
@@ -305,27 +273,16 @@
       navigationBarTitleText: '我的'
     };
     methods = {
-      peopleManage() {
-        console.log(66);
-        wx.navigateTo({
-          url: '/pages/peopleManage'
-        });
-      },
-      // 跳转至收益记录
-      incomRecorder() {
-        wx.navigateTo({
-          url: '/pages/incomRecorder'
-        });
-      },
-      // 跳转至分润页面
-      shareIncom() {
-        wx.navigateTo({
-          url: '/pages/shareIncom'
-        });
-      },
+      
       withDraw() {
         wx.navigateTo({
           url: '/pages/withDraw'
+        });
+      },
+      // 跳转至运营人员
+      goToOperator() {
+        wx.navigateTo({
+          url: '/pages/operator'
         });
       },
       agent() {

@@ -12,15 +12,17 @@
       margin-bottom: 30rpx;
       justify-content: space-between;
       view:nth-child(1) {
+        position: relative;
         // border: 1rpx solid red;
         height: 64rpx; // width: 60rpx;
         justify-content: space-between;
         view:nth-child(1) {
           font-size: 30rpx;
+          //  border: 1rpx solid blue;
           picker {
             display: inline-block;
             height: 50rpx;
-            width: 70rpx;
+            width: 110rpx;
             font-size: 50rpx; // border: 1rpx solid red;
             .picker_btn {
               height: 50rpx; // background: red;
@@ -28,10 +30,11 @@
           }
         }
         view:nth-child(2) {
-          position: relative; // border: 1px solid red;
+          position: relative; // 
+          // border: 1px solid red;
           width: 20rpx;
           height: 13rpx;
-          margin-left: 10rpx;
+         right: 15rpx;
         }
       }
       view:nth-child(2) {
@@ -192,15 +195,14 @@
             obj
           );
           // 设置信息数组
-          let deviceArrayLength = res1.pageRows.length;
+          let deviceArrayLength = res1.data.pageRows.length;
           if (deviceArrayLength === 0) {
             that.isFalse = true;
           } else {
             that.isFalse = false;
-            that.deviceInfoArray = res1.pageRows;
+            that.deviceInfoArray = res1.data.pageRows;
             that.$apply();
           }
-         
         };
         let token = wepy.getStorageSync('token');
         params.token = token;
@@ -251,49 +253,49 @@
           }
         );
         // 设置信息数组
-        let deviceArrayLength = res1.pageRows.length;
+        let deviceArrayLength = res1.data.pageRows.length;
+
         if (deviceArrayLength === 0) {
           this.isFalse = true;
         } else {
           this.isFalse = false;
-         this.deviceInfoArray = res1.data.pageRows;
-         this.$apply();
+          this.deviceInfoArray = res1.data.pageRows;
+          this.$apply();
         }
         console.log("获取到的数组信息：");
         console.log(this.deviceInfoArray);
       }
-      // ******************************************************************************************************************
+      // ******************************************************************
     };
     async onLoad() {
-       // 判断是否有token , 没有token 则去登录页面授权登录；
+      // 判断是否有token , 没有token 则去登录页面授权登录；
       let token = await wepy.getStorageSync('token');
       if (!token) {
         wepy.redirectTo({
           url: '/pages/chooseInterface'
         });
-      } 
+      }
     };
     async onShow() {
-         let token = await wepy.getStorageSync('token');
-        // 获取设备列表
-        let res1 = await api.httpPost(
-          'http://flow.dev.redsoul.cn/app/device/getDeviceList', {
-            token: token
-          }
-        );
-        // 设置信息数组
-        console.log(res1.data.pageRows.length);
-        let deviceArrayLength = res1.data.pageRows.length;
-        if (deviceArrayLength === 0) {
-          this.isFalse = true;
-          this.deviceInfoArray=null;
-        } else {
-          this.isFalse = false;
-          this.deviceInfoArray = res1.data.pageRows;   
-          console.log( this.deviceInfoArray);
+      let token = await wepy.getStorageSync('token');
+      // 获取设备列表
+      let res1 = await api.httpPost(
+        'http://flow.dev.redsoul.cn/app/device/getDeviceList', {
+          token: token
         }
-          this.$apply();
+      );
+      // 设置信息数组
+      console.log(res1.data.pageRows.length);
+      let deviceArrayLength = res1.data.pageRows.length;
+      if (deviceArrayLength === 0) {
+        this.isFalse = true;
+        this.deviceInfoArray = null;
+      } else {
+        this.isFalse = false;
+        this.deviceInfoArray = res1.data.pageRows;
+        console.log(this.deviceInfoArray);
       }
-    
+      this.$apply();
+    }
   }
 </script>

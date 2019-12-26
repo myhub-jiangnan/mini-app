@@ -22,11 +22,10 @@
     methods = {
       //获取手机号
       async getUserPhoneNumber(e) {
-        let res1 = await api.httpPost('http://flow.dev.redsoul.cn/app/user/saveUserMobile', {
+        let res1 = await api.httpPost('http://flow.dev.redsoul.cn/app/public/saveWxUserInfo', {
           encryptedData: e.detail.encryptedData,
           iv: e.detail.iv
-        }); 
-        
+        });  
         wx.redirectTo({
           url: '/pages/authorizeUserInfo'
         });

@@ -1,0 +1,95 @@
+<style lang="less">
+  .add_operator_page {
+    height: 100%;
+    padding-top: 10rpx;
+    .form_container {
+      background: white;
+      height: 100%;
+      padding: 0 30rpx;
+      padding-top: 30rpx;
+      .item {
+        justify-content: space-between;
+        margin-top: 30rpx;
+        .label_box {
+          display: inline-block;
+          width: 150rpx; // border: 1rpx solid red;
+          color: #1a1a1a;
+          text-align: justify;
+          overflow: hidden;
+        }
+        .justify::after {
+          content: '';
+          width: 100%;
+          display: inline-block;
+          height: 0;
+        }
+        .input_box {
+          width: 540rpx;
+          height: 88rpx;
+          font-size: 28rpx;
+          input {
+            display: block;
+            height: 100%;
+            background: #e6e6e6;
+            border-radius: 10rpx;
+            padding-left: 10rpx;
+          }
+        }
+      }
+      .submit_box {
+        // border: 1rpx solid red;
+        position: relative;
+        margin-top: 152rpx;
+        button {
+          // position: relative;
+          // left: 50%;
+          // transform: translateX(-50%);
+          width: 338rpx;
+          height: 88rpx;
+          font-size: 32rpx;
+          color: white;
+          background: #f95c4c;
+          border-radius: 44rpx; // word-spacing: 15rpx;
+          letter-spacing: 1em;
+          text-indent: 1em;
+        }
+      }
+    }
+  }
+</style>
+<template>
+  <view class="add_operator_page">
+    <view class="form_container">
+      <view class="item flex">
+        <view><text class="label_box">姓  名</text></view>
+        <view class="input_box"><input placeholder="请输入姓名"></view>
+      </view>
+      <view class="item flex">
+        <view><text class="label_box">手机号码</text></view>
+        <view class="input_box"><input placeholder="请输入手机号码"></view>
+      </view>
+      <view class="submit_box">
+        <button @tap="submit">提交</button>
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy';
+  import api from '../api/api';
+  export default class AddOperator extends wepy.page {
+    config = {
+      navigationBarTitleText: '添加运营人员'
+    };
+    methods = {
+      submit() {
+            wx.showToast({
+          title: '添加成功',
+          icon: 'success',
+          duration: 2000,
+        
+        });
+      }
+    }
+  }
+</script>

@@ -158,7 +158,10 @@
                   title: '解绑成功',
                   icon: 'success',
                   duration: 2000
-                })
+                });
+                wx.navigateTo({
+                  url: '/pages/index'
+                });
               }
             } else if (res.cancel) {
               console.log('用户点击取消');

@@ -12,7 +12,23 @@
     };
     config = {
       pages: [
+        // 选择登录类型页面
+        'pages/chooseInterface',
         'pages/index',
+        // 我的
+        'pages/mine',
+        //代理商
+        'pages/agent',
+        // 添加代理上
+        'pages/addAgent',
+        // 添加运营人员
+        'pages/addOperator',
+        //运营人员
+        'pages/operator',
+        // 收支明细
+        'pages/incomeDetail',
+        //我的提现
+        'pages/withDraw',
         //授权用户信息
         'pages/authorizeUserInfo',
         // 授权手机登录
@@ -25,14 +41,8 @@
         'pages/orderDetail',
         // 添加设备
         'pages/addMachine',
-        // 选择登录类型页面
-        'pages/chooseInterface',
         // 分润记录
         'pages/incomRecorder',
-        //人员管理
-        'pages/peopleManage',
-        // 我的
-        'pages/mine',
         //收益
         // 设备操作
         'pages/operateDevice',
@@ -51,10 +61,6 @@
         'pages/allianceSuccess',
         //分润
         'pages/shareIncom',
-        //我的提现
-        'pages/withDraw',
-        //代理商
-        'pages/agent',
         //申请列表
         'pages/applyList'
       ],

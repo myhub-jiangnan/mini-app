@@ -260,7 +260,7 @@ export default class Cargo extends wepy.page {
     this.channelList = channelList;
     this.$apply();
     console.log('设备货道信息：');
-    // console.log(res);
+    console.log(res);
     console.log(this.channelList);
   }
 }
