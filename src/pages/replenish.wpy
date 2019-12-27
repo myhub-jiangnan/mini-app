@@ -123,7 +123,7 @@
   import api from '../api/api'
   export default class Replenish extends wepy.page {
     data = {
-      channelList: null
+      channelList:''
     };
     config = {
       navigationBarTitleText: '补货'

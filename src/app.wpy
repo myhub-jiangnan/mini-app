@@ -8,15 +8,17 @@
     data = {
       // env="dev",
       // env="online",
-      apiUrl: 'http://flow.dev.redsoul.cn'
+      apiUrl: 'https://flow.dev.redsoul.cn'
     };
     config = {
       pages: [
-        // 选择登录类型页面
-        'pages/chooseInterface',
         'pages/index',
+        //我的提现
+        'pages/withDraw',
         // 我的
         'pages/mine',
+        // 选择登录类型页面
+        'pages/chooseInterface',
         //代理商
         'pages/agent',
         // 添加代理上
@@ -27,8 +29,6 @@
         'pages/operator',
         // 收支明细
         'pages/incomeDetail',
-        //我的提现
-        'pages/withDraw',
         //授权用户信息
         'pages/authorizeUserInfo',
         // 授权手机登录

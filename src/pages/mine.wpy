@@ -301,7 +301,7 @@
       let res = await wepy.getUserInfo({});
       this.userInfo.nickName = res.userInfo.nickName;
       this.userInfo.avatarUrl = res.userInfo.avatarUrl;
-      this.userInfo.mobile = wepy.getStorageSync("userMobile");
+      this.userInfo.mobile = wepy.getStorageSync("memberMobile");
       this.$apply();
     }
   }

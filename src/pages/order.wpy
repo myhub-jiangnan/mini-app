@@ -149,7 +149,7 @@
   <view class="order_list">
     <view class="search_box">
       <view>
-        <input placeholder="请输入要搜索的经销商/代理商手机号" />
+        <input placeholder="请输入要查看的代理/运营人员手机号" />
       </view>
       <view>
         <button>搜索</button>
@@ -229,14 +229,12 @@
       }
     };
     async onLoad() {
-      
       let url = this.$parent.data.apiUrl;
       let token = await wepy.getStorageSync('token');
       // 订单列表
       let res1 = await api.httpPost(`${url}/app/order/getOrderList`, {
         token: token
       });
-       
       if (res1.code == 0) {
         this.orderList = res1.data.pageRows;
         console.log("列表信息：");

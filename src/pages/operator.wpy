@@ -13,7 +13,6 @@
         view:nth-child(1) {
           width: 24rpx;
           height: 24rpx;
-        
           margin-right: 9rpx;
         }
         view:nth-child(2) {
@@ -54,8 +53,7 @@
         }
         .right_box {
           // border: 1rpx solid red;
-          height: 44rpx;
-          // width: 100rpx;
+          height: 44rpx; // width: 100rpx;
           .image_box {
             display: inline-flex;
             width: 44rpx;
@@ -73,7 +71,7 @@
       <view>运营人员列表</view>
       <view class="add_operator flex" @tap="addOperator">
         <view>
-          <image src="../images/mine/add_icon.png"/>
+          <image src="../images/mine/add_icon.png" />
         </view>
         <view>添加人员</view>
       </view>
@@ -87,24 +85,24 @@
     </view>
     <!-- 运营人员列表 -->
     <view class="operator_list">
-      <view class="item_box flex" wx:for="{{array}}" wx:key="{{index}}">
+      <view class="item_box flex" wx:for="{{array}}" wx:key="index">
         <view class="left_box">
           <view>{{item.name}}</view>
           <view>{{item.mobile}}</view>
         </view>
         <view class="right_box">
-         <view class="image_box">
-           <image src="../images/mine/allot_task_icon.png" />
-         </view>
           <view class="image_box">
-           <image src="../images/mine/capital_statics_icon.png" />
-         </view>
+            <image src="../images/mine/allot_task_icon.png" />
+          </view>
           <view class="image_box">
-           <image src="../images/mine/edit_icon.png" />
-         </view>
+            <image src="../images/mine/capital_statics_icon.png" />
+          </view>
           <view class="image_box">
-           <image src="../images/mine/delete_icon.png" />
-         </view>
+            <image src="../images/mine/edit_icon.png" />
+          </view>
+          <view class="image_box">
+            <image src="../images/mine/delete_icon.png" />
+          </view>
         </view>
       </view>
     </view>
@@ -115,39 +113,39 @@
   import api from '../api/api';
   export default class Operator extends wepy.page {
     data = {
-      array: [{
-          name: "周杰伦",
-          mobile: 18301234567
-        },
-        {
-          name: "周杰伦",
-          mobile: 18301234567
-        },
-        {
-          name: "周杰伦",
-          mobile: 18301234567
-        },
-        {
-          name: "周杰伦",
-          mobile: 18301234567
-        },
-        {
-          name: "周杰伦",
-          mobile: 18301234567
-        },
-        {
-          name: "周杰伦",
-          mobile: 18301234567
-        },
-        {
-          name: "周杰伦",
-          mobile: 18301234567
-        },
-        {
-          name: "周杰伦",
-          mobile: 18301234567
-        },
-      ]
+      // array: [{
+      //     name: "周杰伦",
+      //     mobile: 18301234567
+      //   },
+      //   {
+      //     name: "周杰伦",
+      //     mobile: 18301234567
+      //   },
+      //   {
+      //     name: "周杰伦",
+      //     mobile: 18301234567
+      //   },
+      //   {
+      //     name: "周杰伦",
+      //     mobile: 18301234567
+      //   },
+      //   {
+      //     name: "周杰伦",
+      //     mobile: 18301234567
+      //   },
+      //   {
+      //     name: "周杰伦",
+      //     mobile: 18301234567
+      //   },
+      //   {
+      //     name: "周杰伦",
+      //     mobile: 18301234567
+      //   },
+      //   {
+      //     name: "周杰伦",
+      //     mobile: 18301234567
+      //   },
+      // ]
     }
     config = {
       navigationBarTitleText: '运营人员'
@@ -158,6 +156,12 @@
           url: '/pages/addOperator'
         });
       }
+    };
+    async onShow() {
+      let url = this.$parent.data.apiUrl;
+      let res = await api.httpPost(`${url}/app/team/getOperatorList`, {
+        hasDeviceCount: 1
+      });
     }
   }
 </script>

@@ -22,7 +22,9 @@
           font-size: 36rpx;
           font-weight: bold;
         }
-        text:nth-child(2) {
+        input {
+          display: inline-block;
+          height: 70rpx; // border: 1rpx solid red;
           font-size: 60rpx;
           font-weight: bold;
           margin-left: 20rpx;
@@ -57,15 +59,15 @@
       // border: 1rpx solid red;
       margin-top: 80rpx;
       .btn_box {
-         button {
-           width: 340rpx;
-           height: 88rpx;
-           border-radius: 44rpx;
-           background-color: #f95c4c;
-           color: white;      
-         }
+        button {
+          width: 340rpx;
+          height: 88rpx;
+          border-radius: 44rpx;
+          background-color: #f95c4c;
+          color: white;
+        }
       }
-      view:nth-child(2){
+      view:nth-child(2) {
         margin-top: 40rpx;
         text-align: center;
         color: #f95c4c;
@@ -79,14 +81,14 @@
       margin-top: 129rpx;
       font-size: 28rpx;
       color: #b3b3b3;
-        view:nth-child(1){
-          font-size: 32rpx;
-          font-weight: bold;
-          color: #1a1a1a;
-        } 
-        view {
-          margin-top: 20rpx;
-        }
+      view:nth-child(1) {
+        font-size: 32rpx;
+        font-weight: bold;
+        color: #1a1a1a;
+      }
+      view {
+        margin-top: 20rpx;
+      }
     }
   }
 </style>
@@ -94,12 +96,12 @@
   <view class="withDraw_page">
     <view class="header">
       <view class="first_layer">提现金额</view>
-      <view class="second_layer"><text>¥</text><text>3823.24</text></view>
-      <view class="third_layer"><text>可提现金额:</text><text>¥6868.23</text><text>全部提现</text> </view>
+      <view class="second_layer flex"><text>¥</text><input value="{{withdrawAmount}}" @input="getAmount" /></view>
+      <view class="third_layer"><text>可提现金额:</text><text>¥{{canWithdrawAmount}}</text><text @tap="getAll">全部提现</text> </view>
       <view class="fourth_layer"><text>冻结金额：¥</text><text>2323</text><text>冻结金额需在订单完成12小时后解冻</text> </view>
     </view>
     <view class="center_container">
-      <view class="btn_box"><button>提现</button></view>
+      <view class="btn_box"><button @tap="widthDraw">提现</button></view>
       <view @tap="incomeDetail"><text>收支明细</text></view>
     </view>
     <view class="attention_container">
@@ -112,16 +114,43 @@
 </template>
 <script>
   import wepy from 'wepy';
+  import api from '../api/api';
   export default class WithDraw extends wepy.page {
+    data = {
+      withdrawAmount: 3823.24,
+      canWithdrawAmount:600000
+    }
     config = {
       navigationBarTitleText: '我的提现'
     };
-    methods={
-      incomeDetail(){
+    methods = {
+      incomeDetail() {
         console.log(666);
-         wx.navigateTo({
+        wx.navigateTo({
           url: '/pages/incomeDetail'
         });
+      },
+      // 拿到要提现的金额
+      getAmount(e) {
+        this.withdrawAmount = e.detail.value;
+        console.log(e.detail.value);
+        this.$apply();
+      },
+      // 提现
+      async widthDraw() {
+        console.log(this.withdrawAmount);
+        let url = this.$parent.data.apiUrl;
+        let res = await api.httpPost(`${url}/app/member/withdraw`, {
+          withdrawAmount: this.withdrawAmount
+        });
+        if (res.code == 0) {
+          console.log("提现成功!");
+        }
+      },
+      // 全部提现
+      getAll(){
+        this.withdrawAmount = this.canWithdrawAmount;
+        this.$apply();
       }
     }
   }

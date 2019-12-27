@@ -12,13 +12,11 @@
       margin-bottom: 30rpx;
       justify-content: space-between;
       view:nth-child(1) {
-        position: relative;
-        // border: 1rpx solid red;
+        position: relative; // border: 1rpx solid red;
         height: 64rpx; // width: 60rpx;
         justify-content: space-between;
         view:nth-child(1) {
-          font-size: 30rpx;
-          //  border: 1rpx solid blue;
+          font-size: 30rpx; //  border: 1rpx solid blue;
           picker {
             display: inline-block;
             height: 50rpx;
@@ -34,7 +32,7 @@
           // border: 1px solid red;
           width: 20rpx;
           height: 13rpx;
-         right: 15rpx;
+          right: 15rpx;
         }
       }
       view:nth-child(2) {
@@ -179,51 +177,9 @@
       deviceInfoArray: null,
       isFalse: false,
       // 输入框的值
-      inputContent: ''
+      inputContent: null
     };
     methods = {
-      //  根据状态选择展示设备
-      bindPickerChange: function(e) {
-        this.index = e.detail.value;
-        console.log(this.deviceStatus[this.index] + '设备：');
-        let params = {};
-        let that = this;
-        let getApiDeviceList = async function(obj) {
-          // 获取设备列表
-          let res1 = await api.httpPost(
-            'http://flow.dev.redsoul.cn/app/device/getDeviceList',
-            obj
-          );
-          // 设置信息数组
-          let deviceArrayLength = res1.data.pageRows.length;
-          if (deviceArrayLength === 0) {
-            that.isFalse = true;
-          } else {
-            that.isFalse = false;
-            that.deviceInfoArray = res1.data.pageRows;
-            that.$apply();
-          }
-        };
-        let token = wepy.getStorageSync('token');
-        params.token = token;
-        if (e.detail.value == 0) {
-          getApiDeviceList(params);
-        } else if (e.detail.value == 1) {
-          params.deviceOnlineStatus = 1;
-          getApiDeviceList(params);
-        } else if (e.detail.value == 2) {
-          params.deviceOnlineStatus = 0;
-          getApiDeviceList(params);
-        } else if (e.detail.value == 3) {
-          params.deviceRunningStatus = 1;
-          getApiDeviceList(params);
-        } else if (e.detail.value == 4) {
-          params.deviceStockStatus = 1;
-          getApiDeviceList(params);
-        }
-        console.log(this.deviceInfoArray);
-        this.$apply();
-      },
       // 获取input 输入框的值
       getInputValue(e) {
         this.inputContent = e.detail.value;
@@ -243,27 +199,73 @@
           url: '/pages/operateDevice'
         });
       },
+      //  根据状态选择展示设备
+      bindPickerChange: function(e) {
+        this.index = e.detail.value;
+        console.log(this.deviceStatus[this.index] + '设备：');
+        let params = {};
+        let that = this;
+        let url = this.$parent.data.apiUrl;
+        let getApiDeviceList = async function(obj) {
+          // 获取设备列表
+          let res1 = await api.httpPost(
+            `${url}/app/device/getDeviceList`,
+            obj
+          );
+          // 设置信息数组
+          let deviceArrayLength = res1.data.pageRows.length;
+          if (deviceArrayLength === 0) {
+            that.isFalse = true;
+          } else {
+            that.isFalse = false;
+            that.deviceInfoArray = res1.data.pageRows;
+            that.$apply();
+          }
+        };
+        let token = wepy.getStorageSync('token');
+        params.token = token;
+        params.deviceName = this.inputContent;
+        if (e.detail.value == 0) {
+          getApiDeviceList(params);
+        } else if (e.detail.value == 1) {
+          params.filter = "online";
+          getApiDeviceList(params);
+        } else if (e.detail.value == 2) {
+          params.filter = "offline";
+          getApiDeviceList(params);
+        } else if (e.detail.value == 3) {
+          params.filter = "breakdown";
+          getApiDeviceList(params);
+        } else if (e.detail.value == 4) {
+          params.filter = "sellout";
+          getApiDeviceList(params);
+        }
+        console.log(this.deviceInfoArray);
+        this.$apply();
+      },
       // 点击搜索
       async submitSearch() {
-        console.log(this.inputContent);
-        // 获取设备列表
-        let res1 = await api.httpPost(
-          'http://flow.dev.redsoul.cn/app/device/getDeviceList', {
-            deviceName: this.inputContent
-          }
-        );
-        // 设置信息数组
-        let deviceArrayLength = res1.data.pageRows.length;
-
-        if (deviceArrayLength === 0) {
-          this.isFalse = true;
+        let url = this.$parent.data.apiUrl;
+        if (this.inputContent == null) {
+          console.log("设备名称不能为空！");
+          return;
         } else {
-          this.isFalse = false;
-          this.deviceInfoArray = res1.data.pageRows;
-          this.$apply();
+          // 获取设备列表
+          let res1 = await api.httpPost(
+            `${url}/app/device/getDeviceList`, {
+              deviceName: this.inputContent
+            }
+          );
+          // 设置信息数组
+          let deviceArrayLength = res1.data.pageRows.length;
+          if (deviceArrayLength === 0) {
+            this.isFalse = true;
+          } else {
+            this.isFalse = false;
+            this.deviceInfoArray = res1.data.pageRows;
+            this.$apply();
+          }
         }
-        console.log("获取到的数组信息：");
-        console.log(this.deviceInfoArray);
       }
       // ******************************************************************
     };
@@ -280,12 +282,11 @@
       let token = await wepy.getStorageSync('token');
       // 获取设备列表
       let res1 = await api.httpPost(
-        'http://flow.dev.redsoul.cn/app/device/getDeviceList', {
+        'https://flow.dev.redsoul.cn/app/device/getDeviceList', {
           token: token
         }
       );
       // 设置信息数组
-      console.log(res1.data.pageRows.length);
       let deviceArrayLength = res1.data.pageRows.length;
       if (deviceArrayLength === 0) {
         this.isFalse = true;
@@ -293,7 +294,6 @@
       } else {
         this.isFalse = false;
         this.deviceInfoArray = res1.data.pageRows;
-        console.log(this.deviceInfoArray);
       }
       this.$apply();
     }

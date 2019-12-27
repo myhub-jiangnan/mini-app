@@ -234,12 +234,12 @@
       },
       bindPickerChange01(e) {
         this.stockNumberIndex = e.detail.value;
-        this.formObj.stockNumber = this.stockNumber[this.stockNumberIndex];
+        this.formObj.deviceChannelNum  = this.stockNumber[this.stockNumberIndex];
         console.log('货道数量：' + this.stockNumber[this.stockNumberIndex]);
       },
       bindPickerChange02(e) {
         this.stockCapacityIndex = e.detail.value;
-        this.formObj.stockCapacity = this.stockCapacity[this.stockCapacityIndex];
+        this.formObj.deviceChannelCapacity  = this.stockCapacity[this.stockCapacityIndex];
         console.log('货道容量：' + this.stockCapacity[this.stockCapacityIndex]);
       },
       bindPickerChange03(e) {
@@ -286,31 +286,24 @@
       // 绑定按钮
       async submitClick() {
         let url = this.$parent.data.apiUrl;
-        let res1 = await api.httpPost(`${url}/app/device/addDevice`, this.formObj);
-        console.log("res1返回信息：");
-        console.log(res1);
-        if (res1.code == 0) {
-          let showToast = await wx.showToast({
-            title: '注册成功！',
-            icon: 'success',
-            duration: 2000
-          });
-          setTimeout(() => {
-            wepy.switchTab({
-              url: '/pages/index'
+        if (this.formObj.deviceMac && this.formObj.deviceName && this.formObj.deviceAddress) {
+          let res1 = await api.httpPost(`${url}/app/device/addDevice`, this.formObj);
+          if (res1.code == 0) {
+            let showToast = await wx.showToast({
+              title: '注册成功！',
+              icon: 'success',
+              duration: 2000
             });
-          }, 1000);
-        } else if (res1.code == 1) {
-          let showToast = await wx.showToast({
-            title: '已经注册！',
-            icon: 'warn',
-            duration: 2000
-          });
-          setTimeout(() => {
-            wepy.switchTab({
-              url: '/pages/index'
+          } else if (res1.code == 1) {
+            let showToast = await wx.showToast({
+              title: '已经注册！',
+              icon: 'warn',
+              duration: 2000
             });
-          }, 1000);
+          }
+        } else {
+          console.log("信息不完整！");
+          return;
         }
       }
     };

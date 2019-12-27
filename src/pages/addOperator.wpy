@@ -62,11 +62,11 @@
     <view class="form_container">
       <view class="item flex">
         <view><text class="label_box">姓  名</text></view>
-        <view class="input_box"><input placeholder="请输入姓名"></view>
+        <view class="input_box"><input placeholder="请输入姓名" @input="getName"></view>
       </view>
       <view class="item flex">
         <view><text class="label_box">手机号码</text></view>
-        <view class="input_box"><input placeholder="请输入手机号码"></view>
+        <view class="input_box"><input placeholder="请输入手机号码" @input="getMobile"></view>
       </view>
       <view class="submit_box">
         <button @tap="submit">提交</button>
@@ -78,17 +78,43 @@
   import wepy from 'wepy';
   import api from '../api/api';
   export default class AddOperator extends wepy.page {
+    data = {
+      formOjb: {}
+    };
     config = {
       navigationBarTitleText: '添加运营人员'
     };
     methods = {
-      submit() {
+      getName(e) {
+        this.formOjb.operatorName = e.detail.value;
+      },
+      getMobile(e) {
+        this.formOjb.operatorMobile = e.detail.value;
+      },
+      async submit() {
+        let url = this.$parent.data.apiUrl;
+        if (this.formOjb.operatorName == undefined || this.formOjb.operatorMobile == undefined) {
+          console.log("请将信息填写完整");
+          return ;
+       } else {
+          let res = await api.httpPost(`${url}/app/team/addOperator`, {
+            operatorName: this.formOjb.operatorName,
+            operatorMobile: this.formOjb.operatorMobile
+          });
+          if (res.code == 0) {
             wx.showToast({
-          title: '添加成功',
-          icon: 'success',
-          duration: 2000,
-        
-        });
+              title: '添加成功',
+              icon: 'success',
+              duration: 2000,
+            });
+          } else {
+            wx.showToast({
+              title: '添加失败',
+              icon: 'success',
+              duration: 2000,
+            });
+          }
+        }
       }
     }
   }

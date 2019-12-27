@@ -6,8 +6,8 @@
     <view class="btn-authorize">
       <!-- <button open-type="getUserInfo" type="primary" @getuserinfo="authorize">授权</button> -->
       <button open-type="getPhoneNumber" type="primary" @getphonenumber="getUserPhoneNumber">
-                获取手机号
-              </button>
+                      获取手机号
+                    </button>
     </view>
   </view>
 </template>
@@ -22,10 +22,14 @@
     methods = {
       //获取手机号
       async getUserPhoneNumber(e) {
-        let res1 = await api.httpPost('http://flow.dev.redsoul.cn/app/public/saveWxUserInfo', {
+        let entry = wepy.getStorageSync("entry");
+        console.log("entry值：" + entry);
+        let res1 = await api.httpPost('https://flow.dev.redsoul.cn/app/public/login', {
           encryptedData: e.detail.encryptedData,
-          iv: e.detail.iv
-        });  
+          iv: e.detail.iv,
+          entry: entry
+        });
+        wepy.setStorageSync("memberMobile",res1.data.memberMobile);
         wx.redirectTo({
           url: '/pages/authorizeUserInfo'
         });
