@@ -1,11 +1,13 @@
 <style lang="less">
   page {
+    position: relative;
     height: 100%;
+    background: #ffffff;
+    padding-bottom: 66rpx;
   }
   .operataeDevice {
     position: relative;
     height: 100%;
-    background: #ffffff;
     .header {
       // border: 1rpx solid red;
       padding: 0 53rpx;
@@ -47,19 +49,53 @@
         color: #666666;
         font-size: 28rpx;
         margin-bottom: 20rpx;
+        padding-right: 30rpx;
         text {
           font-weight: bold;
           color: black;
           margin-left: 20rpx;
         }
       }
+      .channelInfo {
+        justify-content: space-between;
+        .left_box {
+          view {
+            position: relative;
+            border: 1rpx solid blue;
+            width: 58rpx;
+            height: 58rpx; // background: red;
+            margin-left: 30rpx;
+          }
+          .picker_box {
+            p width: 100%;
+            height: 100%;
+          }
+        }
+      }
+      .btn_getFull {
+        position: relative;
+        margin-top: 76rpx;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 396rpx;
+        height: 88rpx;
+        text-align: center;
+        line-height: 88rpx;
+        color: #f95c4c;
+        font-size: 36rpx;
+        font-weight: bold;
+        border: 1rpx solid #f95c4c;
+        border-radius: 44rpx;
+      }
       .qr_code_box {
         position: absolute;
         left: 0;
         right: 0;
         margin: auto;
-        margin-top: 100rpx; // border: 1rpx solid blue;
+        margin-top: 60rpx; // border: 1rpx solid blue;
         text-align: center;
+        padding-bottom: 60rpx;
+        font-weight: bold;
         .image_box {
           position: relative;
           left: 50%;
@@ -119,6 +155,54 @@
       </view>
       <view class="item"><text>最近在线:</text><text>{{ device.onlineTime }}</text>
       </view>
+      <view class="item flex channelInfo">
+        <view> <text>货道1:</text> <text>暂无设置</text> </view>
+        <view class="left_box flex">
+          <view></view>
+          <view></view>
+        </view>
+      </view>
+      <view class="item flex channelInfo">
+        <view> <text>货道2:</text> <text>暂无设置</text> </view>
+        <view class="left_box flex">
+          <view></view>
+          <view></view>
+        </view>
+      </view>
+      <view class="item flex channelInfo">
+        <view> <text>货道3:</text> <text>暂无设置</text> </view>
+        <view class="left_box flex">
+          <view></view>
+          <view></view>
+        </view>
+      </view>
+      <view class="item flex channelInfo">
+        <view> <text>货道4:</text> <text>暂无设置</text> </view>
+        <view class="left_box flex">
+          <view></view>
+          <view></view>
+        </view>
+      </view>
+      <view class="item flex channelInfo">
+        <view> <text>货道5:</text> <text>暂无设置</text> </view>
+        <view class="left_box flex">
+          <view class="picker_box">
+            <picker @change="bindPickerChange02" value="{{stockCapacityIndex}}" range="{{stockCapacity}}">
+              <view class="picker_btn" type="default">{{ stockCapacity[stockCapacityIndex] }}
+              </view>
+            </picker>
+          </view>
+          <view></view>
+        </view>
+      </view>
+      <view class="item flex channelInfo">
+        <view> <text>货道6:</text> <text>暂无设置</text> </view>
+        <view class="left_box flex">
+          <view></view>
+          <view></view>
+        </view>
+      </view>
+      <view class="btn_getFull">一键加满</view>
       <view class="qr_code_box">
         <view class="image_box">
           <image src="../images/device_qrcode.png" />
@@ -128,7 +212,6 @@
     </view>
   </view>
 </template>
-
 <script>
   import wepy from 'wepy';
   import api from '../api/api';

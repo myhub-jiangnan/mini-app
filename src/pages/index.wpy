@@ -6,21 +6,24 @@
     background: white;
     padding-top: 30rpx;
     .header {
-      //  border: 1rpx solid black;
+      // border: 1rpx solid black;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 670rpx;
       height: 64rpx;
-      padding: 0 40rpx;
       margin-bottom: 30rpx;
       justify-content: space-between;
-      view:nth-child(1) {
-        position: relative; // border: 1rpx solid red;
-        height: 64rpx; // width: 60rpx;
-        justify-content: space-between;
+      &>view:nth-child(1) {
+        position: relative;
+        //  border: 1rpx solid red;
+        height: 64rpx; 
         view:nth-child(1) {
           font-size: 30rpx; //  border: 1rpx solid blue;
           picker {
             display: inline-block;
             height: 50rpx;
-            width: 110rpx;
+            width: 100rpx;
             font-size: 50rpx; // border: 1rpx solid red;
             .picker_btn {
               height: 50rpx; // background: red;
@@ -39,7 +42,7 @@
         // border: 1rpx solid red;
         height: 64rpx;
         view:nth-child(1) {
-          width: 444rpx;
+          width: 404rpx;
           height: 100%;
           input {
             display: block;
@@ -145,7 +148,7 @@
     </view>
     <!-- 暂无设备 -->
     <view class="no_deviec" wx:if="{{isFalse}}">
-      <image src="../images/index/flwo_img.png"></image>
+      <image src="../images/index/flwo_img.png" />
       <view>~~ 您暂无设备，请添加设备！！！~~</view>
     </view>
     <!-- 设备展示列表 -->

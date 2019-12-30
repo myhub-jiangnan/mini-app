@@ -1,0 +1,46 @@
+<style lang="less">
+  .failed_tip {
+    // border: 1rpx solid blue;
+    position: relative;
+    height: 100%;
+    .container {
+      // border: 1rpx solid red;
+      position: absolute;
+      top: 278rpx;
+      width: 100%;
+      .image_box {
+        position: relative;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 323rpx;
+        height: 172rpx;
+      }
+      .tips {
+        margin-top: 89rpx;
+        font-size: 36rpx;
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+  }
+</style>
+<template>
+  <view class="failed_tip">
+    <view class="container">
+      <view class="image_box">
+        <image src="../images/goods/failed.png" />
+      </view>
+      <view class="tips">购买失败，请联系客服！</view>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy';
+  import api from '../api/api';
+  export default class BuyGoodsFailed extends wepy.page {
+    config = {
+      navigationBarTitleText: '购买失败'
+    };
+  }
+</script>

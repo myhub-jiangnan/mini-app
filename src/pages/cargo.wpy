@@ -1,151 +1,151 @@
 <style lang="less">
-page {
-  height: 100%;
-}
-.cargo {
-  position: relative;
-  height: 100%;
-  background: #f2f2f2;
-  padding-top: 30rpx;
-  .cargo_page {
-    .cargo_list {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      .item_box {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
-        align-items: center;
-        width: 650rpx;
-        height: 176rpx;
-        background: #ffffff;
-        border-radius: 12rpx;
-        margin-top: 50rpx; // border: 1px solid blue;
-        padding: 0 26rpx;
-        .left_box {
-          font-size: 44rpx;
-          font-weight: bold;
-          color: #1a1a1a;
-        }
-        .right_box {
-          .right_top_box {
-            // border: 1px solid red;
-            height: 52rpx;
-            display: flex;
-            flex-flow: row nowrap;
-            justify-content: space-between;
-            align-items: center;
-            text {
-              //  border: 1px solid red;
-              display: inline-block;
-              height: 52rpx;
-              line-height: 52rpx;
-            }
-            button {
-              display: inline-block;
-              width: 98rpx;
-              height: 52rpx;
-              text-align: center;
-              line-height: 52rpx;
-              margin-left: 12rpx;
-            }
-          }
-          .right_bottom_box {
-            // border: 1px solid red;
-            margin-top: 28rpx;
-            width: 212rpx;
-            height: 52rpx;
-            color: white;
-            button {
-              color: white;
-              background: #f95c4c;
-              font-size: 26rpx;
-            }
-          }
-        }
-      }
-    }
-    .bottom_box {
-      display: flex;
-      flex-flow: row nowrap;
-      justify-content: space-between;
-      align-items: center; // border: 1rpx solid red;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      height: 120rpx;
-      background: #ffffff;
-      .btn01 {
-        width: 256rpx;
-        height: 64rpx;
-        line-height: 64rpx;
-        background: #546ff2;
-        color: #ffffff;
-      }
-      .btn02 {
-        width: 414rpx;
-        height: 64rpx;
-        line-height: 64rpx;
-        background: #f95c4c;
-        color: #ffffff;
-      }
-    }
-  }
-  .mask_layer {
-    position: absolute;
+  page {
     height: 100%;
-    width: 100%;
-    background-color: black;
-    left: 0px;
-    top: 0px;
-    opacity: 0.5;
-    z-index: 999;
   }
-  .show_modal {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    margin: auto;
-    width: 560rpx;
-    height: 434rpx;
-    border-radius: 8rpx;
-    background: #ffffff;
-    z-index: 1000;
-    padding-top: 40rpx;
-    .content {
-      // border: 1px solid red;
-      position: relative;
-      width: 280rpx;
-      left: 50%;
-      transform: translateX(-50%);
-      .item {
-        // border: 1rpx solid red;
+  .cargo {
+    position: relative;
+    height: 100%;
+    background: #f2f2f2;
+    padding-top: 30rpx;
+    .cargo_page {
+      .cargo_list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .item_box {
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: space-between;
+          align-items: center;
+          width: 650rpx;
+          height: 176rpx;
+          background: #ffffff;
+          border-radius: 12rpx;
+          margin-top: 50rpx; // border: 1px solid blue;
+          padding: 0 26rpx;
+          .left_box {
+            font-size: 44rpx;
+            font-weight: bold;
+            color: #1a1a1a;
+          }
+          .right_box {
+            .right_top_box {
+              // border: 1px solid red;
+              height: 52rpx;
+              display: flex;
+              flex-flow: row nowrap;
+              justify-content: space-between;
+              align-items: center;
+              text {
+                //  border: 1px solid red;
+                display: inline-block;
+                height: 52rpx;
+                line-height: 52rpx;
+              }
+              button {
+                display: inline-block;
+                width: 98rpx;
+                height: 52rpx;
+                text-align: center;
+                line-height: 52rpx;
+                margin-left: 12rpx;
+              }
+            }
+            .right_bottom_box {
+              // border: 1px solid red;
+              margin-top: 28rpx;
+              width: 212rpx;
+              height: 52rpx;
+              color: white;
+              button {
+                color: white;
+                background: #f95c4c;
+                font-size: 26rpx;
+              }
+            }
+          }
+        }
+      }
+      .bottom_box {
         display: flex;
         flex-flow: row nowrap;
         justify-content: space-between;
-        margin-top: 10rpx;
-        text {
-          display: block;
-          width: 50%;
+        align-items: center; // border: 1rpx solid red;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 120rpx;
+        background: #ffffff;
+        .btn01 {
+          width: 256rpx;
+          height: 64rpx;
+          line-height: 64rpx;
+          background: #546ff2;
+          color: #ffffff;
+        }
+        .btn02 {
+          width: 414rpx;
+          height: 64rpx;
+          line-height: 64rpx;
+          background: #f95c4c;
+          color: #ffffff;
         }
       }
     }
-    .stop_btn {
-      position: absolute; // border: 1px solid red;
+    .mask_layer {
+      position: absolute;
+      height: 100%;
       width: 100%;
-      height: 88rpx;
-      line-height: 88rpx;
-      font-size: 32rpx;
-      color: #f95c4c;
-      text-align: center;
+      background-color: black;
+      left: 0px;
+      top: 0px;
+      opacity: 0.5;
+      z-index: 999;
+    }
+    .show_modal {
+      position: absolute;
+      left: 0;
+      right: 0;
       bottom: 0;
-      border-top: 1px solid #e6e6e6;
+      top: 0;
+      margin: auto;
+      width: 560rpx;
+      height: 434rpx;
+      border-radius: 8rpx;
+      background: #ffffff;
+      z-index: 1000;
+      padding-top: 40rpx;
+      .content {
+        // border: 1px solid red;
+        position: relative;
+        width: 280rpx;
+        left: 50%;
+        transform: translateX(-50%);
+        .item {
+          // border: 1rpx solid red;
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: space-between;
+          margin-top: 10rpx;
+          text {
+            display: block;
+            width: 50%;
+          }
+        }
+      }
+      .stop_btn {
+        position: absolute; // border: 1px solid red;
+        width: 100%;
+        height: 88rpx;
+        line-height: 88rpx;
+        font-size: 32rpx;
+        color: #f95c4c;
+        text-align: center;
+        bottom: 0;
+        border-top: 1px solid #e6e6e6;
+      }
     }
   }
-}
 </style>
 <template>
   <view class="cargo">
@@ -160,8 +160,8 @@ page {
             </view>
             <view class="right_bottom_box">
               <button @tap="testChannel" data-channelid="{{item.channelId}}">
-                电机检测
-              </button>
+                  电机检测
+                </button>
             </view>
           </view>
         </view>
@@ -186,82 +186,81 @@ page {
   </view>
 </template>
 <script>
-import wepy from 'wepy';
-import api from '../api/api';
-export default class Cargo extends wepy.page {
-  config = {
-    navigationBarTitleText: '货道管理'
-  };
-  data = {
-    isFalse: false,
-    checkStatus: [
-      {
-        name: '货道01',
-        status: '检测完...'
+  import wepy from 'wepy';
+  import api from '../api/api';
+  export default class Cargo extends wepy.page {
+    config = {
+      navigationBarTitleText: '货道管理'
+    };
+    data = {
+      isFalse: false,
+      checkStatus: [{
+          name: '货道01',
+          status: '检测完...'
+        },
+        {
+          name: '货道02',
+          status: '检测完...'
+        },
+        {
+          name: '货道03',
+          status: '检测中...'
+        },
+        {
+          name: '货道04',
+          status: '待检测...'
+        },
+        {
+          name: '货道05',
+          status: '待检测...'
+        },
+        {
+          name: '货道06',
+          status: '待检测...'
+        }
+      ],
+      channelList: null
+    };
+    methods = {
+      // 电机检测
+      async testChannel(e) {
+        let channelId = e.currentTarget.dataset.channelid;
+        console.log('channelId的值为：');
+        console.log(channelId);
+        let url = this.$parent.data.apiUrl;
+        let res = await api.httpPost(`${url}/app/device/testChannel`, {
+          channelId: channelId
+        });
+        if (res.code == 0) {
+          console.log("");
+        }
       },
-      {
-        name: '货道02',
-        status: '检测完...'
+      checkRecoder() {
+        wx.navigateTo({
+          url: '/pages/checkRecoder'
+        });
       },
-      {
-        name: '货道03',
-        status: '检测中...'
+      // 显示检测情况
+      showModal() {
+        this.isFalse = true;
       },
-      {
-        name: '货道04',
-        status: '待检测...'
-      },
-      {
-        name: '货道05',
-        status: '待检测...'
-      },
-      {
-        name: '货道06',
-        status: '待检测...'
+      hideModal() {
+        this.isFalse = false;
       }
-    ],
-    channelList: null
-  };
-  methods = {
-    // 电机检测
-    async testChannel(e) {
-      let channelId = e.currentTarget.dataset.channelid;
-      console.log('channelId的值为：');
-      console.log(channelId);
+    };
+    async onLoad() {
+      let deviceObjInfo = await wepy.getStorageSync('deviceObjInfo');
       let url = this.$parent.data.apiUrl;
-      let res = await api.httpPost(`${url}/app/device/testChannel`,{
-        channelId :channelId 
+      let res = await api.httpPost(`${url}/app/device/getDeviceInfo`, {
+        deviceId: deviceObjInfo.deviceId
       });
-      if(res.code==0){
-        console.log("检测完成！");
-      }
-    },
-    checkRecoder() {
-      wx.navigateTo({
-        url: '/pages/checkRecoder'
-      });
-    },
-    // 显示检测情况
-    showModal() {
-      this.isFalse = true;
-    },
-    hideModal() {
-      this.isFalse = false;
+      // 货道列表
+      let channelList = res.data.channelList;
+      this.channelList = channelList;
+      this.$apply();
+      console.log('设备货道信息：');
+      console.log(res);
+      console.log(this.channelList);
     }
-  };
-  async onLoad() {
-    let deviceObjInfo = await wepy.getStorageSync('deviceObjInfo');
-    let url = this.$parent.data.apiUrl;
-    let res = await api.httpPost(`${url}/app/device/getDeviceInfo`, {
-      deviceId: deviceObjInfo.deviceId
-    });
-    // 货道列表
-    let channelList = res.data.channelList;
-    this.channelList = channelList;
-    this.$apply();
-    console.log('设备货道信息：');
-    console.log(res);
-    console.log(this.channelList);
   }
-}
 </script>

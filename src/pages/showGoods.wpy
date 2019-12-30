@@ -1,0 +1,141 @@
+<style lang="less">
+  .show_goods_page {
+    height: 100%;
+    padding: 30rpx;
+    .goods_list {
+      justify-content: space-between;
+      .item_box {
+        width: 330rpx;
+        margin-bottom: 30rpx;
+        .iamge_box {
+          width: 330rpx;
+          height: 332rpx;
+        }
+        .goods_taste {
+          font-size: 26rpx;
+          font-weight: bold;
+          text:nth-child(2) {
+            margin-left: 30rpx;
+          }
+        }
+        .goods_price {
+          justify-content: space-between;
+          view:nth-child(1) {
+            font-size: 36rpx;
+            color: #f95c4c;
+            font-weight: bold;
+          }
+          view:nth-child(2) {
+            font-size: 24rpx;
+            color: white;
+            background: #f95c4c;
+            width: 120rpx;
+            height: 46rpx;
+            border-radius: 23rpx;
+            text-align: center;
+            line-height: 46rpx;
+          }
+        }
+      }
+    }
+  }
+</style>
+<template>
+  <view class="show_goods_page">
+    <view class="goods_list flex">
+      <view class="item_box" wx:for="{{goodsList}}" wx:key="index">
+        <view class="iamge_box">
+          <image src="../images/goods/goods_img.png" />
+        </view>
+        <view class="goods_taste"> <text>【{{item.stockName}}】</text> <text>{{item.tasteType}}</text></view>
+        <view class="goods_price flex">
+          <view>¥{{item.goodsPrice}}</view>
+          <view @tap="buyGoods" data-num="{{item.num}}">立即购买</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy';
+  import api from '../api/api';
+  export default class ShowGoods extends wepy.page {
+    data = {
+      goodsList: [{
+          num: 1,
+          goodsImage: "../images/goods/goods_img.png",
+          stockName: "Flow12- 货道1",
+          tasteType: "冰镇可乐",
+          goodsPrice: 29.9,
+        },
+        {
+          num: 2,
+          goodsImage: "../images/goods/goods_img.png",
+          stockName: "Flow12- 货道1",
+          tasteType: "冰镇可乐",
+          goodsPrice: 29.9,
+        },
+        {
+          num: 1,
+          goodsImage: "../images/goods/goods_img.png",
+          stockName: "Flow12- 货道1",
+          tasteType: "冰镇可乐",
+          goodsPrice: 29.9,
+        },
+        {
+          num: 2,
+          goodsImage: "../images/goods/goods_img.png",
+          stockName: "Flow12- 货道1",
+          tasteType: "冰镇可乐",
+          goodsPrice: 29.9,
+        },
+        {
+          num: 1,
+          goodsImage: "../images/goods/goods_img.png",
+          stockName: "Flow12- 货道1",
+          tasteType: "冰镇可乐",
+          goodsPrice: 29.9,
+        },
+        {
+          num: 2,
+          goodsImage: "../images/goods/goods_img.png",
+          stockName: "Flow12- 货道1",
+          tasteType: "冰镇可乐",
+          goodsPrice: 29.9,
+        },
+      ]
+    }
+    config = {
+      navigationBarTitleText: '商品展示'
+    };
+    methods = {
+      buyGoods(e) {
+        let num = e.currentTarget.dataset.num;
+        if (num == 1) {
+          wx.showToast({
+            title: '购买成功',
+            icon: 'success',
+            duration: 2000
+          });
+         setTimeout(() => {
+            wx.navigateTo({
+              url: '/pages/buyGoodsSuccess'
+            });
+          }, 500)
+        } else if (num == 2) {
+          wx.showToast({
+            title: '购买失败',
+            icon: 'success',
+            duration: 2000
+          });
+          setTimeout(() => {
+            wx.navigateTo({
+              url: '/pages/buyGoodsFailed'
+            });
+          }, 500)
+        }
+      }
+    };
+  
+  }
+</script>
