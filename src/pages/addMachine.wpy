@@ -294,6 +294,9 @@
               icon: 'success',
               duration: 2000
             });
+         wepy.switchTab({
+           url:"/pages/index"
+         });
           } else if (res1.code == 1) {
             let showToast = await wx.showToast({
               title: '已经注册！',

@@ -66,7 +66,7 @@
       </view>
       <view class="item flex">
         <view><text class="label_box">手机号码</text></view>
-        <view class="input_box"><input placeholder="请输入手机号码" @input="getMobile"></view>
+        <view class="input_box"><input type="number" maxlength="11" placeholder="请输入手机号码" @input="getMobile"></view>
       </view>
       <view class="submit_box">
         <button @tap="submit">提交</button>
@@ -91,12 +91,20 @@
       getMobile(e) {
         this.formOjb.operatorMobile = e.detail.value;
       },
+      // 提交
       async submit() {
         let url = this.$parent.data.apiUrl;
+        let pattern = /^1[345678]\d{9}$/;
         if (this.formOjb.operatorName == undefined || this.formOjb.operatorMobile == undefined) {
           console.log("请将信息填写完整");
           return ;
-       } else {
+       } else if(!pattern.test(this.formOjb.operatorMobile)){
+         wx.showToast({
+           title:"手机号有误！",
+           icon: warn,
+           duration:2000,
+         })
+       }else {
           let res = await api.httpPost(`${url}/app/team/addOperator`, {
             operatorName: this.formOjb.operatorName,
             operatorMobile: this.formOjb.operatorMobile

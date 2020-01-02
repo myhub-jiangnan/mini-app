@@ -12,9 +12,10 @@
     };
     config = {
       pages: [
+           'pages/index',
            // 设备操作
         'pages/operateDevice',
-        'pages/index',
+     
         'pages/showGoods',
         // 商品购买
         'pages/buyGoodsSuccess',

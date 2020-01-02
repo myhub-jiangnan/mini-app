@@ -62,11 +62,11 @@
     <view class="form_container">
       <view class="item flex">
         <view><text class="label_box">姓  名</text></view>
-        <view class="input_box"><input placeholder="请输入姓名"></view>
+        <view class="input_box"><input placeholder="请输入姓名" @input="getName"></view>
       </view>
       <view class="item flex">
         <view><text class="label_box">手机号码</text></view>
-        <view class="input_box"><input placeholder="请输入手机号码"></view>
+        <view class="input_box"><input type="number" maxlength="11" placeholder="请输入手机号码" @input="getMobile"></view>
       </view>
       <view class="submit_box">
         <button @tap="submit">提交</button>
@@ -78,17 +78,52 @@
   import wepy from 'wepy';
   import api from '../api/api';
   export default class AddAgent extends wepy.page {
+    data ={
+        formObj:{}
+    };
     config = {
       navigationBarTitleText: '添加代理商'
     };
     methods = {
+      // 获取姓名
+      getName(){
+        this.formObj.agentName = e.detail.value;
+      },
+      // 获取手机号
+      getMobile(){
+       this.formObj.agentMobile = e.detail.value;
+      },
       submit() {
-        wx.showToast({
-          title: '添加成功',
-          icon: 'success',
-          duration: 2000,
-        
-        });
+        let url = this.$parent.data.apiUrl;
+        let pattern = /^1[345678]\d{9}$/;
+        if (this.formOjb.agentName == undefined || this.formOjb.agentMobile == undefined) {
+          console.log("请将信息填写完整");
+          return ;
+       } else if(!pattern.test(this.formOjb.agentMobile)){
+         wx.showToast({
+           title:"手机号有误！",
+           icon: warn,
+           duration:2000,
+         })
+       }else {
+          let res = await api.httpPost(`${url}/app/team/addOperator`, {
+            operatorName: this.formOjb.operatorName,
+            operatorMobile: this.formOjb.operatorMobile
+          });
+          if (res.code == 0) {
+            wx.showToast({
+              title: '添加成功',
+              icon: 'success',
+              duration: 2000,
+            });
+          } else {
+            wx.showToast({
+              title: '添加失败',
+              icon: 'success',
+              duration: 2000,
+            });
+          }
+        }
       }
     }
   }

@@ -1,92 +1,91 @@
 <style lang="less">
-  page {
-    height: 100%;
-  }
-  .choose_login {
-    // border: 1rpx solid red;
-    position: relative;
+page {
+  height: 100%;
+}
+.choose_login {
+  // border: 1rpx solid red;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  .bg_box {
+    position: absolute;
     width: 100%;
     height: 100%;
-    .bg_box {
-      position: absolute;
+    image {
+      display: block;
       width: 100%;
       height: 100%;
-      image {
-        display: block;
-        width: 100%;
-        height: 100%;
+    }
+  }
+  .content_box {
+    // border: 2rpx solid yellow;
+    position: relative;
+    padding-top: 166rpx;
+    .title {
+      // border: 1rpx solid red;
+      font-size: 76rpx;
+      color: white;
+      text-align: center;
+    }
+    .btn_box {
+      // border: 1px solid red;
+      margin-top: 305rpx;
+      button {
+        width: 540rpx;
+        height: 80rpx;
+        margin-bottom: 50rpx;
+        border-radius: 40rpx;
+        font-size: 36rpx;
+        font-weight: bold;
+        color: #1a1a1a;
+        line-height: 80rpx;
+      }
+      .cooperation_btn {
+        margin-top: -50rpx;
       }
     }
-    .content_box {
-      // border: 2rpx solid yellow;
-      position: relative;
-      padding-top: 166rpx;
-      .title {
-        // border: 1rpx solid red;
-        font-size: 76rpx;
-        color: white;
-        text-align: center;
-      }
-      .btn_box {
-        // border: 1px solid red;
-        margin-top: 305rpx;
-        button {
-          width: 540rpx;
-          height: 80rpx;
-          margin-bottom: 50rpx;
-          border-radius: 40rpx;
-          font-size: 36rpx;
-          font-weight: bold;
-          color: #1a1a1a;
-          line-height: 80rpx;
-        }
-        .cooperation_btn {
-          margin-top: -50rpx;
+    .bottom_box {
+      // border: 1px solid red;
+      margin-top: 180rpx;
+      text-align: center;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+      .icon_box {
+        // border: 1px solid transparent;
+        width: 40rpx;
+        height: 36rpx;
+        image {
+          // display: block;
+          width: 100%;
+          height: 100%;
         }
       }
-      .bottom_box {
-        // border: 1px solid red;
-        margin-top: 180rpx;
-        text-align: center;
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: center;
-        align-items: center;
-        .icon_box {
-          // border: 1px solid transparent;
-          width: 40rpx;
-          height: 36rpx;
-          image {
-            // display: block;
-            width: 100%;
-            height: 100%;
-          }
-        }
-        .warm {
-          margin-left: 15rpx;
-          color: #ffffff;
-        }
+      .warm {
+        margin-left: 15rpx;
+        color: #ffffff;
       }
     }
   }
+}
 </style>
 
 <template>
   <view class="choose_login">
-    <view class="bg_box">
-      <image src="../images/choose_login_bg.png" /> </view>
+    <view class="bg_box"> <image src="../images/choose_login_bg.png" /> </view>
     <view class="content_box">
       <view class="title">FLOW福禄</view>
       <view class="btn_box">
         <button @tap="getUserPhoneNumber" data-entry="agent">
-                经销商/代理商入口
-              </button>
+          经销商/代理商入口
+        </button>
         <button @tap="getUserPhoneNumber" data-entry="operator">
-                运营人员入口
-              </button>
-        <button @tap="applyForalliance"  >
-                加盟合作
-              </button>
+          运营人员入口
+        </button>
+        <button @tap="applyForalliance">
+          加盟合作
+        </button>
       </view>
       <view class="bottom_box">
         <view class="icon_box">
@@ -99,37 +98,39 @@
 </template>
 
 <script>
-  import wepy from 'wepy';
-  import api from '../api/api';
-  export default class ChooseInterface extends wepy.page {
-    config = {
-      navigationBarTitleText: '选择加盟类型'
-    };
-    methods = {
-      // 在缓存中存入token ;
-      async getUserPhoneNumber(e) {
-        let res1 = await wepy.login({});
-        if (res1.code) {
-          // 拿到了code 就访问getToken 接口；
-          let res2 = await api.httpPost(
-            'https://flow.dev.redsoul.cn/app/public/getToken', {
-              code: res1.code
-            }
-          );
-          // 拿到token存起来
-          wepy.setStorageSync('token', res2.data.token);
-        }
-        // 拿到选择的登录入口
-        wepy.setStorageSync('entry', e.currentTarget.dataset.entry);
-        wx.redirectTo({
-          url: '/pages/authorize'
-        });
-      },
-      applyForalliance(){
-          wx.navigateTo({
-          url: '/pages/applyForalliance'
-        });
+import wepy from 'wepy';
+import api from '../api/api';
+export default class ChooseInterface extends wepy.page {
+  config = {
+    navigationBarTitleText: '选择加盟类型'
+  };
+  methods = {
+    // 在缓存中存入token ;
+    async getUserPhoneNumber(e) {
+      console.log('123');
+      let res1 = await wepy.login({});
+      if (res1.code) {
+        // 拿到了code 就访问getToken 接口；
+        let res2 = await api.httpPost(
+          'https://flow.dev.redsoul.cn/app/public/getToken',
+          {
+            code: res1.code
+          }
+        );
+        // 拿到token存起来
+        wepy.setStorageSync('token', res2.data.token);
       }
-    };
-  }
+      // 拿到选择的登录入口
+      wepy.setStorageSync('entry', e.currentTarget.dataset.entry);
+      wx.redirectTo({
+        url: '/pages/authorize'
+      });
+    },
+    applyForalliance() {
+      wx.navigateTo({
+        url: '/pages/applyForalliance'
+      });
+    }
+  };
+}
 </script>

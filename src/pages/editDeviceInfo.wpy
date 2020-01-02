@@ -288,11 +288,13 @@
         if (this.formObj.deviceMac !== null && this.formObj.deviceName !== null && this.formObj.deviceAddress !== null) {
           let res = await api.httpPost(`${url}/app/device/saveDeviceInfo`, this.formObj);
           if (res.code == 0 || res.code == 1) {
-            console.log("保存成功！");
             let showToast = await wx.showToast({
               title: '保存成功！',
               icon: 'success',
               duration: 2000
+            });
+            wx.navigateTo({
+              url:"pages/operateDevice"
             });
           } 
         }else {

@@ -59,17 +59,33 @@
       .channelInfo {
         justify-content: space-between;
         .left_box {
+          // border: 1rpx solid blue;
           view {
             position: relative;
-            border: 1rpx solid blue;
+            // border: 1rpx solid blue;
             width: 58rpx;
             height: 58rpx; // background: red;
             margin-left: 30rpx;
           }
           .picker_box {
-            p width: 100%;
+            position: relative;
+            // border: 1rpx solid red;
+             width: 58rpx;
             height: 100%;
+            z-index: 100;
+            picker {
+               position: relative;
+              // border: 1rpx solid black;
+            }
+            .img_box {
+              position: absolute;
+              left: -50%;
+              bottom: 0;
+              z-index: -100;
+            }
+
           }
+       
         }
       }
       .btn_getFull {
@@ -158,48 +174,103 @@
       <view class="item flex channelInfo">
         <view> <text>货道1:</text> <text>暂无设置</text> </view>
         <view class="left_box flex">
-          <view></view>
-          <view></view>
+          <view class="picker_box">
+            <picker @change="bindPickerChange02" value="{{stockCapacityIndex}}" range="{{stockCapacity}}">
+              <view class="picker_btn" type="default">{{ stockCapacity[stockCapacityIndex] }}
+              </view>
+            </picker>
+            <view class="img_box">
+               <image src="../images/operateDevice/add_goods.png" />
+            </view>
+          </view>
+          <view class="getfull">
+            <image src="../images/operateDevice/getFull_icon.png" />
+          </view>
         </view>
       </view>
       <view class="item flex channelInfo">
         <view> <text>货道2:</text> <text>暂无设置</text> </view>
-        <view class="left_box flex">
-          <view></view>
-          <view></view>
+       <view class="left_box flex">
+          <view class="picker_box">
+            <picker @change="bindPickerChange02" value="{{stockCapacityIndex}}" range="{{stockCapacity}}">
+              <view class="picker_btn" type="default">{{ stockCapacity[stockCapacityIndex] }}
+              </view>
+            </picker>
+            <view class="img_box">
+               <image src="../images/operateDevice/add_goods.png" />
+            </view>
+          </view>
+          <view class="getfull">
+            <image src="../images/operateDevice/getFull_icon.png" />
+          </view>
         </view>
       </view>
       <view class="item flex channelInfo">
         <view> <text>货道3:</text> <text>暂无设置</text> </view>
-        <view class="left_box flex">
-          <view></view>
-          <view></view>
-        </view>
-      </view>
-      <view class="item flex channelInfo">
-        <view> <text>货道4:</text> <text>暂无设置</text> </view>
-        <view class="left_box flex">
-          <view></view>
-          <view></view>
-        </view>
-      </view>
-      <view class="item flex channelInfo">
-        <view> <text>货道5:</text> <text>暂无设置</text> </view>
         <view class="left_box flex">
           <view class="picker_box">
             <picker @change="bindPickerChange02" value="{{stockCapacityIndex}}" range="{{stockCapacity}}">
               <view class="picker_btn" type="default">{{ stockCapacity[stockCapacityIndex] }}
               </view>
             </picker>
+            <view class="img_box">
+               <image src="../images/operateDevice/add_goods.png" />
+            </view>
           </view>
-          <view></view>
+          <view class="getfull">
+            <image src="../images/operateDevice/getFull_icon.png" />
+          </view>
+        </view>
+      </view>
+      <view class="item flex channelInfo">
+        <view> <text>货道4:</text> <text>暂无设置</text> </view>
+       <view class="left_box flex">
+          <view class="picker_box">
+            <picker @change="bindPickerChange02" value="{{stockCapacityIndex}}" range="{{stockCapacity}}">
+              <view class="picker_btn" type="default">{{ stockCapacity[stockCapacityIndex] }}
+              </view>
+            </picker>
+            <view class="img_box">
+               <image src="../images/operateDevice/add_goods.png" />
+            </view>
+          </view>
+          <view class="getfull">
+            <image src="../images/operateDevice/getFull_icon.png" />
+          </view>
+        </view>
+      </view>
+      <view class="item flex channelInfo">
+        <view> <text>货道5:</text> <text>暂无设置</text> </view>
+       <view class="left_box flex">
+          <view class="picker_box">
+            <picker @change="bindPickerChange02" value="{{stockCapacityIndex}}" range="{{stockCapacity}}">
+              <view class="picker_btn" type="default">{{ stockCapacity[stockCapacityIndex] }}
+              </view>
+            </picker>
+            <view class="img_box">
+               <image src="../images/operateDevice/add_goods.png" />
+            </view>
+          </view>
+          <view class="getfull">
+            <image src="../images/operateDevice/getFull_icon.png" />
+          </view>
         </view>
       </view>
       <view class="item flex channelInfo">
         <view> <text>货道6:</text> <text>暂无设置</text> </view>
         <view class="left_box flex">
-          <view></view>
-          <view></view>
+          <view class="picker_box">
+            <picker @change="bindPickerChange02" value="{{stockCapacityIndex}}" range="{{stockCapacity}}">
+              <view class="picker_btn" type="default">{{ stockCapacity[stockCapacityIndex] }}
+              </view>
+            </picker>
+            <view class="img_box">
+               <image src="../images/operateDevice/add_goods.png" />
+            </view>
+          </view>
+          <view class="getfull">
+            <image src="../images/operateDevice/getFull_icon.png" />
+          </view>
         </view>
       </view>
       <view class="btn_getFull">一键加满</view>
@@ -220,7 +291,8 @@
       navigationBarTitleText: '设备操作'
     };
     data = {
-      device: ''
+      device: '',
+      stockCapacity:[1,2,3,4,5,6]
     };
     methods = {
       // 解绑
